@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfect Classes — UP's #1 Test Series Platform</title>
+  <meta name="description" content="Prepare for Class 6-12, NDA, CUET & Agniveer with exam-pattern test series. 10,000+ students trained. Noorpur, UP." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ══════════════════════════════════════════════════
+       DESIGN TOKENS
+    ══════════════════════════════════════════════════ */
+    :root {
+      --yellow:        #F5C518;
+      --yellow-dark:   #D4A017;
+      --yellow-light:  #FDE882;
+      --yellow-glow:   rgba(245,197,24,0.12);
+      --yellow-border: rgba(245,197,24,0.28);
+
+      --bg:            #080808;
+      --bg-card:       #111111;
+      --bg-surface:    #181818;
+      --bg-hover:      #1E1E1E;
+
+      --white:         #FFFFFF;
+      --text-muted:    #888;
+      --text-dim:      #555;
+      --border:        rgba(255,255,255,0.07);
+      --border-md:     rgba(255,255,255,0.12);
+
+      --on-yellow:     #0A0A0A;
+
+      --font-h: 'Plus Jakarta Sans', sans-serif;
+      --font-b: 'Inter', sans-serif;
+
+      --r-sm:  6px;
+      --r-md:  12px;
+      --r-lg:  20px;
+      --r-xl:  28px;
+      --r-full:9999px;
+
+      --ease: cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ══════════════════════════════════════════════════
+       BASE
+    ══════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-b);
+      font-size: 1rem;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { cursor: pointer; font-family: inherit; }
+
+    /* ══════════════════════════════════════════════════
+       UTILITIES
+    ══════════════════════════════════════════════════ */
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+    .section    { padding: 96px 0; }
+    .section-sm { padding: 64px 0; }
+
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 14px;
+      background: var(--yellow-glow);
+      border: 1px solid var(--yellow-border);
+      border-radius: var(--r-full);
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--yellow); letter-spacing: .08em; text-transform: uppercase;
+    }
+    .section-title {
+      font-family: var(--font-h);
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800; letter-spacing: -.025em; line-height: 1.15;
+    }
+    .section-sub {
+      font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; max-width: 520px;
+    }
+    .text-yellow { color: var(--yellow); }
+    .text-center { text-align: center; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .flex { display: flex; }
+    .flex-center { display: flex; align-items: center; justify-content: center; }
+    .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: var(--r-full);
+      font-size: .875rem; font-weight: 600; border: none;
+      transition: all .2s var(--ease); white-space: nowrap;
+      line-height: 1;
+    }
+    .btn-primary   { background: var(--yellow); color: var(--on-yellow); }
+    .btn-primary:hover { background: var(--yellow-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(245,197,24,.35); }
+    .btn-outline   { background: transparent; color: var(--white); border: 1.5px solid var(--border-md); }
+    .btn-outline:hover { border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.04); }
+    .btn-lg { padding: 14px 32px; font-size: 1rem; }
+
+    /* Divider */
+    .divider { width: 100%; height: 1px; background: var(--border); }
+
+    /* ══════════════════════════════════════════════════
+       NAVBAR
+    ══════════════════════════════════════════════════ */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 68px;
+      background: rgba(8,8,8,.88);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background .3s;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .logo-mark {
+      width: 38px; height: 38px; border-radius: 8px;
+      background: var(--yellow);
+      font-family: var(--font-h); font-weight: 800; font-size: 1rem;
+      color: var(--on-yellow);
+      display: grid; place-items: center;
+    }
+    .logo-text { font-family: var(--font-h); font-weight: 700; font-size: 1rem; }
+    .logo-text small { display: block; font-size: .6rem; font-weight: 500; color: var(--text-muted); letter-spacing: .07em; text-transform: uppercase; }
+
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-size: .85rem; font-weight: 500; color: var(--text-muted); transition: color .15s; }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta { display: flex; align-items: center; gap: 10px; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 6px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: all .2s; }
+
+    /* Mobile Nav */
+    .mobile-nav {
+      display: none; position: fixed; top: 68px; left: 0; right: 0; z-index: 998;
+      background: var(--bg-card); border-bottom: 1px solid var(--border);
+      padding: 16px 24px 24px; flex-direction: column; gap: 16px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-size: .95rem; font-weight: 500; color: var(--text-muted); padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .mobile-nav a:last-child { border: none; }
+    .mobile-nav .btn { width: 100%; justify-content: center; margin-top: 4px; }
+
+    /* ══════════════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(245,197,24,.13) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 55% at 50% 0%, black, transparent);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 820px; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px;
+      background: var(--yellow-glow); border: 1px solid var(--yellow-border);
+      border-radius: var(--r-full);
+      font-size: .78rem; font-weight: 700; color: var(--yellow); letter-spacing: .05em;
+      margin-bottom: 28px;
+    }
+    .hero-badge-dot { width: 7px; height: 7px; background: var(--yellow); border-radius: 50%; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+
+    .hero-h1 {
+      font-family: var(--font-h);
+      font-size: clamp(2.6rem, 6.5vw, 4.4rem);
+      font-weight: 800; letter-spacing: -.035em; line-height: 1.08;
+      margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--text-muted); max-width: 580px; margin: 0 auto 40px; line-height: 1.75;
+    }
+    .hero-sub strong { color: var(--white); font-weight: 600; }
+
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
+
+    /* Trust row */
+    .trust-row { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
+    .avatar-stack { display: flex; }
+    .av {
+      width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--bg);
+      background: var(--bg-surface); margin-left: -10px;
+      font-family: var(--font-h); font-weight: 800; font-size: .75rem; color: var(--yellow);
+      display: grid; place-items: center;
+    }
+    .av:first-child { margin-left: 0; }
+    .trust-txt { font-size: .82rem; color: var(--text-muted); }
+    .trust-txt strong { color: var(--white); }
+    .stars-sm { color: var(--yellow); font-size: .8rem; letter-spacing: 1px; }
+
+    /* Stats */
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      max-width: 640px; margin: 0 auto;
+      border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden;
+      background: var(--border);
+      gap: 1px;
+    }
+    .h-stat {
+      background: var(--bg-card); padding: 28px 16px;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      position: relative; overflow: hidden;
+      transition: background .2s;
+    }
+    .h-stat:hover { background: var(--bg-hover); }
+    .h-stat::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg,transparent,var(--yellow),transparent); opacity:0; transition:opacity .3s; }
+    .h-stat:hover::before { opacity:1; }
+    .h-stat-num { font-family: var(--font-h); font-size: 2rem; font-weight: 800; color: var(--yellow); letter-spacing: -.03em; line-height:1; }
+    .h-stat-lbl { font-size: .78rem; color: var(--text-muted); font-weight: 500; }
+
+    /* ══════════════════════════════════════════════════
+       MARQUEE BRAND BAR
+    ══════════════════════════════════════════════════ */
+    .brand-bar { padding: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-card); overflow:hidden; }
+    .brand-bar-inner { display:flex; gap:0; }
+    .marquee-track { display:flex; gap:0; animation: marquee 22s linear infinite; white-space:nowrap; }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .marquee-item {
+      padding: 14px 32px; font-size: .8rem; font-weight: 600; color: var(--text-dim);
+      letter-spacing: .06em; text-transform: uppercase;
+      border-right: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px; white-space: nowrap;
+    }
+    .marquee-dot { width:5px;height:5px;border-radius:50%;background:var(--yellow);flex-shrink:0; }
+
+    /* ══════════════════════════════════════════════════
+       WHY PERFECT CLASSES
+    ══════════════════════════════════════════════════ */
+    #why .why-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 56px;
+    }
+    .why-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 32px 28px;
+      transition: border-color .2s, transform .2s;
+      position: relative; overflow: hidden;
+    }
+    .why-card::before { content:''; position:absolute; top:0;left:0;right:0;height:2px; background:linear-gradient(90deg,transparent,var(--yellow),transparent); opacity:0; transition:opacity .3s; }
+    .why-card:hover { border-color: var(--yellow-border); transform: translateY(-4px); }
+    .why-card:hover::before { opacity:1; }
+    .why-icon {
+      width: 48px; height: 48px; border-radius: var(--r-md);
+      background: var(--yellow-glow); border: 1px solid var(--yellow-border);
+      display: grid; place-items: center; font-size: 1.4rem; margin-bottom: 20px;
+    }
+    .why-card h3 { font-family: var(--font-h); font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .why-card p  { font-size: .875rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ══════════════════════════════════════════════════
+       TEST SERIES CATALOG
+    ══════════════════════════════════════════════════ */
+    #catalog { background: var(--bg-card); }
+    .catalog-head { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-bottom:48px; }
+    .filter-tabs { display:flex; gap:8px; flex-wrap:wrap; }
+    .ftab {
+      padding: 7px 18px; border-radius: var(--r-full); font-size:.8rem; font-weight:600;
+      background: var(--bg-surface); border:1px solid var(--border); color: var(--text-muted);
+      cursor:pointer; transition: all .15s;
+    }
+    .ftab.active, .ftab:hover { background: var(--yellow-glow); border-color:var(--yellow-border); color:var(--yellow); }
+
+    .catalog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .test-card {
+      background: var(--bg-surface); border:1px solid var(--border);
+      border-radius: var(--r-lg); padding:24px; display:flex; flex-direction:column; gap:14px;
+      transition: border-color .2s, transform .2s; cursor:pointer;
+    }
+    .test-card:hover { border-color: var(--yellow-border); transform: translateY(-3px); }
+    .test-card-top { display:flex; align-items:center; justify-content:space-between; }
+    .tc-badge {
+      font-size:.68rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+      padding:3px 10px; border-radius:var(--r-full);
+    }
+    .tc-badge.live { background: rgba(239,68,68,.12); color:#EF4444; border:1px solid rgba(239,68,68,.25); }
+    .tc-badge.practice { background: rgba(34,197,94,.1); color:#22C55E; border:1px solid rgba(34,197,94,.2); }
+    .tc-badge.paid { background: var(--yellow-glow); color:var(--yellow); border:1px solid var(--yellow-border); }
+    .tc-class { font-size:.75rem; color:var(--text-dim); font-weight:600; }
+    .test-card h4 { font-family:var(--font-h); font-size:.95rem; font-weight:700; line-height:1.35; }
+    .tc-meta { display:flex; gap:16px; }
+    .tc-meta span { font-size:.75rem; color:var(--text-muted); display:flex; align-items:center; gap:5px; }
+    .tc-price { display:flex; align-items:center; justify-content:space-between; margin-top:4px; }
+    .tc-price strong { font-family:var(--font-h); font-size:1.05rem; font-weight:800; color:var(--yellow); }
+    .tc-price s { font-size:.8rem; color:var(--text-dim); }
+    .tc-btn { padding:8px 18px; font-size:.8rem; }
+
+    .catalog-cta { text-align:center; margin-top:40px; }
+
+    /* ══════════════════════════════════════════════════
+       HOW IT WORKS
+    ══════════════════════════════════════════════════ */
+    #how { position:relative; }
+    .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:56px; position:relative; }
+    .steps::before {
+      content:''; position:absolute; top:36px; left:calc(12.5% + 20px); right:calc(12.5% + 20px); height:2px;
+      background: linear-gradient(90deg,var(--yellow),transparent);
+      background: repeating-linear-gradient(90deg, var(--yellow-border) 0, var(--yellow-border) 8px, transparent 8px, transparent 16px);
+    }
+    .step { text-align:center; padding:24px 16px; }
+    .step-num {
+      width:56px;height:56px;border-radius:50%;margin:0 auto 20px;
+      background:var(--yellow-glow); border:2px solid var(--yellow-border);
+      font-family:var(--font-h); font-size:1.15rem; font-weight:800; color:var(--yellow);
+      display:grid; place-items:center; position:relative; z-index:1;
+    }
+    .step h3 { font-family:var(--font-h); font-size:1rem; font-weight:700; margin-bottom:8px; }
+    .step p  { font-size:.83rem; color:var(--text-muted); line-height:1.65; }
+
+    /* ══════════════════════════════════════════════════
+       RESULTS / SOCIAL PROOF NUMBERS
+    ══════════════════════════════════════════════════ */
+    #results {
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg) 100%);
+      border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    }
+    .results-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border-radius:var(--r-xl); overflow:hidden; margin-top:56px; }
+    .r-stat { background:var(--bg-card); padding:40px 24px; text-align:center; }
+    .r-num { font-family:var(--font-h); font-size:2.6rem; font-weight:800; color:var(--yellow); letter-spacing:-.03em; line-height:1; margin-bottom:8px; }
+    .r-lbl { font-size:.83rem; color:var(--text-muted); font-weight:500; line-height:1.5; }
+
+    /* ══════════════════════════════════════════════════
+       TESTIMONIALS
+    ══════════════════════════════════════════════════ */
+    #testimonials { overflow:hidden; }
+    .testi-head { text-align:center; margin-bottom:56px; }
+    .testi-head .section-sub { margin:16px auto 0; }
+
+    .testi-track-wrap { overflow:hidden; position:relative; }
+    .testi-track-wrap::before, .testi-track-wrap::after {
+      content:''; position:absolute; top:0; bottom:0; width:130px; z-index:2; pointer-events:none;
+    }
+    .testi-track-wrap::before { left:0; background:linear-gradient(90deg,var(--bg),transparent); }
+    .testi-track-wrap::after  { right:0; background:linear-gradient(-90deg,var(--bg),transparent); }
+
+    .testi-track { display:flex; gap:16px; animation:slide 35s linear infinite; width:max-content; }
+    .testi-track:hover { animation-play-state:paused; }
+    @keyframes slide { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    @media (prefers-reduced-motion:reduce) { .testi-track, .marquee-track { animation:none; } }
+
+    .t-card {
+      width:320px; flex-shrink:0;
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:var(--r-lg); padding:28px; display:flex; flex-direction:column; gap:16px;
+      transition:border-color .2s;
+    }
+    .t-card:hover { border-color:var(--yellow-border); }
+    .t-stars { color:var(--yellow); font-size:.85rem; letter-spacing:2px; }
+    .t-text { font-size:.875rem; color:var(--text-muted); line-height:1.7; flex:1; }
+    .t-text::before { content:'"'; }
+    .t-text::after  { content:'"'; }
+    .t-author { display:flex; align-items:center; gap:12px; margin-top:4px; }
+    .t-av {
+      width:40px;height:40px;border-radius:50%;flex-shrink:0;
+      background:linear-gradient(135deg,var(--yellow),var(--yellow-dark));
+      font-family:var(--font-h); font-weight:800; font-size:.9rem; color:var(--on-yellow);
+      display:grid; place-items:center;
+    }
+    .t-name { font-weight:600; font-size:.875rem; }
+    .t-meta { font-size:.72rem; color:var(--text-muted); }
+    .t-tag {
+      align-self:flex-start; font-size:.65rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+      padding:3px 10px; border-radius:var(--r-full);
+      background:var(--yellow-glow); color:var(--yellow); border:1px solid var(--yellow-border);
+    }
+
+    /* ══════════════════════════════════════════════════
+       FAQ
+    ══════════════════════════════════════════════════ */
+    #faq { background:var(--bg-card); }
+    .faq-wrap { max-width:720px; margin:56px auto 0; display:flex; flex-direction:column; gap:8px; }
+    .faq-item { border:1px solid var(--border); border-radius:var(--r-md); overflow:hidden; }
+    .faq-q {
+      width:100%; text-align:left; padding:20px 24px;
+      background:transparent; border:none; color:var(--white);
+      font-family:var(--font-h); font-size:.95rem; font-weight:600;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      transition:background .15s; cursor:pointer;
+    }
+    .faq-q:hover { background:var(--bg-hover); }
+    .faq-arrow { font-size:1.1rem; color:var(--yellow); transition:transform .25s; flex-shrink:0; }
+    .faq-item.open .faq-arrow { transform:rotate(45deg); }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height .3s var(--ease); }
+    .faq-item.open .faq-a { max-height:300px; }
+    .faq-a-inner { padding:0 24px 20px; font-size:.875rem; color:var(--text-muted); line-height:1.75; }
+
+    /* ══════════════════════════════════════════════════
+       CTA BANNER
+    ══════════════════════════════════════════════════ */
+    #cta-banner {
+      position:relative; overflow:hidden;
+      background: linear-gradient(135deg, #1a1400 0%, #0A0A0A 50%, #111100 100%);
+      border-top:1px solid var(--border);
+    }
+    .cta-glow {
+      position:absolute; top:-50%; left:50%; transform:translateX(-50%);
+      width:700px; height:700px;
+      background:radial-gradient(circle,rgba(245,197,24,.18) 0%,transparent 60%);
+      pointer-events:none;
+    }
+    .cta-inner { position:relative;z-index:1; text-align:center; padding:96px 24px; }
+    .cta-inner h2 { font-family:var(--font-h); font-size:clamp(2rem,5vw,3.2rem); font-weight:800; letter-spacing:-.03em; line-height:1.12; margin-bottom:20px; }
+    .cta-inner p  { font-size:1.05rem; color:var(--text-muted); max-width:460px; margin:0 auto 40px; }
+    .cta-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+    .btn-xl { padding:16px 40px; font-size:1.05rem; border-radius:var(--r-full); }
+
+    /* ══════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════ */
+    footer {
+      background:var(--bg-card);
+      border-top:1px solid var(--border);
+      padding:64px 24px 32px;
+    }
+    .footer-grid {
+      max-width:1140px; margin:0 auto;
+      display:grid; grid-template-columns:2fr 1fr 1fr 1.5fr; gap:48px;
+      margin-bottom:48px;
+    }
+    .footer-brand p { font-size:.85rem; color:var(--text-muted); margin-top:12px; line-height:1.7; max-width:260px; }
+    .footer-col h4 { font-family:var(--font-h); font-size:.85rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--text-dim); margin-bottom:16px; }
+    .footer-col ul { display:flex; flex-direction:column; gap:10px; }
+    .footer-col ul a { font-size:.85rem; color:var(--text-muted); transition:color .15s; }
+    .footer-col ul a:hover { color:var(--white); }
+
+    .footer-contact p { font-size:.85rem; color:var(--text-muted); display:flex; align-items:flex-start; gap:8px; margin-bottom:12px; line-height:1.5; }
+    .footer-contact .icon { font-size:1rem; flex-shrink:0; margin-top:1px; }
+
+    .footer-bottom {
+      max-width:1140px; margin:0 auto; padding-top:24px; border-top:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    }
+    .footer-bottom p { font-size:.78rem; color:var(--text-dim); }
+    .footer-badge { display:flex; align-items:center; gap:8px; }
+    .f-graphy { font-size:.72rem; color:var(--text-dim); }
+    .f-graphy span { color:var(--yellow); font-weight:600; }
+    .social-links { display:flex; gap:10px; }
+    .social-link {
+      width:34px;height:34px;border-radius:var(--r-sm);
+      background:var(--bg-surface); border:1px solid var(--border);
+      display:grid; place-items:center; font-size:.9rem;
+      color:var(--text-muted); transition:all .15s;
+    }
+    .social-link:hover { border-color:var(--yellow-border); color:var(--yellow); background:var(--yellow-glow); }
+
+    /* ══════════════════════════════════════════════════
+       SIGN UP MODAL
+    ══════════════════════════════════════════════════ */
+    .modal-overlay {
+      position:fixed; inset:0; z-index:1000;
+      background:rgba(0,0,0,.75); backdrop-filter:blur(6px);
+      display:none; align-items:center; justify-content:center; padding:24px;
+    }
+    .modal-overlay.open { display:flex; }
+    .modal {
+      background:var(--bg-card); border:1px solid var(--border-md);
+      border-radius:var(--r-xl); padding:40px; max-width:440px; width:100%;
+      position:relative; animation:modalIn .25s var(--ease);
+    }
+    @keyframes modalIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    .modal-close {
+      position:absolute; top:16px; right:16px; width:32px;height:32px;
+      border-radius:50%; background:var(--bg-surface); border:none; color:var(--text-muted);
+      font-size:1.1rem; display:grid; place-items:center; cursor:pointer;
+      transition:background .15s;
+    }
+    .modal-close:hover { background:var(--bg-hover); color:var(--white); }
+    .modal-top { margin-bottom:28px; }
+    .modal-top h2 { font-family:var(--font-h); font-size:1.5rem; font-weight:800; margin-bottom:6px; }
+    .modal-top p  { font-size:.875rem; color:var(--text-muted); }
+    .form-group { margin-bottom:16px; }
+    .form-group label { display:block; font-size:.8rem; font-weight:600; color:var(--text-muted); margin-bottom:6px; }
+    .form-group input, .form-group select {
+      width:100%; padding:12px 16px;
+      background:var(--bg-surface); border:1px solid var(--border-md);
+      border-radius:var(--r-md); color:var(--white); font-family:var(--font-b); font-size:.9rem;
+      transition:border-color .15s; outline:none;
+    }
+    .form-group input:focus, .form-group select:focus { border-color:var(--yellow); }
+    .form-group select option { background:var(--bg-card); }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .form-submit { width:100%; padding:14px; margin-top:8px; font-size:1rem; font-weight:700; justify-content:center; border-radius:var(--r-md); }
+    .form-note { text-align:center; font-size:.75rem; color:var(--text-dim); margin-top:12px; }
+    .form-divider { display:flex; align-items:center; gap:12px; margin:20px 0; }
+    .form-divider::before,.form-divider::after { content:''; flex:1; height:1px; background:var(--border); }
+    .form-divider span { font-size:.75rem; color:var(--text-dim); }
+
+    /* ══════════════════════════════════════════════════
+       SCROLL TO TOP
+    ══════════════════════════════════════════════════ */
+    #scrolltop {
+      position:fixed; bottom:28px; right:28px; z-index:500;
+      width:44px;height:44px;border-radius:50%;
+      background:var(--yellow); border:none; color:var(--on-yellow);
+      font-size:1.1rem; display:grid; place-items:center; cursor:pointer;
+      opacity:0; transform:translateY(10px); transition:all .25s;
+      box-shadow:0 4px 20px rgba(245,197,24,.4);
+    }
+    #scrolltop.show { opacity:1; transform:translateY(0); }
+    #scrolltop:hover { background:var(--yellow-dark); transform:translateY(-2px); }
+
+    /* ══════════════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════════════ */
+    @media(max-width:1024px) {
+      .catalog-grid   { grid-template-columns:repeat(2,1fr); }
+      .footer-grid    { grid-template-columns:1fr 1fr; }
+      #navbar         { padding:0 24px; }
+    }
+    @media(max-width:768px) {
+      .section        { padding:64px 0; }
+      .nav-links      { display:none; }
+      .nav-cta .btn-outline { display:none; }
+      .hamburger      { display:flex; }
+      .why-grid       { grid-template-columns:1fr; }
+      .steps          { grid-template-columns:1fr 1fr; }
+      .steps::before  { display:none; }
+      .results-grid   { grid-template-columns:repeat(2,1fr); }
+      .catalog-grid   { grid-template-columns:1fr; }
+      .footer-grid    { grid-template-columns:1fr; gap:32px; }
+      .footer-bottom  { flex-direction:column; align-items:flex-start; }
+      .hero-stats     { grid-template-columns:repeat(3,1fr); }
+      .catalog-head   { flex-direction:column; align-items:flex-start; }
+    }
+    @media(max-width:480px) {
+      .hero-stats { grid-template-columns:1fr; }
+      .steps      { grid-template-columns:1fr; }
+      .results-grid { grid-template-columns:1fr 1fr; }
+      .form-row   { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ╔══════════════════════════════════════════════════╗
+     ║  NAVBAR                                          ║
+     ╚══════════════════════════════════════════════════╝ -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="logo-mark">PC</div>
+    <div class="logo-text">Perfect Classes <small>Noorpur, UP</small></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#catalog">Test Series</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#testimonials">Results</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="#" class="btn btn-outline" onclick="openModal()">Log In</a>
+    <a href="#" class="btn btn-primary" onclick="openModal()">Sign Up Free</a>
+  </div>
+  <button class="hamburger" onclick="toggleMobile()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#catalog"      onclick="closeMobile()">Test Series</a>
+  <a href="#why"          onclick="closeMobile()">Why Perfect Classes</a>
+  <a href="#how"          onclick="closeMobile()">How It Works</a>
+  <a href="#testimonials" onclick="closeMobile()">Student Results</a>
+  <a href="#faq"          onclick="closeMobile()">FAQ</a>
+  <a href="#"  class="btn btn-outline" onclick="openModal();closeMobile()">Log In</a>
+  <a href="#"  class="btn btn-primary" onclick="openModal();closeMobile()">Sign Up Free →</a>
+</div>
+
+<!-- ╔══════════════════════════════════════════════════╗
+     ║  HERO                                            ║
+     ╚══════════════════════════════════════════════════╝ -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      UP's Most Trusted Test Series Platform
+    </div>
+
+    <h1 class="hero-h1">
+      Crack Every Exam with<br/>
+      <span class="text-yellow">India's Best</span> Test Series
+    </h1>
+
+    <p class="hero-sub">
+      Prepare for <strong>Class 6–12, NDA, CUET &amp; Agniveer</strong> with
+      real exam-pattern tests. The same coaching that built 10,000+ toppers
+      offline — now available anywhere, anytime.
+    </p>
+
+    <div class="hero-btns">
+      <a href="#" class="btn btn-primary btn-lg" onclick="openModal()">Start for Free &nbsp;→</a>
+      <a href="#catalog" class="btn btn-outline btn-lg">Browse Test Series</a>
+    </div>
+
+    <div class="trust-row">
+      <div class="avatar-stack">
+        <div class="av">R</div><div class="av">P</div>
+        <div class="av">A</div><div class="av">S</div><div class="av">M</div>
+      </div>
+      <div>
+        <div class="stars-sm">★★★★★</div>
+        <div class="trust-txt"><strong>4.9/5</strong> · 2,400+ student reviews</div>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="h-stat">
+        <div class="h-stat-num">10K+</div>
+        <div class="h-stat-lbl">Students Trained</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-num">500+</div>
+        <div class="h-stat-lbl">Test Series Live</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-num">6+</div>
+        <div class="h-stat-lbl">Years of Results</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════╗
+     ║  MARQUEE BAR                                     ║
+     ╚══════════════════════════════════════════════════╝ -->
+<div class="brand-bar" aria-hidden="true">
+  <div class="brand-bar-inner">
+    <div class="marquee-track">
+      <div class="marquee-item"><span class="marquee-dot"></span>Class 6</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Class 7</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Class 8</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Class 9</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Class 10</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Class 11</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Class 12</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>NDA</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>CUET</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Agniveer</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Maths</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Science</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>English</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Hindi</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Social Studies</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Physics</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Chemistry</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Biology</div>
+      <!-- duplicate for seamless loop -->
+      <div class="marquee-item"><span class="marquee-dot"></span>Class 6</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Class 7</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Class 8</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Class 9</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Class 10</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Class 11</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Class 12</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>NDA</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>CUET</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Agniveer</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Maths</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Science</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>English</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Hindi</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Social Studies</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Physics</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Chemistry</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Biology</div>
+    </div>
+  </div>
+</div>
+
+<!-- ╔══════════════════════════════════════════════════╗
+     ║  WHY PERFECT CLASSES                             ║
+     ╚══════════════════════════════════════════════════╝ -->
+<section id="why" class="section">
+  <div class="container">
+    <div class="text-center">
+      <span class="tag">Why Choose Us</span>
+      <h2 class="section-title" style="margin-top:16px">
+        Built by Educators.<br/>Trusted by <span class="text-yellow">10,000 Students.</span>
+      </h2>
+      <p class="section-sub mx-auto" style="margin-top:16px">
+        We don't just sell tests — we build the discipline and strategy that turns students into toppers.
+      </p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">📋</div>
+        <h3>Real Exam Pattern Questions</h3>
+        <p>Every test is modeled on actual board and entrance exam patterns — no filler, no guesswork. Train on what matters.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <h3>Live + Practice Modes</h3>
+        <p>Choose Live Tests with real-time rankings and countdowns, or Practice Mode at your own pace. Both build real skill.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📊</div>
+        <h3>Detailed Performance Analytics</h3>
+        <p>See exactly where you're losing marks — subject-wise, chapter-wise, and question-type breakdown after every test.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🏆</div>
+        <h3>Proven Track Record</h3>
+        <p>6+ years of producing toppers in NDA, boards, and competitive exams from Noorpur. Our results speak for themselves.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📱</div>
+        <h3>Study on Any Device</h3>
+        <p>Attempt tests on mobile, tablet, or desktop. The Android app keeps your progress synced everywhere, anytime.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💰</div>
+        <h3>Affordable &amp; Accessible</h3>
+        <p>Premium quality at prices that work for every family in UP. Because every student deserves a fair shot at their dream.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════╗
+     ║  TEST SERIES CATALOG                             ║
+     ╚══════════════════════════════════════════════════╝ -->
+<section id="catalog" class="section">
+  <div class="container">
+    <div class="catalog-head">
+      <div>
+        <span class="tag">Test Series</span>
+        <h2 class="section-title" style="margin-top:16px">Explore Our <span class="text-yellow">Test Library</span></h2>
+        <p class="section-sub" style="margin-top:12px">Pick your exam. Pick your subject. Start practising in minutes.</p>
+      </div>
+      <div class="filter-tabs" role="tablist">
+        <button class="ftab active" onclick="filterTests(this,'all')">All</button>
+        <button class="ftab" onclick="filterTests(this,'school')">Class 6–12</button>
+        <button class="ftab" onclick="filterTests(this,'nda')">NDA</button>
+        <button class="ftab" onclick="filterTests(this,'cuet')">CUET</button>
+        <button class="ftab" onclick="filterTests(this,'agniveer')">Agniveer</button>
+      </div>
+    </div>
+
+    <div class="catalog-grid" id="catalogGrid">
+
+      <div class="test-card" data-cat="nda">
+        <div class="test-card-top">
+          <span class="tc-badge live">🔴 Live Test</span>
+          <span class="tc-class">NDA</span>
+        </div>
+        <h4>NDA Full Mock Test — Paper I &amp; II</h4>
+        <div class="tc-meta">
+          <span>⏱ 2.5 hrs</span>
+          <span>📝 270 Questions</span>
+          <span>📊 All Subjects</span>
+        </div>
+        <div class="tc-price">
+          <div><strong>₹199</strong> &nbsp;<s>₹399</s></div>
+          <a href="#" class="btn btn-primary tc-btn" onclick="openModal()">Enrol Now</a>
+        </div>
+      </div>
+
+      <div class="test-card" data-cat="school">
+        <div class="test-card-top">
+          <span class="tc-badge practice">Practice</span>
+          <span class="tc-class">Class 10</span>
+        </div>
+        <h4>Class 10 Maths — Chapter-wise Test Series</h4>
+        <div class="tc-meta">
+          <span>⏱ 45 min/test</span>
+          <span>📝 15 Tests</span>
+          <span>📊 All Chapters</span>
+        </div>
+        <div class="tc-price">
+          <div><strong>₹149</strong> &nbsp;<s>₹299</s></div>
+          <a href="#" class="btn btn-primary tc-btn" onclick="openModal()">Enrol Now</a>
+        </div>
+      </div>
+
+      <div class="test-card" data-cat="cuet">
+        <div class="test-card-top">
+          <span class="tc-badge live">🔴 Live Test</span>
+          <span class="tc-class">CUET</span>
+        </div>
+        <h4>CUET Full Mock Test Series — Domain + General</h4>
+        <div class="tc-meta">
+          <span>⏱ 3 hrs</span>
+          <span>📝 200 Questions</span>
+          <span>📊 Domain + GK</span>
+        </div>
+        <div class="tc-price">
+          <div><strong>₹249</strong> &nbsp;<s>₹499</s></div>
+          <a href="#" class="btn btn-primary tc-btn" onclick="openModal()">Enrol Now</a>
+        </div>
+      </div>
+
+      <div class="test-card" data-cat="agniveer">
+        <div class="test-card-top">
+          <span class="tc-badge practice">Practice</span>
+          <span class="tc-class">Agniveer</span>
+        </div>
+        <h4>Agniveer Army — Complete Test Series Pack</h4>
+        <div class="tc-meta">
+          <span>⏱ 60 min/test</span>
+          <span>📝 20 Tests</span>
+          <span>📊 All Subjects</span>
+        </div>
+        <div class="tc-price">
+          <div><strong>₹179</strong> &nbsp;<s>₹349</s></div>
+          <a href="#" class="btn btn-primary tc-btn" onclick="openModal()">Enrol Now</a>
+        </div>
+      </div>
+
+      <div class="test-card" data-cat="school">
+        <div class="test-card-top">
+          <span class="tc-badge practice">Practice</span>
+          <span class="tc-class">Class 12</span>
+        </div>
+        <h4>Class 12 Science — Physics, Chemistry &amp; Bio Pack</h4>
+        <div class="tc-meta">
+          <span>⏱ 1 hr/test</span>
+          <span>📝 30 Tests</span>
+          <span>📊 PCB Combined</span>
+        </div>
+        <div class="tc-price">
+          <div><strong>₹199</strong> &nbsp;<s>₹399</s></div>
+          <a href="#" class="btn btn-primary tc-btn" onclick="openModal()">Enrol Now</a>
+        </div>
+      </div>
+
+      <div class="test-card" data-cat="school">
+        <div class="test-card-top">
+          <span class="tc-badge live">🔴 Live Test</span>
+          <span class="tc-class">Class 9</span>
+        </div>
+        <h4>Class 9 Annual Exam Mock Test — All Subjects</h4>
+        <div class="tc-meta">
+          <span>⏱ 3 hrs</span>
+          <span>📝 80 Questions</span>
+          <span>📊 All Subjects</span>
+        </div>
+        <div class="tc-price">
+          <div><strong>₹99</strong> &nbsp;<s>₹199</s></div>
+          <a href="#" class="btn btn-primary tc-btn" onclick="openModal()">Enrol Now</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="catalog-cta">
+      <a href="#" class="btn btn-outline btn-lg" onclick="openModal()">View All Test Series &nbsp;→</a>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════╗
+     ║  HOW IT WORKS                                    ║
+     ╚══════════════════════════════════════════════════╝ -->
+<section id="how" class="section" style="background:var(--bg-card)">
+  <div class="container">
+    <div class="text-center">
+      <span class="tag">Simple Process</span>
+      <h2 class="section-title" style="margin-top:16px">
+        Start Preparing in <span class="text-yellow">4 Easy Steps</span>
+      </h2>
+      <p class="section-sub mx-auto" style="margin-top:16px">No confusion. No long setup. Just you and the exam.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Create Free Account</h3>
+        <p>Sign up in under 60 seconds. No credit card needed. Just your name and phone number.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Choose Your Exam</h3>
+        <p>Select your class or target exam — NDA, CUET, Agniveer, or Class 6–12 boards.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Pick &amp; Purchase a Test</h3>
+        <p>Browse subject or full-length tests. Pay securely. Instant access, no waiting.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Attempt &amp; Analyse</h3>
+        <p>Give the test, get your score, and review your detailed performance report immediately.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════╗
+     ║  RESULTS / NUMBERS                               ║
+     ╚══════════════════════════════════════════════════╝ -->
+<section id="results" class="section">
+  <div class="container">
+    <div class="text-center">
+      <span class="tag">Our Results</span>
+      <h2 class="section-title" style="margin-top:16px">
+        Numbers That <span class="text-yellow">Don't Lie</span>
+      </h2>
+      <p class="section-sub mx-auto" style="margin-top:16px">
+        6 years of offline excellence, now available online. These are real students, real results.
+      </p>
+    </div>
+    <div class="results-grid">
+      <div class="r-stat">
+        <div class="r-num">10,000+</div>
+        <div class="r-lbl">Students trained across all courses since 2018</div>
+      </div>
+      <div class="r-stat">
+        <div class="r-num">97%</div>
+        <div class="r-lbl">Pass rate for students who complete full test series</div>
+      </div>
+      <div class="r-stat">
+        <div class="r-num">340+</div>
+        <div class="r-lbl">NDA &amp; defence selections in the last 4 years</div>
+      </div>
+      <div class="r-stat">
+        <div class="r-num">4.9★</div>
+        <div class="r-lbl">Average rating from 2,400+ verified student reviews</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════╗
+     ║  TESTIMONIALS                                    ║
+     ╚══════════════════════════════════════════════════╝ -->
+<section id="testimonials" class="section">
+  <div class="container">
+    <div class="testi-head">
+      <span class="tag">Student Stories</span>
+      <h2 class="section-title" style="margin-top:16px">
+        Real Students. <span class="text-yellow">Real Results.</span>
+      </h2>
+      <p class="section-sub">Don't take our word for it — hear from the students who cracked their exams with Perfect Classes.</p>
+    </div>
+  </div>
+  <div class="testi-track-wrap">
+    <div class="testi-track">
+      <!-- Card 1 -->
+      <div class="t-card">
+        <div class="t-tag">NDA Selected</div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">The NDA mock tests here are exactly like the real paper. After 3 months of practice I walked into the exam hall with full confidence. Got selected in my first attempt.</p>
+        <div class="t-author">
+          <div class="t-av">R</div>
+          <div><div class="t-name">Rahul Verma</div><div class="t-meta">NDA 2024 · Noorpur</div></div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="t-card">
+        <div class="t-tag">94% Boards</div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">I was scoring 65% in my school tests. After doing the Class 10 chapter-wise series consistently, I jumped to 94% in boards. The analytics showed me exactly where I was weak.</p>
+        <div class="t-author">
+          <div class="t-av">P</div>
+          <div><div class="t-name">Priya Sharma</div><div class="t-meta">Class 10 Board Topper · 2024</div></div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="t-card">
+        <div class="t-tag">DU Admitted</div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">CUET felt impossible until I started the Perfect Classes mock series. The domain subject tests are spot on. Got admission to my first choice college in Delhi University!</p>
+        <div class="t-author">
+          <div class="t-av">A</div>
+          <div><div class="t-name">Anjali Singh</div><div class="t-meta">CUET 2024 · Delhi University</div></div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="t-card">
+        <div class="t-tag">Agniveer Selected</div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">The live test leaderboard kept me competing every week. That pressure in practice meant no pressure on exam day. Cleared Agniveer on the very first try.</p>
+        <div class="t-author">
+          <div class="t-av">S</div>
+          <div><div class="t-name">Suresh Kumar</div><div class="t-meta">Agniveer Army · 2024</div></div>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="t-card">
+        <div class="t-tag">Parent Review</div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">My son went from 58% to 88% in Class 9 Science in just 2 months. The detailed analysis report after every test is what made the difference. Worth every rupee.</p>
+        <div class="t-author">
+          <div class="t-av">M</div>
+          <div><div class="t-name">Meena Devi</div><div class="t-meta">Parent of Class 9 Student</div></div>
+        </div>
+      </div>
+      <!-- Card 6 -->
+      <div class="t-card">
+        <div class="t-tag">92% Boards</div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">Class 12 PCM is no joke. The chapter-wise tests helped me revise systematically. I didn't have to study randomly anymore — the test report told me what to do next.</p>
+        <div class="t-author">
+          <div class="t-av">V</div>
+          <div><div class="t-name">Vikas Yadav</div><div class="t-meta">Class 12 · PCM · 92%</div></div>
+        </div>
+      </div>
+      <!-- Duplicate set for seamless loop -->
+      <div class="t-card">
+        <div class="t-tag">NDA Selected</div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">The NDA mock tests here are exactly like the real paper. After 3 months of practice I walked into the exam hall with full confidence. Got selected in my first attempt.</p>
+        <div class="t-author">
+          <div class="t-av">R</div>
+          <div><div class="t-name">Rahul Verma</div><div class="t-meta">NDA 2024 · Noorpur</div></div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="t-tag">94% Boards</div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">I was scoring 65% in my school tests. After doing the Class 10 chapter-wise series consistently, I jumped to 94% in boards. The analytics showed me exactly where I was weak.</p>
+        <div class="t-author">
+          <div class="t-av">P</div>
+          <div><div class="t-name">Priya Sharma</div><div class="t-meta">Class 10 Board Topper · 2024</div></div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="t-tag">DU Admitted</div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">CUET felt impossible until I started the Perfect Classes mock series. The domain subject tests are spot on. Got admission to my first choice college in Delhi University!</p>
+        <div class="t-author">
+          <div class="t-av">A</div>
+          <div><div class="t-name">Anjali Singh</div><div class="t-meta">CUET 2024 · Delhi University</div></div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="t-tag">Agniveer Selected</div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">The live test leaderboard kept me competing every week. That pressure in practice meant no pressure on exam day. Cleared Agniveer on the very first try.</p>
+        <div class="t-author">
+          <div class="t-av">S</div>
+          <div><div class="t-name">Suresh Kumar</div><div class="t-meta">Agniveer Army · 2024</div></div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="t-tag">Parent Review</div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">My son went from 58% to 88% in Class 9 Science in just 2 months. The detailed analysis report after every test is what made the difference. Worth every rupee.</p>
+        <div class="t-author">
+          <div class="t-av">M</div>
+          <div><div class="t-name">Meena Devi</div><div class="t-meta">Parent of Class 9 Student</div></div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="t-tag">92% Boards</div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">Class 12 PCM is no joke. The chapter-wise tests helped me revise systematically. I didn't have to study randomly anymore — the test report told me what to do next.</p>
+        <div class="t-author">
+          <div class="t-av">V</div>
+          <div><div class="t-name">Vikas Yadav</div><div class="t-meta">Class 12 · PCM · 92%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════╗
+     ║  FAQ                                             ║
+     ╚══════════════════════════════════════════════════╝ -->
+<section id="faq" class="section">
+  <div class="container">
+    <div class="text-center">
+      <span class="tag">FAQ</span>
+      <h2 class="section-title" style="margin-top:16px">Questions? <span class="text-yellow">We've Got Answers.</span></h2>
+      <p class="section-sub mx-auto" style="margin-top:16px">Everything you need to know before you start.</p>
+    </div>
+    <div class="faq-wrap">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How do I access the test series after purchasing?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">After purchase, the test series appears instantly in your dashboard. You can attempt it from our website or the Perfect Classes Android app. All progress is saved automatically across devices.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What's the difference between Live Tests and Practice Tests?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">Live Tests run at a scheduled time with a real countdown timer — you compete with other students and get a leaderboard ranking. Practice Tests can be attempted anytime at your own pace. Both include full detailed analytics after completion.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can I attempt a test more than once?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">Practice tests can be re-attempted as many times as you want within your subscription period — repetition is key to building speed. Live tests can only be attempted once during the live window, but you can review the full solution later.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is there a mobile app? Which platforms does it support?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">Yes! The Perfect Classes Android app is available on Google Play Store. Simply sign in with the same account you used on the website and all your purchased tests will be available. iOS support is coming soon.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What is your refund policy?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">We offer a full refund within 24 hours of purchase if no tests have been attempted. Once a test has been started, we do not offer refunds. If you face any technical issues, contact us at support@perfectclasses.in and we'll resolve it immediately.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          I'm in Class 6 — is this platform right for me?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">Absolutely. We have test series for every class from 6 to 12, covering all core subjects. The tests are age-appropriate and curriculum-aligned. Starting early is the biggest advantage any student can have.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════╗
+     ║  CTA BANNER                                      ║
+     ╚══════════════════════════════════════════════════╝ -->
+<section id="cta-banner">
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <h2>Your Exam Won't Wait.<br/><span class="text-yellow">Neither Should You.</span></h2>
+    <p>Join 10,000+ students who chose to prepare smarter. Create your free account and attempt your first test today.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn btn-primary btn-xl" onclick="openModal()">Create Free Account →</a>
+      <a href="tel:+919999999999" class="btn btn-outline btn-xl">📞 Call Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════╗
+     ║  FOOTER                                          ║
+     ╚══════════════════════════════════════════════════╝ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo" style="margin-bottom:12px;display:inline-flex">
+        <div class="logo-mark">PC</div>
+        <div class="logo-text">Perfect Classes <small>Noorpur, UP</small></div>
+      </a>
+      <p>UP's most trusted test series platform for Class 6–12, NDA, CUET &amp; Agniveer preparation. 10,000+ students trained since 2018.</p>
+      <div class="social-links" style="margin-top:20px">
+        <a href="#" class="social-link" title="YouTube">▶</a>
+        <a href="#" class="social-link" title="Instagram">📷</a>
+        <a href="#" class="social-link" title="WhatsApp">💬</a>
+        <a href="#" class="social-link" title="Telegram">✈</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Exam Categories</h4>
+      <ul>
+        <li><a href="#">Class 6 – 8 Tests</a></li>
+        <li><a href="#">Class 9 – 10 Tests</a></li>
+        <li><a href="#">Class 11 – 12 Tests</a></li>
+        <li><a href="#">NDA Test Series</a></li>
+        <li><a href="#">CUET Test Series</a></li>
+        <li><a href="#">Agniveer Test Series</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#why">Why Choose Us</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#testimonials">Student Results</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col footer-contact">
+      <h4>Contact Us</h4>
+      <p><span class="icon">📍</span> Perfect Classes, Noorpur, Bijnor District, Uttar Pradesh — 246734</p>
+      <p><span class="icon">📞</span> +91 99999 99999</p>
+      <p><span class="icon">✉️</span> support@perfectclasses.in</p>
+      <p><span class="icon">🕐</span> Mon – Sat, 9 AM – 7 PM</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2024 Perfect Classes, Noorpur. All rights reserved.</p>
+    <div class="footer-badge">
+      <span class="f-graphy">Powered by <span>Graphy</span></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ╔══════════════════════════════════════════════════╗
+     ║  SIGN UP MODAL                                   ║
+     ╚══════════════════════════════════════════════════╝ -->
+<div class="modal-overlay" id="signupModal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-top">
+      <h2>Create Free Account</h2>
+      <p>Join 10,000+ students. Get instant access to test series.</p>
+    </div>
+    <form onsubmit="handleSignup(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Rahul" required />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Verma" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+91 98765 43210" required />
+      </div>
+      <div class="form-group">
+        <label>I'm preparing for</label>
+        <select required>
+          <option value="" disabled selected>Select your exam</option>
+          <option>Class 6</option>
+          <option>Class 7</option>
+          <option>Class 8</option>
+          <option>Class 9</option>
+          <option>Class 10</option>
+          <option>Class 11</option>
+          <option>Class 12</option>
+          <option>NDA</option>
+          <option>CUET</option>
+          <option>Agniveer</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="Create a password" required />
+      </div>
+      <button type="submit" class="btn btn-primary form-submit">Create My Account →</button>
+      <p class="form-note">By signing up you agree to our <a href="#" style="color:var(--yellow)">Terms</a> &amp; <a href="#" style="color:var(--yellow)">Privacy Policy</a></p>
+      <div class="form-divider"><span>Already have an account?</span></div>
+      <a href="#" class="btn btn-outline" style="width:100%;justify-content:center">Log In Instead</a>
+    </form>
+  </div>
+</div>
+
+<!-- Scroll to top -->
+<button id="scrolltop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<!-- ╔══════════════════════════════════════════════════╗
+     ║  JAVASCRIPT                                      ║
+     ╚══════════════════════════════════════════════════╝ -->
+<script>
+  // ── Mobile nav ──
+  function toggleMobile() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+  function closeMobile() {
+    document.getElementById('mobileNav').classList.remove('open');
+  }
+
+  // ── Modal ──
+  function openModal() {
+    document.getElementById('signupModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('signupModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('signupModal')) closeModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ── Sign up form ──
+  function handleSignup(e) {
+    e.preventDefault();
+    // In production: POST to Graphy API
+    alert('Account created! Redirecting to your dashboard...');
+    closeModal();
+  }
+
+  // ── FAQ accordion ──
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ── Catalog filter ──
+  function filterTests(btn, cat) {
+    document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.test-card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // ── Scroll to top button ──
+  window.addEventListener('scroll', () => {
+    const btn = document.getElementById('scrolltop');
+    btn.classList.toggle('show', window.scrollY > 400);
+  });
+
+  // ── Navbar shadow on scroll ──
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 20) {
+      nav.style.background = 'rgba(8,8,8,0.98)';
+    } else {
+      nav.style.background = 'rgba(8,8,8,0.88)';
+    }
+  });
+</script>
+</body>
+</html>
