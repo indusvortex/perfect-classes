@@ -10,12 +10,22 @@ import { Navbar as ResizableNav, NavBody, NavItems, MobileNav, NavbarLogo, Navba
 import { InteractiveGridPattern } from "@/registry/magicui/interactive-grid-pattern";
 import { Marquee } from "@/registry/magicui/marquee";
 
-// Scroll to top on route change
+// Scroll to top or hash on route change
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (hash) {
+      setTimeout(() => {
+        const id = hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 0);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
   return null;
 }
 
@@ -142,14 +152,14 @@ function Navbar() {
             onClose={() => setIsMobileMenuOpen(false)}
           >
             {navItems.map((item, idx) => (
-              <a
+              <Link
                 key={`mobile-link-${idx}`}
-                href={item.link}
+                to={item.link}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="relative text-[#121212] font-semibold text-lg block py-3 border-b border-gray-100 w-full hover:text-[#981F1F] transition-colors"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
             <div className="flex w-full flex-row gap-4 mt-4">
               <a 

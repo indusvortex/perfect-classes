@@ -1,4 +1,5 @@
 "use client";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import {
@@ -115,12 +116,12 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
       )}
     >
       {items.map((item, idx) => (
-        <a
+        <Link
           onMouseEnter={() => setHovered(idx)}
           onClick={onItemClick}
           className="relative px-4 py-2 text-neutral-600 pointer-events-auto whitespace-nowrap"
           key={`link-${idx}`}
-          href={item.link}
+          to={item.link}
         >
           {hovered === idx && (
             <motion.div
@@ -129,7 +130,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
             />
           )}
           <span className="relative z-20 text-[#121212]">{item.name}</span>
-        </a>
+        </Link>
       ))}
     </motion.div>
   );
@@ -214,35 +215,31 @@ export const MobileNavToggle = ({
 
 export const NavbarLogo = () => {
   return (
-    <a
-      href="/#hero"
+    <Link
+      to="/#hero"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
       <div className="w-8 h-8 rounded-lg bg-[#981F1F] flex items-center justify-center">
         <span className="text-white font-bold text-sm">P</span>
       </div>
       <span className="font-bold text-[#121212] text-lg">Perfect <span className="text-[#981F1F]">Classes</span></span>
-    </a>
+    </Link>
   );
 };
 
 export const NavbarButton = ({
   href,
-  as: Tag = "a",
+  onClick,
   children,
   className,
   variant = "primary",
-  ...props
 }: {
   href?: string;
-  as?: React.ElementType;
+  onClick?: () => void;
   children: React.ReactNode;
   className?: string;
   variant?: "primary" | "secondary" | "dark" | "gradient" | "brand";
-} & (
-  | React.ComponentPropsWithoutRef<"a">
-  | React.ComponentPropsWithoutRef<"button">
-)) => {
+}) => {
   const baseStyles =
     "px-4 py-2 rounded-md button text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
 
@@ -257,13 +254,24 @@ export const NavbarButton = ({
       "bg-[#981F1F] text-white !rounded-xl hover:bg-[#7a1818] shadow-md",
   };
 
+  if (href) {
+    if (href.startsWith('tel:') || href.startsWith('mailto:') || href.startsWith('http')) {
+      return (
+        <a href={href} onClick={onClick} className={cn(baseStyles, variantStyles[variant], className)}>
+          {children}
+        </a>
+      );
+    }
+    return (
+      <Link to={href} onClick={onClick} className={cn(baseStyles, variantStyles[variant], className)}>
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <Tag
-      href={href || undefined}
-      className={cn(baseStyles, variantStyles[variant], className)}
-      {...props}
-    >
+    <button onClick={onClick} className={cn(baseStyles, variantStyles[variant], className)}>
       {children}
-    </Tag>
+    </button>
   );
 };
