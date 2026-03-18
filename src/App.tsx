@@ -197,7 +197,7 @@ function InteractiveHero() {
   ];
 
   return (
-    <section id="hero" className="relative min-h-[90vh] bg-[#FAFAFA] flex items-center overflow-hidden pt-16">
+    <section id="hero" className="relative min-h-[90vh] bg-[#FAFAFA] flex items-center overflow-hidden pt-24 sm:pt-20 lg:pt-16">
       {/* Background radial gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(152,31,31,0.05),transparent_50%)] z-0" />
       <div className="absolute inset-0 z-0">
@@ -217,11 +217,11 @@ function InteractiveHero() {
           <span className="inline-flex items-center gap-2 bg-[#FFF1F1] text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6 border border-[#981F1F]/20">
             <Trophy size={14} /> India's Premier Coaching
           </span>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-[#121212] leading-[1.1] mb-6 tracking-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#121212] leading-[1.1] mb-6 tracking-tight">
             Score More. <br />
             <span className="text-[#981F1F]">Every Subject.</span>
           </h1>
-          <p className="text-lg text-[#555] mb-10 max-w-lg leading-relaxed">
+          <p className="text-base sm:text-lg text-[#555] mb-8 sm:mb-10 max-w-lg leading-relaxed">
             A collaborative learning ecosystem extending beyond the classroom. From Foundation to NDA, prepare with India's most rigorous interactive test series.
           </p>
           
@@ -324,7 +324,7 @@ function TestSeriesExplorer() {
           <span className="inline-flex items-center gap-2 bg-white border border-[#981F1F]/20 text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4">
             <Target size={12} /> Test Series
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#121212]">Explore Our <span className="text-[#981F1F]">Test Series</span></h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#121212]">Explore Our <span className="text-[#981F1F]">Test Series</span></h2>
           <p className="text-[#555] mt-2 max-w-xl mx-auto">Find the right test series for your goal — filter by class, exam, or subject.</p>
         </div>
         {/* Tab bar */}
@@ -422,7 +422,7 @@ function ResultsShowcase() {
           <span className="inline-flex items-center gap-2 bg-[#981F1F]/10 text-[#FDB813] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-[#FDB813]/20">
             <Award size={12} /> Wall of Fame
           </span>
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
             Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FDB813] to-orange-500">Achievements.</span>
           </h2>
         </div>
@@ -457,7 +457,7 @@ function WhyUs() {
     <section id="about" className="py-20 bg-[#121212]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Why Perfect <span className="text-[#FDB813]">Classes?</span></h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white">Why Perfect <span className="text-[#FDB813]">Classes?</span></h2>
           <p className="text-white/60 mt-3 max-w-xl mx-auto">Not just tests — a complete preparation ecosystem designed to get you selected.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -502,14 +502,14 @@ function Testimonials() {
 
   return (
     <section className="py-24 bg-[#FAFAFA] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
         
         {/* Left Side: Header & Context */}
         <div>
           <span className="inline-flex items-center gap-2 bg-[#FFF1F1] text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6">
             <Star size={12} /> Student Reviews
           </span>
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-[#121212] leading-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-3xl lg:text-5xl font-extrabold text-[#121212] leading-tight mb-6">
             Stories of <span className="text-[#981F1F]">Excellence.</span>
           </h2>
           <p className="text-[#555] text-lg leading-relaxed mb-8 max-w-lg">
@@ -531,8 +531,8 @@ function Testimonials() {
         </div>
 
         {/* Right Side: Animated Vertical Marquee */}
-        <div className="relative flex h-[500px] lg:h-[600px] w-full flex-row items-center justify-center overflow-hidden [perspective:1000px] [transform-style:preserve-3d]">
-          <div className="absolute inset-y-0 left-0 w-full lg:w-1/2 flex flex-col items-center px-2">
+        <div className="relative flex h-[400px] sm:h-[500px] lg:h-[600px] w-full flex-row items-center justify-center overflow-hidden [perspective:1000px] [transform-style:preserve-3d]">
+          <div className="absolute inset-y-0 left-0 w-full md:w-1/2 flex flex-col items-center px-2">
             <Marquee pauseOnHover vertical className="[--duration:30s] [--gap:1.5rem]" style={{"--gap": "1.5rem"} as React.CSSProperties}>
               {firstRow.map((t, i) => (
                 <div key={`col1-${i}`} className="w-full max-w-sm lg:w-80 cursor-pointer overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
@@ -552,7 +552,7 @@ function Testimonials() {
             </Marquee>
           </div>
           
-          <div className="absolute inset-y-0 right-0 hidden lg:flex w-1/2 flex-col items-center pt-24 px-2">
+          <div className="absolute inset-y-0 right-0 hidden md:flex w-1/2 flex-col items-center pt-16 lg:pt-24 px-2">
             <Marquee reverse pauseOnHover vertical className="[--duration:35s] [--gap:1.5rem]" style={{"--gap": "1.5rem"} as React.CSSProperties}>
               {secondRow.map((t, i) => (
                 <div key={`col2-${i}`} className="w-full max-w-sm lg:w-80 cursor-pointer overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
@@ -607,7 +607,7 @@ function Stats() {
     <section ref={ref} className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#121212]">Impact, <span className="text-[#981F1F]">At Scale</span></h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#121212]">Impact, <span className="text-[#981F1F]">At Scale</span></h2>
           <p className="text-[#555] mt-2">Numbers that reflect the trust of thousands of students.</p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
@@ -630,7 +630,7 @@ function EnrollCTA() {
         <span className="inline-block bg-[#FDB813] text-[#121212] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6">
           Limited Seats — 2026 Batch
         </span>
-        <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-5">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-5">
           Start Your Preparation Today
         </h2>
         <p className="text-white/75 text-lg mb-8 max-w-xl mx-auto">
