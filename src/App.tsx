@@ -47,14 +47,100 @@ const QUICK_LINKS = [
 ];
 
 const BY_CLASS_SERIES = [
-  { class: '6', label: 'History, Geography, Constitution, Science, Static GK', tests: 40, badge: 'CLASS 6', tier: 'junior', age: '10-11 yrs', gradient: 'from-amber-400 to-orange-500', emoji: '\uD83E\uDDD2', tagline: 'Neev Ka Pehla Patthar' },
-  { class: '7', label: 'History, Geography, Constitution, Science, Static GK', tests: 50, badge: 'CLASS 7', tier: 'junior', age: '11-12 yrs', gradient: 'from-emerald-400 to-teal-500', emoji: '\uD83E\uDDD2', tagline: 'Samajh Badho, Ratta Chhodo' },
-  { class: '8', label: 'History, Geography, Constitution, Science, Static GK', tests: 60, badge: 'CLASS 8', tier: 'junior', age: '12-13 yrs', gradient: 'from-blue-400 to-indigo-500', emoji: '\uD83D\uDC66', tagline: 'Board Se Pehle Ki Tayyari' },
-  { class: '9', label: 'History, Geography, Constitution, Science, Static GK', tests: 80, badge: 'CLASS 9', tier: 'senior', age: '13-14 yrs', gradient: 'from-violet-500 to-purple-600', emoji: '\uD83D\uDC66', tagline: 'Competitive Edge Shuru' },
-  { class: '10', label: 'History, Geography, Constitution, Science, Static GK', tests: 120, badge: 'CLASS 10', tier: 'senior', age: '14-15 yrs', gradient: 'from-rose-500 to-red-600', emoji: '\uD83E\uDDD1', tagline: 'Board + Competition Ready' },
-  { class: '11', label: 'History, Geography, Constitution, Science, Static GK', tests: 150, badge: 'CLASS 11', tier: 'senior', age: '15-16 yrs', gradient: 'from-[#981F1F] to-[#6B1515]', emoji: '\uD83E\uDDD1', tagline: 'IAS/NDA Level Foundation' },
-  { class: '12', label: 'History, Geography, Constitution, Science, Static GK', tests: 200, badge: 'CLASS 12', tier: 'senior', age: '16-18 yrs', gradient: 'from-[#121212] to-[#333]', emoji: '\uD83E\uDDD1\u200D\uD83C\uDF93', tagline: 'Exam Ready, Future Ready' },
+  { class: '6', label: 'History, Geography, Constitution, Science, Static GK', tests: 40, badge: 'CLASS 6', gradient: 'from-amber-400 to-orange-500', illustration: 'child', tagline: 'Neev Ka Pehla Patthar' },
+  { class: '7', label: 'History, Geography, Constitution, Science, Static GK', tests: 50, badge: 'CLASS 7', gradient: 'from-emerald-400 to-teal-500', illustration: 'child', tagline: 'Samajh Badho, Ratta Chhodo' },
+  { class: '8', label: 'History, Geography, Constitution, Science, Static GK', tests: 60, badge: 'CLASS 8', gradient: 'from-blue-400 to-indigo-500', illustration: 'child', tagline: 'Board Se Pehle Ki Tayyari' },
+  { class: '9', label: 'History, Geography, Constitution, Science, Static GK', tests: 80, badge: 'CLASS 9', gradient: 'from-violet-500 to-purple-600', illustration: 'teen', tagline: 'Competitive Edge Shuru' },
+  { class: '10', label: 'History, Geography, Constitution, Science, Static GK', tests: 120, badge: 'CLASS 10', gradient: 'from-rose-500 to-red-600', illustration: 'teen', tagline: 'Board + Competition Ready' },
+  { class: '11', label: 'History, Geography, Constitution, Science, Static GK', tests: 150, badge: 'CLASS 11', gradient: 'from-[#981F1F] to-[#6B1515]', illustration: 'senior', tagline: 'IAS/NDA Level Foundation' },
+  { class: '12', label: 'History, Geography, Constitution, Science, Static GK', tests: 200, badge: 'CLASS 12', gradient: 'from-[#121212] to-[#333]', illustration: 'senior', tagline: 'Exam Ready, Future Ready' },
 ];
+
+// Student illustration SVGs — 3 age variants
+function StudentIllustration({ type, className = '' }: { type: string; className?: string }) {
+  if (type === 'child') {
+    return (
+      <svg viewBox="0 0 80 100" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+        {/* Backpack */}
+        <rect x="20" y="42" width="40" height="36" rx="6" fill="white" fillOpacity="0.25" />
+        <rect x="28" y="50" width="24" height="10" rx="3" fill="white" fillOpacity="0.15" />
+        {/* Body */}
+        <rect x="25" y="52" width="30" height="28" rx="5" fill="white" fillOpacity="0.9" />
+        {/* Head */}
+        <circle cx="40" cy="30" r="18" fill="white" fillOpacity="0.9" />
+        {/* Hair */}
+        <path d="M22 28c0-10 8-18 18-18s18 8 18 18" fill="white" fillOpacity="0.3" />
+        <ellipse cx="40" cy="14" rx="16" ry="6" fill="#333" fillOpacity="0.7" />
+        {/* Eyes */}
+        <circle cx="33" cy="30" r="2.5" fill="#333" />
+        <circle cx="47" cy="30" r="2.5" fill="#333" />
+        {/* Smile */}
+        <path d="M34 37c2 3 10 3 12 0" stroke="#333" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+        {/* Book in hand */}
+        <rect x="50" y="58" width="14" height="18" rx="2" fill="#FDB813" fillOpacity="0.8" />
+        <line x1="54" y1="62" x2="60" y2="62" stroke="white" strokeWidth="1" />
+        <line x1="54" y1="65" x2="60" y2="65" stroke="white" strokeWidth="1" />
+        <line x1="54" y1="68" x2="58" y2="68" stroke="white" strokeWidth="1" />
+      </svg>
+    );
+  }
+  if (type === 'teen') {
+    return (
+      <svg viewBox="0 0 80 100" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+        {/* Body */}
+        <rect x="24" y="48" width="32" height="34" rx="5" fill="white" fillOpacity="0.9" />
+        {/* Head */}
+        <circle cx="40" cy="26" r="17" fill="white" fillOpacity="0.9" />
+        {/* Hair - side parted */}
+        <path d="M23 24c0-10 8-18 17-18s17 8 17 18" fill="#333" fillOpacity="0.7" />
+        <path d="M24 24c1-8 7-14 14-15" stroke="#333" strokeWidth="2" fill="none" />
+        {/* Eyes */}
+        <circle cx="33" cy="26" r="2" fill="#333" />
+        <circle cx="47" cy="26" r="2" fill="#333" />
+        {/* Glasses */}
+        <rect x="29" y="22" width="9" height="8" rx="4" stroke="#333" strokeWidth="1.2" fill="none" />
+        <rect x="42" y="22" width="9" height="8" rx="4" stroke="#333" strokeWidth="1.2" fill="none" />
+        <line x1="38" y1="26" x2="42" y2="26" stroke="#333" strokeWidth="1" />
+        {/* Smile */}
+        <path d="M35 34c2 2 8 2 10 0" stroke="#333" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+        {/* Notebook */}
+        <rect x="12" y="54" width="16" height="22" rx="2" fill="#FDB813" fillOpacity="0.8" />
+        <line x1="15" y1="58" x2="25" y2="58" stroke="white" strokeWidth="1" />
+        <line x1="15" y1="61" x2="25" y2="61" stroke="white" strokeWidth="1" />
+        <line x1="15" y1="64" x2="22" y2="64" stroke="white" strokeWidth="1" />
+        {/* Pen in hand */}
+        <rect x="55" y="50" width="3" height="20" rx="1.5" fill="white" fillOpacity="0.5" transform="rotate(15 55 50)" />
+      </svg>
+    );
+  }
+  // senior
+  return (
+    <svg viewBox="0 0 80 100" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+      {/* Body - formal */}
+      <rect x="22" y="46" width="36" height="36" rx="5" fill="white" fillOpacity="0.9" />
+      {/* Tie */}
+      <polygon points="40,50 37,60 40,72 43,60" fill="#981F1F" fillOpacity="0.7" />
+      {/* Head */}
+      <circle cx="40" cy="24" r="17" fill="white" fillOpacity="0.9" />
+      {/* Hair - neat */}
+      <path d="M23 22c0-10 8-17 17-17s17 7 17 17" fill="#333" fillOpacity="0.8" />
+      {/* Eyes - determined */}
+      <ellipse cx="33" cy="24" rx="2" ry="1.8" fill="#333" />
+      <ellipse cx="47" cy="24" rx="2" ry="1.8" fill="#333" />
+      {/* Eyebrows */}
+      <line x1="30" y1="20" x2="36" y2="21" stroke="#333" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="44" y1="21" x2="50" y2="20" stroke="#333" strokeWidth="1.5" strokeLinecap="round" />
+      {/* Confident smile */}
+      <path d="M34 32c2 3 10 3 12 0" stroke="#333" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+      {/* Trophy */}
+      <path d="M58 52 L62 52 L64 62 L60 66 L56 62 Z" fill="#FDB813" fillOpacity="0.9" />
+      <rect x="58" y="66" width="4" height="3" fill="#FDB813" fillOpacity="0.7" />
+      <rect x="56" y="69" width="8" height="2" rx="1" fill="#FDB813" fillOpacity="0.6" />
+      {/* Star on trophy */}
+      <circle cx="60" cy="57" r="2" fill="white" fillOpacity="0.8" />
+    </svg>
+  );
+}
 
 const BY_EXAM_SERIES = [
   { exam: 'UPSC', title: 'UPSC Foundation Series', desc: 'The same NCERT foundation every IAS topper builds. Start from Class 6 level — reach Prelims level.', tests: 120, badge: 'UPSC', emoji: '\uD83C\uDFDB\uFE0F', gradient: 'from-[#981F1F] to-[#6B1515]' },
@@ -330,20 +416,6 @@ function TestSeriesExplorer() {
           </div>
         </div>
 
-        {/* Tier Labels */}
-        {tab === 'class' && (
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <div className="flex items-center gap-2 text-sm">
-              <div className="w-3 h-3 rounded-full bg-gradient-to-r from-amber-400 to-teal-500" />
-              <span className="text-[#555] font-medium">Tier 1 — Class 6-8 (Neev)</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm">
-              <div className="w-3 h-3 rounded-full bg-gradient-to-r from-violet-500 to-[#121212]" />
-              <span className="text-[#555] font-medium">Tier 2 — Class 9-12 (Competition Ready)</span>
-            </div>
-          </div>
-        )}
-
         <AnimatePresence mode="wait">
           {tab === 'class' && (
             <motion.div key="class" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
@@ -352,21 +424,19 @@ function TestSeriesExplorer() {
                 <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
                   className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-[#981F1F]/30 transition-all duration-300 relative overflow-hidden flex flex-col">
 
-                  {/* Visual Header with Gradient + Emoji Avatar */}
-                  <div className={`relative h-32 bg-gradient-to-br ${s.gradient} flex items-center justify-between px-5 pt-4 pb-3`}>
-                    {/* Decorative circles */}
-                    <div className="absolute top-3 right-3 w-20 h-20 rounded-full bg-white/10" />
-                    <div className="absolute bottom-0 right-8 w-12 h-12 rounded-full bg-white/10" />
+                  {/* Visual Header with Gradient + Student Illustration */}
+                  <div className={`relative h-36 bg-gradient-to-br ${s.gradient} flex items-end justify-between px-5 pb-4`}>
+                    {/* Decorative shapes */}
+                    <div className="absolute top-3 right-3 w-24 h-24 rounded-full bg-white/10" />
+                    <div className="absolute top-0 left-0 w-16 h-16 rounded-full bg-white/5 -translate-x-4 -translate-y-4" />
 
                     <div className="relative z-10 flex flex-col">
-                      <span className="text-white/70 text-[10px] font-bold uppercase tracking-widest">{s.tier === 'junior' ? 'Tier 1' : 'Tier 2'}</span>
-                      <span className="text-white text-3xl font-extrabold leading-none mt-1">Class {s.class}</span>
-                      <span className="text-white/60 text-[10px] mt-1">{s.age}</span>
+                      <span className="text-white text-3xl font-extrabold leading-none">Class {s.class}</span>
                     </div>
 
-                    {/* Age-representative Emoji Avatar */}
-                    <div className="relative z-10 w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/30 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <span className="text-3xl">{s.emoji}</span>
+                    {/* Student Illustration */}
+                    <div className="relative z-10 group-hover:scale-105 transition-transform duration-500">
+                      <StudentIllustration type={s.illustration} className="w-20 h-24 drop-shadow-lg" />
                     </div>
                   </div>
 
