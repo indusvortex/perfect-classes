@@ -47,13 +47,13 @@ const QUICK_LINKS = [
 ];
 
 const BY_CLASS_SERIES = [
-  { class: '6', label: 'History, Geography, Constitution, Science, Static GK', tests: 40, badge: 'CLASS 6', gradient: 'from-amber-400 to-orange-500', illustration: 'child', tagline: 'Neev Ka Pehla Patthar' },
-  { class: '7', label: 'History, Geography, Constitution, Science, Static GK', tests: 50, badge: 'CLASS 7', gradient: 'from-emerald-400 to-teal-500', illustration: 'child', tagline: 'Samajh Badho, Ratta Chhodo' },
-  { class: '8', label: 'History, Geography, Constitution, Science, Static GK', tests: 60, badge: 'CLASS 8', gradient: 'from-blue-400 to-indigo-500', illustration: 'child', tagline: 'Board Se Pehle Ki Tayyari' },
-  { class: '9', label: 'History, Geography, Constitution, Science, Static GK', tests: 80, badge: 'CLASS 9', gradient: 'from-violet-500 to-purple-600', illustration: 'teen', tagline: 'Competitive Edge Shuru' },
-  { class: '10', label: 'History, Geography, Constitution, Science, Static GK', tests: 120, badge: 'CLASS 10', gradient: 'from-rose-500 to-red-600', illustration: 'teen', tagline: 'Board + Competition Ready' },
-  { class: '11', label: 'History, Geography, Constitution, Science, Static GK', tests: 150, badge: 'CLASS 11', gradient: 'from-[#981F1F] to-[#6B1515]', illustration: 'senior', tagline: 'IAS/NDA Level Foundation' },
-  { class: '12', label: 'History, Geography, Constitution, Science, Static GK', tests: 200, badge: 'CLASS 12', gradient: 'from-[#121212] to-[#333]', illustration: 'senior', tagline: 'Exam Ready, Future Ready' },
+  { class: '6', label: 'History, Geography, Constitution, Science, Static GK', tests: 40, badge: 'CLASS 6', gradient: 'from-amber-400 to-orange-500', image: '/students/class6.png', tagline: 'Neev Ka Pehla Patthar' },
+  { class: '7', label: 'History, Geography, Constitution, Science, Static GK', tests: 50, badge: 'CLASS 7', gradient: 'from-emerald-400 to-teal-500', image: '/students/class7.png', tagline: 'Samajh Badho, Ratta Chhodo' },
+  { class: '8', label: 'History, Geography, Constitution, Science, Static GK', tests: 60, badge: 'CLASS 8', gradient: 'from-blue-400 to-indigo-500', image: '/students/class8.png', tagline: 'Board Se Pehle Ki Tayyari' },
+  { class: '9', label: 'History, Geography, Constitution, Science, Static GK', tests: 80, badge: 'CLASS 9', gradient: 'from-violet-500 to-purple-600', image: '/students/class9.png', tagline: 'Competitive Edge Shuru' },
+  { class: '10', label: 'History, Geography, Constitution, Science, Static GK', tests: 120, badge: 'CLASS 10', gradient: 'from-rose-500 to-red-600', image: '/students/class10.png', tagline: 'Board + Competition Ready' },
+  { class: '11', label: 'History, Geography, Constitution, Science, Static GK', tests: 150, badge: 'CLASS 11', gradient: 'from-[#981F1F] to-[#6B1515]', image: '/students/class11.png', tagline: 'IAS/NDA Level Foundation' },
+  { class: '12', label: 'History, Geography, Constitution, Science, Static GK', tests: 200, badge: 'CLASS 12', gradient: 'from-[#121212] to-[#333]', image: '/students/class12.png', tagline: 'Exam Ready, Future Ready' },
 ];
 
 // Detailed class data for individual class pages
@@ -140,92 +140,6 @@ const CLASS_DATA: Record<string, {
     bookPages: 420,
   },
 };
-
-// Student illustration SVGs — 3 age variants
-function StudentIllustration({ type, className = '' }: { type: string; className?: string }) {
-  if (type === 'child') {
-    return (
-      <svg viewBox="0 0 80 100" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
-        {/* Backpack */}
-        <rect x="20" y="42" width="40" height="36" rx="6" fill="white" fillOpacity="0.25" />
-        <rect x="28" y="50" width="24" height="10" rx="3" fill="white" fillOpacity="0.15" />
-        {/* Body */}
-        <rect x="25" y="52" width="30" height="28" rx="5" fill="white" fillOpacity="0.9" />
-        {/* Head */}
-        <circle cx="40" cy="30" r="18" fill="white" fillOpacity="0.9" />
-        {/* Hair */}
-        <path d="M22 28c0-10 8-18 18-18s18 8 18 18" fill="white" fillOpacity="0.3" />
-        <ellipse cx="40" cy="14" rx="16" ry="6" fill="#333" fillOpacity="0.7" />
-        {/* Eyes */}
-        <circle cx="33" cy="30" r="2.5" fill="#333" />
-        <circle cx="47" cy="30" r="2.5" fill="#333" />
-        {/* Smile */}
-        <path d="M34 37c2 3 10 3 12 0" stroke="#333" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-        {/* Book in hand */}
-        <rect x="50" y="58" width="14" height="18" rx="2" fill="#FDB813" fillOpacity="0.8" />
-        <line x1="54" y1="62" x2="60" y2="62" stroke="white" strokeWidth="1" />
-        <line x1="54" y1="65" x2="60" y2="65" stroke="white" strokeWidth="1" />
-        <line x1="54" y1="68" x2="58" y2="68" stroke="white" strokeWidth="1" />
-      </svg>
-    );
-  }
-  if (type === 'teen') {
-    return (
-      <svg viewBox="0 0 80 100" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
-        {/* Body */}
-        <rect x="24" y="48" width="32" height="34" rx="5" fill="white" fillOpacity="0.9" />
-        {/* Head */}
-        <circle cx="40" cy="26" r="17" fill="white" fillOpacity="0.9" />
-        {/* Hair - side parted */}
-        <path d="M23 24c0-10 8-18 17-18s17 8 17 18" fill="#333" fillOpacity="0.7" />
-        <path d="M24 24c1-8 7-14 14-15" stroke="#333" strokeWidth="2" fill="none" />
-        {/* Eyes */}
-        <circle cx="33" cy="26" r="2" fill="#333" />
-        <circle cx="47" cy="26" r="2" fill="#333" />
-        {/* Glasses */}
-        <rect x="29" y="22" width="9" height="8" rx="4" stroke="#333" strokeWidth="1.2" fill="none" />
-        <rect x="42" y="22" width="9" height="8" rx="4" stroke="#333" strokeWidth="1.2" fill="none" />
-        <line x1="38" y1="26" x2="42" y2="26" stroke="#333" strokeWidth="1" />
-        {/* Smile */}
-        <path d="M35 34c2 2 8 2 10 0" stroke="#333" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-        {/* Notebook */}
-        <rect x="12" y="54" width="16" height="22" rx="2" fill="#FDB813" fillOpacity="0.8" />
-        <line x1="15" y1="58" x2="25" y2="58" stroke="white" strokeWidth="1" />
-        <line x1="15" y1="61" x2="25" y2="61" stroke="white" strokeWidth="1" />
-        <line x1="15" y1="64" x2="22" y2="64" stroke="white" strokeWidth="1" />
-        {/* Pen in hand */}
-        <rect x="55" y="50" width="3" height="20" rx="1.5" fill="white" fillOpacity="0.5" transform="rotate(15 55 50)" />
-      </svg>
-    );
-  }
-  // senior
-  return (
-    <svg viewBox="0 0 80 100" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
-      {/* Body - formal */}
-      <rect x="22" y="46" width="36" height="36" rx="5" fill="white" fillOpacity="0.9" />
-      {/* Tie */}
-      <polygon points="40,50 37,60 40,72 43,60" fill="#981F1F" fillOpacity="0.7" />
-      {/* Head */}
-      <circle cx="40" cy="24" r="17" fill="white" fillOpacity="0.9" />
-      {/* Hair - neat */}
-      <path d="M23 22c0-10 8-17 17-17s17 7 17 17" fill="#333" fillOpacity="0.8" />
-      {/* Eyes - determined */}
-      <ellipse cx="33" cy="24" rx="2" ry="1.8" fill="#333" />
-      <ellipse cx="47" cy="24" rx="2" ry="1.8" fill="#333" />
-      {/* Eyebrows */}
-      <line x1="30" y1="20" x2="36" y2="21" stroke="#333" strokeWidth="1.5" strokeLinecap="round" />
-      <line x1="44" y1="21" x2="50" y2="20" stroke="#333" strokeWidth="1.5" strokeLinecap="round" />
-      {/* Confident smile */}
-      <path d="M34 32c2 3 10 3 12 0" stroke="#333" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-      {/* Trophy */}
-      <path d="M58 52 L62 52 L64 62 L60 66 L56 62 Z" fill="#FDB813" fillOpacity="0.9" />
-      <rect x="58" y="66" width="4" height="3" fill="#FDB813" fillOpacity="0.7" />
-      <rect x="56" y="69" width="8" height="2" rx="1" fill="#FDB813" fillOpacity="0.6" />
-      {/* Star on trophy */}
-      <circle cx="60" cy="57" r="2" fill="white" fillOpacity="0.8" />
-    </svg>
-  );
-}
 
 const BY_EXAM_SERIES = [
   { exam: 'UPSC', title: 'UPSC Foundation Series', desc: 'The same NCERT foundation every IAS topper builds. Start from Class 6 level — reach Prelims level.', tests: 120, badge: 'UPSC', emoji: '\uD83C\uDFDB\uFE0F', gradient: 'from-[#981F1F] to-[#6B1515]' },
@@ -415,11 +329,15 @@ function InteractiveHero() {
         {/* Right Column: Interactive Orbital Animation */}
         <div className="hidden lg:flex justify-center items-center relative h-[600px] w-full">
           {/* Central Hub */}
-          <div className="absolute z-20 w-32 h-32 bg-white rounded-full shadow-2xl border-4 border-[#FFF1F1] flex items-center justify-center">
+          <motion.div
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute z-20 w-32 h-32 bg-white rounded-full shadow-2xl border-4 border-[#FFF1F1] flex items-center justify-center"
+          >
             <div className="w-16 h-16 rounded-xl bg-[#981F1F] flex items-center justify-center">
               <span className="text-white font-bold text-4xl">P</span>
             </div>
-          </div>
+          </motion.div>
           
           {/* Dotted orbits */}
           <div className="absolute inset-0 flex items-center justify-center">
@@ -475,6 +393,26 @@ function QuickLinks() {
 
 function TestSeriesExplorer() {
   const [tab, setTab] = useState<'class' | 'exam'>('class');
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const isDown = useRef(false);
+  const startX = useRef(0);
+  const scrollLeftRef = useRef(0);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDown.current = true;
+    startX.current = e.pageX - (sliderRef.current?.offsetLeft || 0);
+    scrollLeftRef.current = sliderRef.current?.scrollLeft || 0;
+  };
+  const handleMouseLeave = () => { isDown.current = false; };
+  const handleMouseUp = () => { isDown.current = false; };
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDown.current || !sliderRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - (sliderRef.current.offsetLeft || 0);
+    const walk = (x - startX.current) * 1.5;
+    sliderRef.current.scrollLeft = scrollLeftRef.current - walk;
+  };
+
   const tabs: { key: 'class' | 'exam'; label: string }[] = [
     { key: 'class', label: 'By Class' },
     { key: 'exam', label: 'By Competitive Exam' },
@@ -504,7 +442,12 @@ function TestSeriesExplorer() {
         <AnimatePresence mode="wait">
           {tab === 'class' && (
             <motion.div key="class" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="flex gap-5 overflow-x-auto pb-6 snap-x snap-mandatory lg:grid lg:grid-cols-7 lg:overflow-visible scrollbar-hide">
+              ref={sliderRef}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseLeave}
+              className="flex gap-5 overflow-x-auto pb-6 snap-x snap-mandatory lg:grid lg:grid-cols-7 lg:overflow-visible scrollbar-hide cursor-grab active:cursor-grabbing">
               {BY_CLASS_SERIES.map((s, i) => (
                 <Link to={`/class/${s.class}`} key={i} className="snap-center flex-shrink-0 w-[200px] sm:w-[220px] lg:w-auto">
                   <motion.div
@@ -527,7 +470,7 @@ function TestSeriesExplorer() {
 
                     {/* Illustration */}
                     <div className="relative z-10 flex-grow flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                      <StudentIllustration type={s.illustration} className="w-24 h-28 drop-shadow-xl" />
+                      <img src={s.image} alt={`Class ${s.class} student`} className="w-24 h-28 drop-shadow-xl object-contain" />
                     </div>
 
                     {/* Bottom Text */}
@@ -592,7 +535,7 @@ function BooksShowcase() {
   return (
     <section id="books" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-10">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-10">
           <span className="inline-flex items-center gap-2 bg-[#FFF1F1] text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-[#981F1F]/20">
             <BookOpen size={12} /> Pure NCERT Books
           </span>
@@ -602,7 +545,7 @@ function BooksShowcase() {
           <p className="text-[#555] max-w-2xl mx-auto mt-2 text-lg">
             Written by Vipin Sir himself — one book per class covering History, Geography, Constitution, Science & Static GK. The same NCERT foundation that decides UPSC, NDA, and every state exam. No market junk, only what matters.
           </p>
-        </div>
+        </motion.div>
 
         <div className="flex justify-center mb-10">
           <div className="flex bg-gray-50 border border-gray-200 rounded-xl p-1">
@@ -652,7 +595,7 @@ function MissionSection() {
   return (
     <section id="mission" className="py-24 bg-[#121212] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <span className="inline-flex items-center gap-2 bg-[#981F1F]/20 text-[#FDB813] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6 border border-[#FDB813]/20">
               <Award size={12} /> Vipin Sir's Legacy
@@ -667,12 +610,12 @@ function MissionSection() {
               The result? Rural students are forced to migrate to Delhi or Prayagraj and spend lakhs relearning Class 6-12 NCERT books. Junior IAS fixes this — building the foundation while the child is still in school, at a price every family can afford.
             </p>
             
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mt-8">
+            <motion.div animate={{ boxShadow: ['0 0 0px rgba(253,184,19,0)', '0 0 20px rgba(253,184,19,0.15)', '0 0 0px rgba(253,184,19,0)'] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} className="bg-white/5 border border-white/10 rounded-2xl p-6 mt-8">
                <h3 className="text-white font-bold text-xl flex items-center gap-2 mb-3"><MapPin className="text-[#FDB813]" size={20} /> 200 Gaon, Ek Mission</h3>
                <p className="text-white/60 text-sm leading-relaxed">
                  Vipin Sir is personally visiting 200 villages in a vanity van — sleeping in it, eating on the road — to sit with parents and show them what their children deserve. No grand seminar halls, no marketing gimmicks. Just a teacher going door-to-door proving that ₹100/month can change a family's future forever.
                </p>
-            </div>
+            </motion.div>
           </div>
 
           <div className="relative h-[550px] w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
@@ -690,7 +633,7 @@ function MissionSection() {
                 </div>
              </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -702,14 +645,14 @@ function ResultsShowcase() {
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#981F1F]/50 to-transparent"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 mb-12">
-        <div className="text-center">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center">
           <span className="inline-flex items-center gap-2 bg-[#981F1F]/10 text-[#FDB813] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-[#FDB813]/20">
             <Award size={12} /> Wall of Fame
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
             Noorpur Se <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FDB813] to-orange-500">Sarkari Naukri Tak.</span>
           </h2>
-        </div>
+        </motion.div>
       </div>
 
       <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
@@ -800,12 +743,20 @@ function Testimonials() {
     return () => clearInterval(timer);
   }, []);
 
+  // Auto-rotate video testimonials
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveVideo(prev => (prev + 1) % VIDEO_TESTIMONIALS.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section className="py-24 bg-[#FAFAFA] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* Top: Header Text */}
-        <div className="text-center mb-14">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-14">
           <span className="inline-flex items-center gap-2 bg-[#FFF1F1] text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-[#981F1F]/20">
             <Star size={12} /> Student Reviews
           </span>
@@ -815,7 +766,7 @@ function Testimonials() {
           <p className="text-[#555] text-lg leading-relaxed max-w-2xl mx-auto">
             From small towns to government jobs — real students and parents from Noorpur and nearby villages who trusted Vipin Sir's system.
           </p>
-        </div>
+        </motion.div>
 
         {/* Bottom: Video Slider (Left) + Text Testimonials (Right) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
@@ -986,10 +937,10 @@ function Stats() {
   return (
     <section ref={ref} className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-12">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#121212]">The Perfect Classes <span className="text-[#981F1F]">Legacy</span></h2>
           <p className="text-[#555] mt-2">From 5 students in Noorpur to thousands of government selections — built on trust, not marketing.</p>
-        </div>
+        </motion.div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
           {STATS.map((s, i) => (
             <div key={i} className="text-center bg-gray-50/50 p-4 sm:p-0 rounded-2xl sm:bg-transparent">
@@ -1006,10 +957,10 @@ function Stats() {
 function EnrollCTA() {
   return (
     <section className="py-20 bg-[#981F1F]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-        <span className="inline-block bg-[#FDB813] text-[#121212] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6">
+      <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <motion.span animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} className="inline-block bg-[#FDB813] text-[#121212] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6">
           Just ₹100/Month — No Excuses
-        </span>
+        </motion.span>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-5">
           Aapke Bachche Ka Future,<br />Sirf ₹100 Mein.
         </h2>
@@ -1024,7 +975,7 @@ function EnrollCTA() {
             <Phone size={18} /> Call Us
           </a>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
@@ -1034,9 +985,9 @@ function FAQ() {
   return (
     <section className="py-20 bg-[#FAFAFA]">
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-12">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
           <h2 className="text-3xl font-extrabold text-[#121212]">Frequently Asked <span className="text-[#981F1F]">Questions</span></h2>
-        </div>
+        </motion.div>
         <div className="flex flex-col gap-3">
           {FAQS.map((f, i) => (
             <div key={i} className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
@@ -1223,15 +1174,19 @@ function ClassPage() {
 
             {/* Illustration */}
             <div className="hidden lg:flex justify-center items-center">
-              <div className="relative">
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className="relative"
+              >
                 <div className="w-72 h-80 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 flex items-center justify-center shadow-2xl">
-                  <StudentIllustration type={classInfo.illustration} className="w-48 h-56 drop-shadow-2xl" />
+                  <img src={classInfo.image} alt={`Class ${classInfo.class} student`} className="w-48 h-56 drop-shadow-2xl object-contain" />
                 </div>
                 <div className="absolute -bottom-4 -right-4 bg-white rounded-2xl px-5 py-3 shadow-xl">
                   <span className="text-[#981F1F] font-extrabold text-2xl">{classInfo.tests}+</span>
                   <span className="text-[#555] text-sm ml-1.5">Tests</span>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
