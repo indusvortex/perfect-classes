@@ -47,13 +47,13 @@ const QUICK_LINKS = [
 ];
 
 const BY_CLASS_SERIES = [
-  { class: '6', label: 'Foundation Builder', tests: 40, badge: 'CLASS 6' },
-  { class: '7', label: 'Concept Mastery', tests: 50, badge: 'CLASS 7' },
-  { class: '8', label: 'Pre-Board Prep', tests: 60, badge: 'CLASS 8' },
-  { class: '9', label: 'Advanced Foundations', tests: 80, badge: 'CLASS 9' },
-  { class: '10', label: 'Board Preparation', tests: 120, badge: 'CLASS 10' },
-  { class: '11', label: 'Stream Introduction', tests: 150, badge: 'CLASS 11' },
-  { class: '12', label: 'Board + Comp. Prep', tests: 200, badge: 'CLASS 12' },
+  { class: '6', label: 'History, Geography, Constitution, Science, Static GK', tests: 40, badge: 'CLASS 6' },
+  { class: '7', label: 'History, Geography, Constitution, Science, Static GK', tests: 50, badge: 'CLASS 7' },
+  { class: '8', label: 'History, Geography, Constitution, Science, Static GK', tests: 60, badge: 'CLASS 8' },
+  { class: '9', label: 'History, Geography, Constitution, Science, Static GK', tests: 80, badge: 'CLASS 9' },
+  { class: '10', label: 'History, Geography, Constitution, Science, Static GK', tests: 120, badge: 'CLASS 10' },
+  { class: '11', label: 'History, Geography, Constitution, Science, Static GK', tests: 150, badge: 'CLASS 11' },
+  { class: '12', label: 'History, Geography, Constitution, Science, Static GK', tests: 200, badge: 'CLASS 12' },
 ];
 
 const BY_EXAM_SERIES = [
@@ -73,31 +73,32 @@ const RESULTS: { type: 'quote' | 'stat'; name?: string; score?: string; year?: s
 ];
 
 const FEATURES = [
-  { icon: FileText, title: '2000+ Tests', desc: 'Covering every class, subject, chapter, and competitive exam — always updated to the latest pattern.' },
-  { icon: BarChart2, title: 'AI Performance Analysis', desc: 'Instant reports on accuracy, speed, and weak topics. Personalised improvement plan after every test.' },
-  { icon: Shield, title: 'Exam-Accurate Pattern', desc: 'All tests designed to exactly mirror real exam formats — NDA, CUET, Agniveer, CBSE, and more.' },
+  { icon: FileText, title: 'Book-Linked Tests', desc: 'Every question comes directly from Vipin Sir\'s NCERT books. No random questions — study the chapter, ace the test. 100% alignment.' },
+  { icon: BarChart2, title: 'Track Your Growth', desc: 'See exactly where you stand — subject-wise scores, weak topics, and improvement trends after every test. Know what to fix next.' },
+  { icon: Shield, title: 'Proven by 350+ Selections', desc: 'This isn\'t a new experiment. The same teaching system that produced 350+ UP Police and 125+ Super TET selections — now digital.' },
 ];
 
 const TESTIMONIALS = [
-  { name: 'Rahul Yadav', tag: 'NDA Cleared 2025', stars: 5, text: '"The NDA test series is incredibly detailed. Daily practice shifted my accuracy from 60% to 89% in just 2 months."', avatar: 'RY' },
-  { name: 'Meera Pillai', tag: 'CUET 99.1 %ile', stars: 5, text: '"I tried three platforms. Perfect Classes CUET tests were the only ones that matched the actual exam difficulty."', avatar: 'MP' },
-  { name: 'Vikram Tiwari', tag: 'Class 10 — 96%', stars: 5, text: '"Chapter-wise tests after each topic made revision so systematic. I scored 40 marks more than my mock avg."', avatar: 'VT' },
-  { name: 'Anjali Nair', tag: 'Agniveer Navy Selected', stars: 5, text: '"The Agniveer series had the exact question types. When I sat for the real exam it felt like another mock test."', avatar: 'AN' },
+  { name: 'Rohit Kumar', tag: 'UP Police Selected', stars: 5, text: '"Main Noorpur se hoon. Vipin Sir ke books se padha, test series se practice ki — ek hi attempt mein selection ho gaya. Gaon mein kisi ne socha nahi tha."', avatar: 'RK' },
+  { name: 'Priya Sharma', tag: 'Super TET Selected', stars: 5, text: '"School mein sirf PCM padhaya gaya. GS ka G nahi aata tha. Junior IAS ki books ne Class 6 se neenv daali — aaj government teacher hoon."', avatar: 'PS' },
+  { name: 'Arun Singh', tag: 'NDA Cleared 2025', stars: 5, text: '"NDA mein 400 marks GS ke hote hain — yeh mujhe Perfect Classes ne samjhaya. Warna main sirf Maths ki tension le raha tha."', avatar: 'AS' },
+  { name: 'Kavita Devi', tag: 'Parent — Noorpur', stars: 5, text: '"₹100 mahine mein itni quality padhai? Mere bete ko Class 7 se Junior IAS mein daala. Ab usse Constitution aur Geography aise aati hai jaise Delhi ke bachche padhte hain."', avatar: 'KD' },
 ];
 
 const STATS = [
-  { value: 50000, suffix: '+', label: 'Students Enrolled' },
-  { value: 2000, suffix: '+', label: 'Tests Available' },
-  { value: 95, suffix: '%', label: 'Selection Rate' },
-  { value: 15, suffix: '+', label: 'Years of Excellence' },
+  { value: 5000, suffix: '+', label: 'Students at a Time' },
+  { value: 350, suffix: '+', label: 'UP Police Selections' },
+  { value: 125, suffix: '+', label: 'Super TET Selections' },
+  { value: 10, suffix: '+', label: 'Years of Legacy' },
 ];
 
 const FAQS = [
-  { q: 'Which classes does Perfect Classes cover?', a: 'We cover Classes 6 to 12 (all subjects) plus competitive exams — NDA, CUET, and Agniveer.' },
-  { q: 'Are the test series updated for the latest pattern?', a: 'Yes. Our expert team updates all tests every academic year to match the current NDA/CUET/CBSE pattern.' },
-  { q: 'Can I access tests on mobile?', a: 'Absolutely. Our platform is fully mobile-optimised — attempt tests anytime, anywhere.' },
-  { q: 'Is there a free trial?', a: 'Yes! You can attempt 5 full-length tests for free — no credit card required.' },
-  { q: 'Do you provide solutions and analysis?', a: 'Every test includes step-by-step solutions and a detailed performance report with rank, accuracy, and topic-wise breakdown.' },
+  { q: 'What is the Junior IAS program?', a: 'Junior IAS is Vipin Sir\'s mission to build UPSC-level General Studies foundations from Class 6 itself. It covers History, Geography, Constitution, Science, and Static GK — the same NCERT subjects that decide every competitive exam in India.' },
+  { q: 'Why should my child start preparing from Class 6?', a: 'Because competitive exams like UPSC, NDA, and State PCS test NCERT knowledge from Class 6-12. Schools only focus on PCM to clear boards — they completely ignore the Humanities that actually decide your rank. Starting early means no last-minute cramming in Delhi coaching centers.' },
+  { q: 'How does the test series work with the books?', a: 'Every single question in our test series comes directly from Vipin Sir\'s custom NCERT books. Study the chapter, take the test — 100% alignment, zero surprises. This is how 350+ students cleared UP Police from a single center.' },
+  { q: 'Is ₹100/month really the full price?', a: 'Yes. ₹100/month (₹1,200/year) gives you access to the complete Junior IAS ecosystem — books and test series. Vipin Sir deliberately priced it so that no rural or semi-urban family is ever priced out of quality education.' },
+  { q: 'Who is Vipin Sir?', a: 'Vipin Sir is a B.Tech + M.Tech Aeronautical Engineer who left a BSF government job to teach. He taught at Drishti IAS (Delhi) before founding Perfect Classes in Noorpur in 2016. Starting with just 5 students, he built it to 5,000 students with 350+ UP Police and 125+ Super TET selections — all from one center, purely by word of mouth.' },
+  { q: 'Can I access tests on mobile?', a: 'Yes. Our platform is fully mobile-optimised — attempt tests anytime, anywhere, even on basic smartphones with slow internet.' },
 ];
 
 // ─── SUB-COMPONENTS ──────────────────────────────────────────────────────────
@@ -209,11 +210,11 @@ function InteractiveHero() {
             <Trophy size={14} /> Junior IAS Program
           </span>
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#121212] leading-[1.1] mb-6 tracking-tight">
-            Build the Foundation. <br />
-            <span className="text-[#981F1F]">Secure the Future.</span>
+            School Mein Padho, <br />
+            <span className="text-[#981F1F]">IAS Ki Tayyari Karo.</span>
           </h1>
           <p className="text-base sm:text-lg text-[#555] mb-8 sm:mb-10 max-w-lg leading-relaxed">
-            The ultimate "Junior IAS" ecosystem bridging the gap between school exams and competitive success. From Class 6 to UPSC, prepare with Vipin Sir's highly rigorous, strictly NCERT-based program.
+            From the institute that produced 350+ UP Police & 125+ Super TET selections — Vipin Sir's Junior IAS program builds UPSC-level foundations from Class 6 itself. Strictly NCERT. Just ₹100/month.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 max-w-lg">
@@ -236,7 +237,7 @@ function InteractiveHero() {
                 <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200" />
               ))}
             </div>
-            <p>Join <span className="text-[#121212] font-bold">50,000+</span> students</p>
+            <p><span className="text-[#121212] font-bold">350+ selections</span> from one center</p>
           </div>
         </motion.div>
 
@@ -312,10 +313,10 @@ function TestSeriesExplorer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-10">
           <span className="inline-flex items-center gap-2 bg-white border border-[#981F1F]/20 text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4">
-            <Target size={12} /> Test Series
+            <Target size={12} /> Junior IAS Test Series
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#121212]">Explore Our <span className="text-[#981F1F]">Test Series</span></h2>
-          <p className="text-[#555] mt-2 max-w-xl mx-auto">Find the right test series for your goal — filter by class or competitive exam.</p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#121212]">NCERT-Based <span className="text-[#981F1F]">Test Series</span></h2>
+          <p className="text-[#555] mt-2 max-w-xl mx-auto">Every question comes directly from Vipin Sir's NCERT-based books. Study the book, take the test — no surprises, only results.</p>
         </div>
         {/* Tab bar */}
         <div className="flex justify-center mb-10 mx-auto px-2">
@@ -342,10 +343,14 @@ function TestSeriesExplorer() {
                     </div>
                     <span className="text-xs font-bold bg-[#FDB813]/20 text-[#8a6500] px-2.5 py-1 rounded-full">{s.badge}</span>
                   </div>
-                  <h3 className="font-bold text-[#121212] flex items-center gap-2 group-hover:text-[#981F1F] transition-colors text-lg mb-1">
+                  <h3 className="font-bold text-[#121212] flex items-center gap-2 group-hover:text-[#981F1F] transition-colors text-lg mb-2">
                     Class {s.class}
                   </h3>
-                  <p className="text-sm text-[#555] mb-4">{s.label}</p>
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {s.label.split(', ').map(subj => (
+                      <span key={subj} className="text-[10px] bg-gray-50 text-[#555] border border-gray-200 px-2 py-0.5 rounded-md whitespace-nowrap">{subj}</span>
+                    ))}
+                  </div>
                   <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
                     <span className="text-sm text-[#666]"><span className="font-bold text-[#981F1F]">{s.tests}+</span> Tests</span>
                     <button className="text-sm text-[#981F1F] font-semibold flex items-center gap-1 group-hover:gap-2 transition-all bg-[#981F1F]/5 group-hover:bg-[#981F1F]/10 px-3 py-1.5 rounded-lg">
@@ -385,13 +390,13 @@ function TestSeriesExplorer() {
 
 
 const BOOKS = [
-  { class: 'Class 6', title: '6th Foundation', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
-  { class: 'Class 7', title: '7th Mastery', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
-  { class: 'Class 8', title: '8th Pre-Board', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
-  { class: 'Class 9', title: '9th Advanced', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
-  { class: 'Class 10', title: '10th Board Prep', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
-  { class: 'Class 11', title: '11th Core GS', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
-  { class: 'Class 12', title: '12th Mains GS', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
+  { class: 'Class 6', title: 'Junior IAS — Class 6', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
+  { class: 'Class 7', title: 'Junior IAS — Class 7', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
+  { class: 'Class 8', title: 'Junior IAS — Class 8', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
+  { class: 'Class 9', title: 'Junior IAS — Class 9', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
+  { class: 'Class 10', title: 'Junior IAS — Class 10', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
+  { class: 'Class 11', title: 'Junior IAS — Class 11', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
+  { class: 'Class 12', title: 'Junior IAS — Class 12', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
 ];
 
 function BooksShowcase() {
@@ -404,10 +409,10 @@ function BooksShowcase() {
             <BookOpen size={12} /> Pure NCERT Books
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#121212] tracking-tight mb-4">
-            Early Preparation <span className="text-[#981F1F]">Bright Future.</span>
+            Wahi NCERT, <span className="text-[#981F1F]">Jo Schools Nahi Padhate.</span>
           </h2>
           <p className="text-[#555] max-w-2xl mx-auto mt-2 text-lg">
-            Strictly NCERT-based study materials authored by Vipin Sir. Covering History, Geography, Constitution, Science, and Static GK in a single, perfectly crafted book for Classes 6-12.
+            Written by Vipin Sir himself — one book per class covering History, Geography, Constitution, Science & Static GK. The same NCERT foundation that decides UPSC, NDA, and every state exam. No market junk, only what matters.
           </p>
         </div>
 
@@ -465,19 +470,19 @@ function MissionSection() {
               <Award size={12} /> Vipin Sir's Legacy
             </span>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">
-              The <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FDB813] to-orange-500">Junior IAS</span> Mission.
+              Gaon Ka Bachcha Bhi <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FDB813] to-orange-500">IAS Ban Sake.</span>
             </h2>
             <p className="text-white/70 text-lg mb-6 leading-relaxed">
-              After producing an unprecedented 350+ UP Police selections and 125+ Super TET successes from a single center, Vipin Sir identified a systemic flaw: <strong>The Education Scam</strong>.
+              Vipin Sir left a BSF government job and a position at Delhi's Drishti IAS to return to Noorpur. Why? Because he saw the truth: <strong>schools teach PCM to pass boards, but competitive exams are decided by General Studies</strong> — a subject no school teaches properly.
             </p>
             <p className="text-white/70 text-lg mb-8 leading-relaxed">
-              Schools focus only on PCM merely to pass board exams, totally neglecting the core Humanities (NCERT) crucial for actual competitive exams like UPSC, NDA, and PCS. To combat this, we launched the Junior IAS program—intervening early to build rock-solid foundations for rural and semi-urban students.
+              The result? Rural students are forced to migrate to Delhi or Prayagraj and spend lakhs relearning Class 6-12 NCERT books. Junior IAS fixes this — building the foundation while the child is still in school, at a price every family can afford.
             </p>
             
             <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mt-8">
-               <h3 className="text-white font-bold text-xl flex items-center gap-2 mb-3"><MapPin className="text-[#FDB813]" size={20} /> The 200-Village Vanity Van Tour</h3>
+               <h3 className="text-white font-bold text-xl flex items-center gap-2 mb-3"><MapPin className="text-[#FDB813]" size={20} /> 200 Gaon, Ek Mission</h3>
                <p className="text-white/60 text-sm leading-relaxed">
-                 We are taking this mission directly to the people. Working out of a modified Vanity Van acting as our mobile HQ, Vipin Sir and team will conduct a massive door-to-door, 200-village campaign. Our goal? To sit directly with villagers and prove that elite, UPSC-level foundation education is accessible for just ₹100 a month.
+                 Vipin Sir is personally visiting 200 villages in a vanity van — sleeping in it, eating on the road — to sit with parents and show them what their children deserve. No grand seminar halls, no marketing gimmicks. Just a teacher going door-to-door proving that ₹100/month can change a family's future forever.
                </p>
             </div>
           </div>
@@ -491,8 +496,8 @@ function MissionSection() {
                     <Target size={28} className="text-white" />
                   </div>
                   <div className="flex flex-col justify-center">
-                    <h4 className="text-white font-bold text-xl">Grassroots Impact</h4>
-                    <p className="text-white/70 text-sm">Empowering the forgotten talent across India.</p>
+                    <h4 className="text-white font-bold text-xl">Har Gaon Tak Padhai</h4>
+                    <p className="text-white/70 text-sm">Woh talent jo Delhi nahi ja sakta — hum uske paas aa rahe hain.</p>
                   </div>
                 </div>
              </div>
@@ -514,7 +519,7 @@ function ResultsShowcase() {
             <Award size={12} /> Wall of Fame
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FDB813] to-orange-500">Achievements.</span>
+            Noorpur Se <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FDB813] to-orange-500">Sarkari Naukri Tak.</span>
           </h2>
         </div>
       </div>
@@ -548,8 +553,8 @@ function WhyUs() {
     <section id="about" className="py-20 bg-[#121212]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white">Why Perfect <span className="text-[#FDB813]">Classes?</span></h2>
-          <p className="text-white/60 mt-3 max-w-xl mx-auto">Not just tests — a complete preparation ecosystem designed to get you selected.</p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white">Why <span className="text-[#FDB813]">Junior IAS?</span></h2>
+          <p className="text-white/60 mt-3 max-w-xl mx-auto">Because your school won't teach you what UPSC will ask. We fill that gap — from Class 6 itself.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {FEATURES.map((f, i) => {
@@ -568,10 +573,10 @@ function WhyUs() {
         </div>
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
-            { icon: CheckCircle, label: 'AI-powered analysis' },
-            { icon: Layers, label: 'Chapter + Full-syllabus' },
-            { icon: Zap, label: 'Instant results' },
-            { icon: Users, label: 'Expert-curated questions' },
+            { icon: CheckCircle, label: 'Pure NCERT — no junk content' },
+            { icon: Layers, label: 'Class 6 to 12, one system' },
+            { icon: Zap, label: 'Just ₹100/month' },
+            { icon: Users, label: 'Written by Vipin Sir himself' },
           ].map((item, i) => {
             const Icon = item.icon;
             return (
@@ -601,10 +606,10 @@ function Testimonials() {
             <Star size={12} /> Student Reviews
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-3xl lg:text-5xl font-extrabold text-[#121212] leading-tight mb-6">
-            Stories of <span className="text-[#981F1F]">Excellence.</span>
+            Unki Kahani, <span className="text-[#981F1F]">Apni Zubaani.</span>
           </h2>
           <p className="text-[#555] text-lg leading-relaxed mb-8 max-w-lg">
-            Don't just take our word for it. Thousands of students have transformed their preparation and achieved top ranks across India using Perfect Classes.
+            From small towns to government jobs — these are real students and parents from Noorpur and nearby villages who trusted Vipin Sir's system.
           </p>
           <div className="flex items-center gap-4">
             <div className="flex -space-x-3">
@@ -616,7 +621,7 @@ function Testimonials() {
               <div className="flex gap-1 mb-1">
                 {[...Array(5)].map((_, i) => <Star key={i} size={16} className="fill-[#FDB813] text-[#FDB813]" />)}
               </div>
-              <p className="font-bold text-sm text-[#121212]">4.9/5 from 12,000+ reviews</p>
+              <p className="font-bold text-sm text-[#121212]">Trusted by 5,000+ families</p>
             </div>
           </div>
         </div>
@@ -698,8 +703,8 @@ function Stats() {
     <section ref={ref} className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#121212]">Impact, <span className="text-[#981F1F]">At Scale</span></h2>
-          <p className="text-[#555] mt-2">Numbers that reflect the trust of thousands of students.</p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#121212]">The Perfect Classes <span className="text-[#981F1F]">Legacy</span></h2>
+          <p className="text-[#555] mt-2">From 5 students in Noorpur to thousands of government selections — built on trust, not marketing.</p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
           {STATS.map((s, i) => (
@@ -719,13 +724,13 @@ function EnrollCTA() {
     <section className="py-20 bg-[#981F1F]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
         <span className="inline-block bg-[#FDB813] text-[#121212] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6">
-          Limited Seats — 2026 Batch
+          Just ₹100/Month — No Excuses
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-5">
-          Start Your Preparation Today
+          Aapke Bachche Ka Future,<br />Sirf ₹100 Mein.
         </h2>
         <p className="text-white/75 text-lg mb-8 max-w-xl mx-auto">
-          Join 50,000+ students who cracked NDA, CUET, Agniveer, and board exams with Perfect Classes.
+          The same NCERT foundation that IAS toppers build in Delhi — now available for every village, every family. 350+ selections prove this system works.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <button className="bg-[#FDB813] text-[#121212] font-bold px-8 py-4 rounded-xl hover:bg-[#e5a810] transition-colors flex items-center gap-2 text-lg">
@@ -786,11 +791,11 @@ function Footer() {
               </div>
               <span className="font-bold text-white text-lg">Perfect Classes</span>
             </div>
-            <p className="text-white/50 text-sm leading-relaxed mb-5">India's premier test series platform for Classes 6–12 and competitive exams.</p>
+            <p className="text-white/50 text-sm leading-relaxed mb-5">From Noorpur to every village — building IAS-level foundations for India's future since 2016.</p>
             <div className="flex flex-col gap-2 text-sm text-white/50">
               <a href="tel:+919876543210" className="flex items-center gap-2 hover:text-white transition-colors"><Phone size={13} /> +91 98765 43210</a>
-              <a href="mailto:info@perfectclasses.in" className="flex items-center gap-2 hover:text-white transition-colors"><Mail size={13} /> info@perfectclasses.in</a>
-              <span className="flex items-center gap-2"><MapPin size={13} /> Rajasthan, India</span>
+              <a href="mailto:info@perfectclassesnoorpur.com" className="flex items-center gap-2 hover:text-white transition-colors"><Mail size={13} /> info@perfectclassesnoorpur.com</a>
+              <span className="flex items-center gap-2"><MapPin size={13} /> Noorpur, Bijnor, Uttar Pradesh</span>
             </div>
           </div>
           {/* Test Series */}
