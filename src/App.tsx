@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useLocation, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   BookOpen, ChevronRight, ChevronLeft, Star, CheckCircle, Trophy,
@@ -55,6 +55,91 @@ const BY_CLASS_SERIES = [
   { class: '11', label: 'History, Geography, Constitution, Science, Static GK', tests: 150, badge: 'CLASS 11', gradient: 'from-[#981F1F] to-[#6B1515]', illustration: 'senior', tagline: 'IAS/NDA Level Foundation' },
   { class: '12', label: 'History, Geography, Constitution, Science, Static GK', tests: 200, badge: 'CLASS 12', gradient: 'from-[#121212] to-[#333]', illustration: 'senior', tagline: 'Exam Ready, Future Ready' },
 ];
+
+// Detailed class data for individual class pages
+const CLASS_DATA: Record<string, {
+  heroDesc: string;
+  subjects: { name: string; icon: string; chapters: string[]; tests: number }[];
+  bookPages: number;
+}> = {
+  '6': {
+    heroDesc: 'Where every topper\'s journey begins. Build an unshakable NCERT foundation in History, Geography, Civics, Science & GK — the subjects your school ignores but UPSC demands.',
+    subjects: [
+      { name: 'History', icon: '\uD83D\uDCDC', chapters: ['What, Where, How and When?', 'From Hunting-Gathering to Growing Food', 'In the Earliest Cities', 'What Books and Burials Tell Us', 'Kingdoms, Kings and an Early Republic', 'New Questions and Ideas', 'Ashoka, The Emperor Who Gave Up War', 'Vital Villages, Thriving Towns', 'Traders, Kings and Pilgrims', 'New Empires and Kingdoms', 'Buildings, Paintings and Books'], tests: 8 },
+      { name: 'Geography', icon: '\uD83C\uDF0D', chapters: ['The Earth in the Solar System', 'Globe: Latitudes and Longitudes', 'Motions of the Earth', 'Maps', 'Major Domains of the Earth', 'Major Landforms of the Earth', 'Our Country — India', 'India: Climate, Vegetation and Wildlife'], tests: 8 },
+      { name: 'Constitution', icon: '\u2696\uFE0F', chapters: ['Understanding Diversity', 'Diversity and Discrimination', 'What is Government?', 'Key Elements of a Democratic Government', 'Panchayati Raj', 'Rural Administration', 'Urban Administration', 'Rural Livelihoods', 'Urban Livelihoods'], tests: 8 },
+      { name: 'Science', icon: '\uD83D\uDD2C', chapters: ['Food: Where Does It Come From?', 'Components of Food', 'Fibre to Fabric', 'Sorting Materials into Groups', 'Separation of Substances', 'Changes Around Us', 'Getting to Know Plants', 'Body Movements', 'The Living Organisms and Their Surroundings', 'Motion and Measurement of Distances'], tests: 8 },
+      { name: 'Static GK', icon: '\uD83D\uDCCA', chapters: ['India: States & Capitals', 'National Symbols', 'Important Days & Events', 'Famous Personalities', 'First in India & World', 'Books & Authors', 'Awards & Honours', 'Basic Indian Geography Facts'], tests: 8 },
+    ],
+    bookPages: 180,
+  },
+  '7': {
+    heroDesc: 'Concepts deepen. From Medieval India to the Indian Constitution\'s evolution — Class 7 bridges curiosity with real competitive exam thinking.',
+    subjects: [
+      { name: 'History', icon: '\uD83D\uDCDC', chapters: ['Tracing Changes Through a Thousand Years', 'New Kings and Kingdoms', 'The Delhi Sultans', 'The Mughal Empire', 'Rulers and Buildings', 'Towns, Traders and Craftspersons', 'Tribes, Nomads and Settled Communities', 'Devotional Paths to the Divine', 'The Making of Regional Cultures', 'Eighteenth-Century Political Formations'], tests: 10 },
+      { name: 'Geography', icon: '\uD83C\uDF0D', chapters: ['Environment', 'Inside Our Earth', 'Our Changing Earth', 'Air', 'Water', 'Natural Vegetation and Wildlife', 'Human Environment: Settlement, Transport and Communication', 'Human-Environment Interactions: The Tropical and Subtropical Region', 'Life in the Deserts'], tests: 10 },
+      { name: 'Constitution', icon: '\u2696\uFE0F', chapters: ['On Equality', 'Role of the Government in Health', 'How the State Government Works', 'Growing Up as Boys and Girls', 'Women Change the World', 'Understanding Media', 'Understanding Advertising', 'Markets Around Us', 'A Shirt in the Market'], tests: 10 },
+      { name: 'Science', icon: '\uD83D\uDD2C', chapters: ['Nutrition in Plants', 'Nutrition in Animals', 'Fibre to Fabric', 'Heat', 'Acids, Bases and Salts', 'Physical and Chemical Changes', 'Weather, Climate and Adaptations', 'Winds, Storms and Cyclones', 'Soil', 'Respiration in Organisms', 'Transportation in Animals and Plants', 'Reproduction in Plants'], tests: 10 },
+      { name: 'Static GK', icon: '\uD83D\uDCCA', chapters: ['World: Countries & Capitals', 'International Organisations', 'Indian Rivers & Mountains', 'Important Inventions', 'Sports & Trophies', 'Currencies of the World', 'Famous Monuments', 'Indian Arts & Culture Basics'], tests: 10 },
+    ],
+    bookPages: 210,
+  },
+  '8': {
+    heroDesc: 'The bridge between basics and boards. Modern Indian History, the Constitution in practice, and advanced Geography — the real competitive exam syllabus starts here.',
+    subjects: [
+      { name: 'History', icon: '\uD83D\uDCDC', chapters: ['How, When and Where', 'From Trade to Territory', 'Ruling the Countryside', 'Tribals, Dikus and the Vision of a Golden Age', 'When People Rebel (1857)', 'Civilising the Native, Educating the Nation', 'Women, Caste and Reform', 'The Making of the National Movement', 'India After Independence'], tests: 12 },
+      { name: 'Geography', icon: '\uD83C\uDF0D', chapters: ['Resources', 'Land, Soil, Water, Natural Vegetation and Wildlife Resources', 'Mineral and Power Resources', 'Agriculture', 'Industries', 'Human Resources'], tests: 12 },
+      { name: 'Constitution', icon: '\u2696\uFE0F', chapters: ['The Indian Constitution', 'Understanding Secularism', 'Why Do We Need a Parliament?', 'Understanding Laws', 'Judiciary', 'Understanding Our Criminal Justice System', 'Understanding Marginalisation', 'Confronting Marginalisation'], tests: 12 },
+      { name: 'Science', icon: '\uD83D\uDD2C', chapters: ['Crop Production and Management', 'Microorganisms', 'Synthetic Fibres and Plastics', 'Materials: Metals and Non-Metals', 'Coal and Petroleum', 'Combustion and Flame', 'Conservation of Plants and Animals', 'Cell: Structure and Functions', 'Reproduction in Animals', 'Force and Pressure', 'Friction', 'Sound', 'Chemical Effects of Electric Current'], tests: 12 },
+      { name: 'Static GK', icon: '\uD83D\uDCCA', chapters: ['Indian Freedom Fighters', 'Important Acts & Laws in Indian History', 'UN & Its Agencies', 'Indian Defence', 'Space Missions — India & World', 'Dams & Rivers of India', 'Census & Demographics', 'Current Affairs Framework'], tests: 12 },
+    ],
+    bookPages: 240,
+  },
+  '9': {
+    heroDesc: 'Competition-level preparation officially begins. French Revolution, Indian Constitution at depth, Climate & Population — the chapters UPSC Prelims directly tests.',
+    subjects: [
+      { name: 'History', icon: '\uD83D\uDCDC', chapters: ['The French Revolution', 'Socialism in Europe and the Russian Revolution', 'Nazism and the Rise of Hitler', 'Forest Society and Colonialism', 'Pastoralists in the Modern World'], tests: 16 },
+      { name: 'Geography', icon: '\uD83C\uDF0D', chapters: ['India — Size and Location', 'Physical Features of India', 'Drainage', 'Climate', 'Natural Vegetation and Wildlife', 'Population'], tests: 16 },
+      { name: 'Constitution', icon: '\u2696\uFE0F', chapters: ['What is Democracy? Why Democracy?', 'Constitutional Design', 'Electoral Politics', 'Working of Institutions', 'Democratic Rights'], tests: 16 },
+      { name: 'Science', icon: '\uD83D\uDD2C', chapters: ['Matter in Our Surroundings', 'Is Matter Around Us Pure?', 'Atoms and Molecules', 'Structure of the Atom', 'The Fundamental Unit of Life', 'Tissues', 'Diversity in Living Organisms', 'Motion', 'Force and Laws of Motion', 'Gravitation', 'Work and Energy', 'Sound', 'Why Do We Fall Ill?', 'Natural Resources', 'Improvement in Food Resources'], tests: 16 },
+      { name: 'Static GK', icon: '\uD83D\uDCCA', chapters: ['World Wars — Causes & Effects', 'Indian Geography Advanced', 'Constitutional Bodies of India', 'Economic Terms & Concepts', 'Important Committees & Commissions', 'Environmental Conventions', 'Indian Polity Advanced', 'Science & Technology in India'], tests: 16 },
+    ],
+    bookPages: 280,
+  },
+  '10': {
+    heroDesc: 'Board exams meet competition prep. Nationalism, Federalism, Development Economics — these chapters appear word-for-word in UPSC, NDA, and every state exam.',
+    subjects: [
+      { name: 'History', icon: '\uD83D\uDCDC', chapters: ['The Rise of Nationalism in Europe', 'Nationalism in India', 'The Making of a Global World', 'The Age of Industrialisation', 'Print Culture and the Modern World'], tests: 24 },
+      { name: 'Geography', icon: '\uD83C\uDF0D', chapters: ['Resources and Development', 'Forest and Wildlife Resources', 'Water Resources', 'Agriculture', 'Minerals and Energy Resources', 'Manufacturing Industries', 'Lifelines of National Economy'], tests: 24 },
+      { name: 'Constitution', icon: '\u2696\uFE0F', chapters: ['Power Sharing', 'Federalism', 'Democracy and Diversity', 'Gender, Religion and Caste', 'Popular Struggles and Movements', 'Political Parties', 'Outcomes of Democracy', 'Challenges to Democracy'], tests: 24 },
+      { name: 'Science', icon: '\uD83D\uDD2C', chapters: ['Chemical Reactions and Equations', 'Acids, Bases and Salts', 'Metals and Non-metals', 'Carbon and its Compounds', 'Periodic Classification of Elements', 'Life Processes', 'Control and Coordination', 'How do Organisms Reproduce?', 'Heredity and Evolution', 'Light: Reflection and Refraction', 'Human Eye and Colourful World', 'Electricity', 'Magnetic Effects of Electric Current', 'Sources of Energy', 'Our Environment'], tests: 24 },
+      { name: 'Static GK', icon: '\uD83D\uDCCA', chapters: ['Indian Economy Basics', 'Five Year Plans', 'Indian Political System Deep Dive', 'International Relations', 'Environmental Issues & Policies', 'Indian Agriculture Data', 'Transport & Communication', 'Social Issues & Schemes'], tests: 24 },
+    ],
+    bookPages: 320,
+  },
+  '11': {
+    heroDesc: 'IAS and NDA-level depth begins. Indian Constitution in full, World History, Economic Development, and advanced Geography — this is where serious aspirants separate from the crowd.',
+    subjects: [
+      { name: 'History', icon: '\uD83D\uDCDC', chapters: ['From the Beginning of Time', 'Writing and City Life', 'An Empire Across Three Continents', 'The Central Islamic Lands', 'Nomadic Empires', 'The Three Orders', 'Changing Cultural Traditions', 'Confrontation of Cultures', 'The Industrial Revolution', 'Displacing Indigenous Peoples', 'Paths to Modernisation'], tests: 30 },
+      { name: 'Geography', icon: '\uD83C\uDF0D', chapters: ['Geography as a Discipline', 'The Origin and Evolution of the Earth', 'Interior of the Earth', 'Distribution of Oceans and Continents', 'Minerals and Rocks', 'Geomorphic Processes', 'Landforms and their Evolution', 'Composition and Structure of Atmosphere', 'Solar Radiation, Heat Balance and Temperature', 'Atmospheric Circulation and Weather Systems', 'Water in the Atmosphere', 'World Climate and Climate Change', 'Water (Oceans)', 'Movements of Ocean Water', 'Life on the Earth', 'Biodiversity and Conservation'], tests: 30 },
+      { name: 'Constitution', icon: '\u2696\uFE0F', chapters: ['Constitution — Why and How?', 'Rights in the Indian Constitution', 'Election and Representation', 'Executive', 'Legislature', 'Judiciary', 'Federalism', 'Local Governments', 'Constitution as a Living Document', 'The Philosophy of the Constitution'], tests: 30 },
+      { name: 'Science', icon: '\uD83D\uDD2C', chapters: ['The Living World', 'Biological Classification', 'Plant Kingdom', 'Animal Kingdom', 'Morphology of Flowering Plants', 'Anatomy of Flowering Plants', 'Cell: The Unit of Life', 'Biomolecules', 'Cell Cycle and Cell Division', 'Transport in Plants', 'Mineral Nutrition', 'Photosynthesis', 'Respiration in Plants', 'Plant Growth and Development', 'Digestion and Absorption', 'Breathing and Exchange of Gases', 'Body Fluids and Circulation', 'Excretory Products and their Elimination', 'Locomotion and Movement', 'Neural Control and Coordination', 'Chemical Coordination and Integration'], tests: 30 },
+      { name: 'Static GK', icon: '\uD83D\uDCCA', chapters: ['Indian Polity — Complete Framework', 'World Geography Advanced', 'Indian Economy — Macro Concepts', 'Science & Technology Current', 'Art & Culture of India', 'Modern Indian History — Advanced', 'International Organisations Deep Dive', 'Ethics & Governance Basics'], tests: 30 },
+    ],
+    bookPages: 380,
+  },
+  '12': {
+    heroDesc: 'The final year. Cold War, Indian Politics since Independence, Contemporary World Politics, Human Geography — the exact syllabus of UPSC Mains GS papers. Finish this, and you\'re exam ready.',
+    subjects: [
+      { name: 'History', icon: '\uD83D\uDCDC', chapters: ['Bricks, Beads and Bones', 'Kings, Farmers and Towns', 'Kinship, Caste and Class', 'Thinkers, Beliefs and Buildings', 'Through the Eyes of Travellers', 'Bhakti-Sufi Traditions', 'An Imperial Capital: Vijayanagara', 'Peasants, Zamindars and the State', 'Kings and Chronicles: The Mughal Courts', 'Colonialism and the Countryside', 'Rebels and the Raj', 'Colonial Cities', 'Mahatma Gandhi and the Nationalist Movement', 'Understanding Partition', 'Framing the Constitution'], tests: 40 },
+      { name: 'Geography', icon: '\uD83C\uDF0D', chapters: ['Human Geography: Nature and Scope', 'The World Population: Distribution, Density and Growth', 'Population Composition', 'Human Development', 'Primary Activities', 'Secondary Activities', 'Tertiary and Quaternary Activities', 'Transport and Communication', 'International Trade', 'Human Settlements'], tests: 40 },
+      { name: 'Constitution', icon: '\u2696\uFE0F', chapters: ['The Cold War Era', 'The End of Bipolarity', 'US Hegemony in World Politics', 'Alternative Centres of Power', 'Contemporary South Asia', 'International Organisations', 'Security in the Contemporary World', 'Environment and Natural Resources', 'Globalisation', 'Era of One-Party Dominance', 'Challenges of Nation Building', 'Politics of Planned Development', 'India\'s External Relations', 'Challenges to and Restoration of the Congress System', 'Rise of Popular Movements', 'Regional Aspirations', 'Recent Developments in Indian Politics'], tests: 40 },
+      { name: 'Science', icon: '\uD83D\uDD2C', chapters: ['Reproduction in Organisms', 'Sexual Reproduction in Flowering Plants', 'Human Reproduction', 'Reproductive Health', 'Principles of Inheritance and Variation', 'Molecular Basis of Inheritance', 'Evolution', 'Human Health and Disease', 'Strategies for Enhancement in Food Production', 'Microbes in Human Welfare', 'Biotechnology: Principles and Processes', 'Biotechnology and its Applications', 'Organisms and Populations', 'Ecosystem', 'Biodiversity and Conservation', 'Environmental Issues'], tests: 40 },
+      { name: 'Static GK', icon: '\uD83D\uDCCA', chapters: ['UPSC Prelims GS Pattern', 'Indian History — Complete Timeline', 'World Politics & Relations', 'Indian Economy — Budget & Policy', 'Geography — Map-Based Questions', 'Governance & Social Justice', 'Disaster Management', 'Internal Security Basics', 'Ethics Case Studies Intro'], tests: 40 },
+    ],
+    bookPages: 420,
+  },
+};
 
 // Student illustration SVGs — 3 age variants
 function StudentIllustration({ type, className = '' }: { type: string; className?: string }) {
@@ -419,45 +504,42 @@ function TestSeriesExplorer() {
         <AnimatePresence mode="wait">
           {tab === 'class' && (
             <motion.div key="class" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              className="flex gap-5 overflow-x-auto pb-6 snap-x snap-mandatory lg:grid lg:grid-cols-7 lg:overflow-visible scrollbar-hide">
               {BY_CLASS_SERIES.map((s, i) => (
-                <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                  className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-[#981F1F]/30 transition-all duration-300 relative overflow-hidden flex flex-col">
-
-                  {/* Visual Header with Gradient + Student Illustration */}
-                  <div className={`relative h-36 bg-gradient-to-br ${s.gradient} flex items-end justify-between px-5 pb-4`}>
+                <Link to={`/class/${s.class}`} key={i} className="snap-center flex-shrink-0 w-[200px] sm:w-[220px] lg:w-auto">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.06 }}
+                    className={`group relative bg-gradient-to-b ${s.gradient} rounded-2xl overflow-hidden aspect-[3/4] flex flex-col items-center justify-between p-5 text-white shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 cursor-pointer`}
+                  >
                     {/* Decorative shapes */}
-                    <div className="absolute top-3 right-3 w-24 h-24 rounded-full bg-white/10" />
-                    <div className="absolute top-0 left-0 w-16 h-16 rounded-full bg-white/5 -translate-x-4 -translate-y-4" />
+                    <div className="absolute top-3 right-3 w-20 h-20 rounded-full bg-white/10" />
+                    <div className="absolute bottom-10 left-2 w-12 h-12 rounded-full bg-white/5" />
 
-                    <div className="relative z-10 flex flex-col">
-                      <span className="text-white text-3xl font-extrabold leading-none">Class {s.class}</span>
+                    {/* Badge */}
+                    <div className="relative z-10 self-start">
+                      <span className="bg-white/20 backdrop-blur-sm text-[10px] font-bold px-3 py-1 rounded-lg border border-white/30 uppercase tracking-wider">
+                        {s.badge}
+                      </span>
                     </div>
 
-                    {/* Student Illustration */}
-                    <div className="relative z-10 group-hover:scale-105 transition-transform duration-500">
-                      <StudentIllustration type={s.illustration} className="w-20 h-24 drop-shadow-lg" />
-                    </div>
-                  </div>
-
-                  {/* Card Body */}
-                  <div className="p-5 flex flex-col flex-grow">
-                    <p className="text-xs font-bold text-[#981F1F] mb-2 italic">"{s.tagline}"</p>
-
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {s.label.split(', ').map(subj => (
-                        <span key={subj} className="text-[10px] bg-gray-50 text-[#555] border border-gray-200 px-2 py-0.5 rounded-md whitespace-nowrap">{subj}</span>
-                      ))}
+                    {/* Illustration */}
+                    <div className="relative z-10 flex-grow flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                      <StudentIllustration type={s.illustration} className="w-24 h-28 drop-shadow-xl" />
                     </div>
 
-                    <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
-                      <span className="text-sm text-[#666]"><span className="font-bold text-[#981F1F]">{s.tests}+</span> Tests</span>
-                      <button className="text-sm text-white font-semibold flex items-center gap-1 group-hover:gap-2 transition-all bg-[#981F1F] hover:bg-[#7a1818] px-4 py-1.5 rounded-lg shadow-sm">
-                        View <ArrowRight size={14} />
-                      </button>
+                    {/* Bottom Text */}
+                    <div className="relative z-10 text-center w-full">
+                      <h3 className="text-xl font-extrabold leading-tight">Class {s.class}</h3>
+                      <p className="text-white/70 text-[10px] italic mt-1 leading-snug">"{s.tagline}"</p>
+                      <div className="mt-3 bg-white/15 backdrop-blur-sm text-xs font-semibold px-4 py-1.5 rounded-full border border-white/20 inline-flex items-center gap-1.5">
+                        {s.tests}+ Tests <ArrowRight size={12} />
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                </Link>
               ))}
             </motion.div>
           )}
@@ -467,25 +549,23 @@ function TestSeriesExplorer() {
               className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               {BY_EXAM_SERIES.map((s, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12 }}
-                  className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden">
-                  {/* Gradient Header */}
-                  <div className={`relative h-36 bg-gradient-to-br ${s.gradient} flex items-center justify-center`}>
-                    <div className="absolute top-4 right-4 w-16 h-16 rounded-full bg-white/10" />
-                    <div className="absolute bottom-2 left-4 w-10 h-10 rounded-full bg-white/10" />
-                    <div className="relative z-10 text-center">
-                      <span className="text-5xl block mb-2">{s.emoji}</span>
-                      <span className="text-white font-extrabold text-xl tracking-wide">{s.badge}</span>
-                    </div>
+                  className={`group relative bg-gradient-to-b ${s.gradient} rounded-2xl overflow-hidden aspect-[3/4] sm:aspect-auto sm:h-auto flex flex-col items-center justify-between p-8 text-white shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 cursor-pointer`}>
+                  {/* Decorative */}
+                  <div className="absolute top-4 right-4 w-20 h-20 rounded-full bg-white/10" />
+                  <div className="absolute bottom-8 left-4 w-14 h-14 rounded-full bg-white/5" />
+
+                  <div className="relative z-10 text-center flex flex-col items-center flex-grow justify-center">
+                    <span className="text-5xl block mb-3">{s.emoji}</span>
+                    <span className="bg-white/20 backdrop-blur-sm text-xs font-bold px-3 py-1 rounded-lg border border-white/30 uppercase tracking-wider mb-4">{s.badge}</span>
+                    <h3 className="font-bold text-xl mb-2">{s.title}</h3>
+                    <p className="text-sm text-white/70 mb-5 leading-relaxed max-w-xs">{s.desc}</p>
+                    <div className="text-3xl font-extrabold mb-1">{s.tests}+</div>
+                    <div className="text-xs text-white/60 mb-5">Mock Tests</div>
                   </div>
-                  <div className="p-6 text-center">
-                    <h3 className="font-bold text-[#121212] text-lg mb-2">{s.title}</h3>
-                    <p className="text-sm text-[#555] mb-5 leading-relaxed">{s.desc}</p>
-                    <div className="text-2xl font-extrabold text-[#981F1F] mb-1">{s.tests}+</div>
-                    <div className="text-xs text-[#666] mb-5">Mock Tests Available</div>
-                    <button className="w-full bg-[#981F1F] text-white font-semibold py-3 rounded-xl hover:bg-[#7a1818] transition-colors shadow-sm group-hover:shadow-md">
-                      Explore Series
-                    </button>
-                  </div>
+
+                  <button className="relative z-10 w-full bg-white text-[#121212] font-semibold py-3 rounded-xl hover:bg-gray-100 transition-colors shadow-md">
+                    Explore Series
+                  </button>
                 </motion.div>
               ))}
             </motion.div>
@@ -1073,6 +1153,266 @@ function PagePlaceholder({ title }: { title: string }) {
   );
 }
 
+// ─── CLASS PAGE ──────────────────────────────────────────────────────────────
+
+function ClassPage() {
+  const { classId } = useParams();
+  const classInfo = BY_CLASS_SERIES.find(s => s.class === classId);
+  const data = classId ? CLASS_DATA[classId] : null;
+  const [openSubject, setOpenSubject] = useState<number | null>(null);
+
+  if (!classInfo || !data) return <PagePlaceholder title="Class Not Found" />;
+
+  const totalChapters = data.subjects.reduce((sum, s) => sum + s.chapters.length, 0);
+
+  return (
+    <div className="bg-[#FAFAFA]">
+      {/* ── Hero Section ── */}
+      <section className={`relative bg-gradient-to-br ${classInfo.gradient} pt-28 pb-16 sm:pt-32 sm:pb-20 overflow-hidden`}>
+        <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-white/10" />
+        <div className="absolute bottom-0 left-10 w-40 h-40 rounded-full bg-white/5" />
+        <div className="absolute top-1/2 right-1/4 w-20 h-20 rounded-full bg-white/10" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <Link to="/#test-series" className="inline-flex items-center gap-2 text-white/70 hover:text-white text-sm mb-6 transition-colors">
+                <ArrowRight className="rotate-180" size={14} /> All Classes
+              </Link>
+              <div className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-white/30">
+                Junior IAS — Class {classInfo.class}
+              </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-[1.1] mb-4">
+                Class {classInfo.class}
+              </h1>
+              <p className="text-xl sm:text-2xl text-white/80 font-semibold italic mb-4">
+                "{classInfo.tagline}"
+              </p>
+              <p className="text-white/70 text-base sm:text-lg leading-relaxed mb-8 max-w-lg">
+                {data.heroDesc}
+              </p>
+
+              {/* Quick stats */}
+              <div className="flex flex-wrap gap-4 mb-8">
+                {[
+                  { val: `${data.subjects.length}`, label: 'Subjects' },
+                  { val: `${totalChapters}`, label: 'Chapters' },
+                  { val: `${classInfo.tests}+`, label: 'Tests' },
+                  { val: `${data.bookPages}`, label: 'Pages' },
+                ].map((s, i) => (
+                  <div key={i} className="bg-white/15 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/20 text-center min-w-[80px]">
+                    <div className="text-white font-extrabold text-xl">{s.val}</div>
+                    <div className="text-white/60 text-[10px] uppercase tracking-wider font-semibold">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-3">
+                <button className="bg-white text-[#121212] font-bold px-8 py-4 rounded-xl flex items-center gap-2 hover:bg-gray-100 transition-colors shadow-lg text-lg">
+                  Start Free Test <ArrowRight size={18} />
+                </button>
+                <button className="bg-white/15 border border-white/30 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/25 transition-colors flex items-center gap-2">
+                  <BookOpen size={18} /> Order Book
+                </button>
+              </div>
+
+              <div className="mt-6 inline-flex items-center gap-2 bg-white/10 text-white/80 text-sm font-medium px-4 py-2 rounded-full border border-white/20">
+                Just ₹100/month — Complete access
+              </div>
+            </div>
+
+            {/* Illustration */}
+            <div className="hidden lg:flex justify-center items-center">
+              <div className="relative">
+                <div className="w-72 h-80 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 flex items-center justify-center shadow-2xl">
+                  <StudentIllustration type={classInfo.illustration} className="w-48 h-56 drop-shadow-2xl" />
+                </div>
+                <div className="absolute -bottom-4 -right-4 bg-white rounded-2xl px-5 py-3 shadow-xl">
+                  <span className="text-[#981F1F] font-extrabold text-2xl">{classInfo.tests}+</span>
+                  <span className="text-[#555] text-sm ml-1.5">Tests</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Subjects Grid ── */}
+      <section className="py-16 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#121212]">
+              What You'll <span className="text-[#981F1F]">Learn</span>
+            </h2>
+            <p className="text-[#555] mt-2 max-w-xl mx-auto">5 subjects, {totalChapters} chapters — every topic that NCERT covers and competitive exams test.</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {data.subjects.map((subj, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all p-6 text-center cursor-pointer group"
+                onClick={() => setOpenSubject(openSubject === i ? null : i)}
+              >
+                <span className="text-4xl block mb-3">{subj.icon}</span>
+                <h3 className="font-bold text-[#121212] text-lg mb-1 group-hover:text-[#981F1F] transition-colors">{subj.name}</h3>
+                <p className="text-xs text-[#888] mb-3">{subj.chapters.length} Chapters</p>
+                <div className="flex items-center justify-center gap-2 text-sm">
+                  <span className="font-bold text-[#981F1F]">{subj.tests}</span>
+                  <span className="text-[#666]">Tests</span>
+                </div>
+                <div className="mt-3 text-[10px] text-[#981F1F] font-semibold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
+                  View Chapters
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Chapter Breakdown (Accordion) ── */}
+      <section className="pb-16 sm:pb-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#121212]">
+              Chapter-Wise <span className="text-[#981F1F]">Breakdown</span>
+            </h2>
+            <p className="text-[#555] mt-2">Click any subject to see all chapters covered in the book & test series.</p>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            {data.subjects.map((subj, i) => (
+              <div key={i} className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                <button
+                  className="w-full text-left px-6 py-5 flex items-center justify-between hover:text-[#981F1F] transition-colors"
+                  onClick={() => setOpenSubject(openSubject === i ? null : i)}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">{subj.icon}</span>
+                    <div>
+                      <span className="font-bold text-[#121212] text-lg">{subj.name}</span>
+                      <span className="text-[#888] text-sm ml-3">{subj.chapters.length} chapters · {subj.tests} tests</span>
+                    </div>
+                  </div>
+                  <span className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all ${openSubject === i ? 'bg-[#981F1F] text-white rotate-90' : 'bg-gray-100 text-[#555]'}`}>
+                    <ChevronRight size={16} />
+                  </span>
+                </button>
+                <AnimatePresence>
+                  {openSubject === i && (
+                    <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
+                      <div className="px-6 pb-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {subj.chapters.map((ch, ci) => (
+                            <div key={ci} className="flex items-start gap-3 py-2.5 px-3 rounded-lg bg-gray-50 border border-gray-100">
+                              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#981F1F]/10 text-[#981F1F] text-[10px] font-bold flex items-center justify-center mt-0.5">
+                                {ci + 1}
+                              </span>
+                              <span className="text-sm text-[#333] leading-snug">{ch}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Book + Test Series Info ── */}
+      <section className="pb-16 sm:pb-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Book Card */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 flex flex-col sm:flex-row gap-6 items-center">
+              <div className="w-32 h-40 bg-[#FAFAFA] rounded-xl flex items-center justify-center border border-gray-100 flex-shrink-0">
+                <BookOpen size={48} className="text-[#981F1F] opacity-70" />
+              </div>
+              <div className="flex-grow text-center sm:text-left">
+                <div className="text-xs font-bold text-[#FDB813] uppercase tracking-wider mb-1">Junior IAS Book</div>
+                <h3 className="font-bold text-[#121212] text-2xl mb-2">Junior IAS — Class {classInfo.class}</h3>
+                <p className="text-sm text-[#555] mb-4 leading-relaxed">
+                  {data.bookPages} pages covering all 5 subjects. Written by Vipin Sir. Available in Hindi & English.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4 justify-center sm:justify-start">
+                  {data.subjects.map(s => (
+                    <span key={s.name} className="text-[10px] bg-gray-50 text-[#555] border border-gray-200 px-2 py-1 rounded-md">{s.name}</span>
+                  ))}
+                </div>
+                <button className="bg-[#121212] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#333] transition-colors">
+                  Order Book
+                </button>
+              </div>
+            </div>
+
+            {/* Test Series Card */}
+            <div className={`bg-gradient-to-br ${classInfo.gradient} rounded-2xl p-8 text-white relative overflow-hidden`}>
+              <div className="absolute top-4 right-4 w-32 h-32 rounded-full bg-white/10" />
+              <div className="relative z-10">
+                <div className="text-xs font-bold text-white/70 uppercase tracking-wider mb-1">Digital Test Series</div>
+                <h3 className="font-bold text-3xl mb-2">{classInfo.tests}+ Tests</h3>
+                <p className="text-white/70 text-sm mb-6 leading-relaxed max-w-sm">
+                  Every question from the book. Chapter-wise + full syllabus + mixed tests. Instant results with detailed analysis.
+                </p>
+                <div className="grid grid-cols-2 gap-3 mb-6">
+                  {data.subjects.map(s => (
+                    <div key={s.name} className="bg-white/15 rounded-lg px-3 py-2 text-center">
+                      <div className="font-bold text-lg">{s.tests}</div>
+                      <div className="text-[10px] text-white/60 uppercase">{s.name}</div>
+                    </div>
+                  ))}
+                </div>
+                <button className="bg-white text-[#121212] font-bold px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors flex items-center gap-2">
+                  Start Free Test <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Pricing CTA ── */}
+      <section className="pb-20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+          <div className="bg-[#121212] rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-[#981F1F]/10 -translate-y-1/2" />
+            <div className="relative z-10">
+              <div className="inline-block bg-[#FDB813] text-[#121212] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-5">
+                Complete Class {classInfo.class} Package
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+                Book + Test Series
+              </h2>
+              <div className="flex items-baseline justify-center gap-2 mb-2">
+                <span className="text-5xl font-extrabold text-[#FDB813]">₹100</span>
+                <span className="text-white/60 text-lg">/month</span>
+              </div>
+              <p className="text-white/50 text-sm mb-8 max-w-md mx-auto">
+                ₹1,200/year for the complete Junior IAS ecosystem. {data.bookPages}-page book + {classInfo.tests}+ digital tests. No hidden charges.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <button className="bg-[#981F1F] text-white font-bold px-8 py-4 rounded-xl hover:bg-[#7a1818] transition-colors flex items-center gap-2 shadow-lg">
+                  Enroll Now <ArrowRight size={18} />
+                </button>
+                <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="bg-white/10 border border-white/20 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/20 transition-colors flex items-center gap-2">
+                  <Phone size={16} /> Ask on WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 // ─── CONTACT PAGE ─────────────────────────────────────────────────────────────
 
 function ContactPage() {
@@ -1529,6 +1869,7 @@ export default function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             <Route path="/terms-of-use" element={<TermsOfUsePage />} />
+            <Route path="/class/:classId" element={<ClassPage />} />
             <Route path="/subject/:subjectId" element={<PagePlaceholder title="Subject Details" />} />
           </Routes>
         </main>
