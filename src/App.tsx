@@ -47,19 +47,19 @@ const QUICK_LINKS = [
 ];
 
 const BY_CLASS_SERIES = [
-  { class: '6', label: 'History, Geography, Constitution, Science, Static GK', tests: 40, badge: 'CLASS 6' },
-  { class: '7', label: 'History, Geography, Constitution, Science, Static GK', tests: 50, badge: 'CLASS 7' },
-  { class: '8', label: 'History, Geography, Constitution, Science, Static GK', tests: 60, badge: 'CLASS 8' },
-  { class: '9', label: 'History, Geography, Constitution, Science, Static GK', tests: 80, badge: 'CLASS 9' },
-  { class: '10', label: 'History, Geography, Constitution, Science, Static GK', tests: 120, badge: 'CLASS 10' },
-  { class: '11', label: 'History, Geography, Constitution, Science, Static GK', tests: 150, badge: 'CLASS 11' },
-  { class: '12', label: 'History, Geography, Constitution, Science, Static GK', tests: 200, badge: 'CLASS 12' },
+  { class: '6', label: 'History, Geography, Constitution, Science, Static GK', tests: 40, badge: 'CLASS 6', tier: 'junior', age: '10-11 yrs', gradient: 'from-amber-400 to-orange-500', emoji: '\uD83E\uDDD2', tagline: 'Neev Ka Pehla Patthar' },
+  { class: '7', label: 'History, Geography, Constitution, Science, Static GK', tests: 50, badge: 'CLASS 7', tier: 'junior', age: '11-12 yrs', gradient: 'from-emerald-400 to-teal-500', emoji: '\uD83E\uDDD2', tagline: 'Samajh Badho, Ratta Chhodo' },
+  { class: '8', label: 'History, Geography, Constitution, Science, Static GK', tests: 60, badge: 'CLASS 8', tier: 'junior', age: '12-13 yrs', gradient: 'from-blue-400 to-indigo-500', emoji: '\uD83D\uDC66', tagline: 'Board Se Pehle Ki Tayyari' },
+  { class: '9', label: 'History, Geography, Constitution, Science, Static GK', tests: 80, badge: 'CLASS 9', tier: 'senior', age: '13-14 yrs', gradient: 'from-violet-500 to-purple-600', emoji: '\uD83D\uDC66', tagline: 'Competitive Edge Shuru' },
+  { class: '10', label: 'History, Geography, Constitution, Science, Static GK', tests: 120, badge: 'CLASS 10', tier: 'senior', age: '14-15 yrs', gradient: 'from-rose-500 to-red-600', emoji: '\uD83E\uDDD1', tagline: 'Board + Competition Ready' },
+  { class: '11', label: 'History, Geography, Constitution, Science, Static GK', tests: 150, badge: 'CLASS 11', tier: 'senior', age: '15-16 yrs', gradient: 'from-[#981F1F] to-[#6B1515]', emoji: '\uD83E\uDDD1', tagline: 'IAS/NDA Level Foundation' },
+  { class: '12', label: 'History, Geography, Constitution, Science, Static GK', tests: 200, badge: 'CLASS 12', tier: 'senior', age: '16-18 yrs', gradient: 'from-[#121212] to-[#333]', emoji: '\uD83E\uDDD1\u200D\uD83C\uDF93', tagline: 'Exam Ready, Future Ready' },
 ];
 
 const BY_EXAM_SERIES = [
-  { exam: 'UPSC', title: 'UPSC Foundation Series', desc: 'NCERT based comprehensive test series for IAS.', tests: 120, badge: 'UPSC' },
-  { exam: 'NDA', title: 'NDA Complete Test Series', desc: 'Section-wise + full-length mocks for Maths & GAT.', tests: 80, badge: 'NDA' },
-  { exam: 'CUET', title: 'CUET Subject-wise Series', desc: 'Domain-specific tests for all major CUET subjects.', tests: 150, badge: 'CUET' },
+  { exam: 'UPSC', title: 'UPSC Foundation Series', desc: 'The same NCERT foundation every IAS topper builds. Start from Class 6 level — reach Prelims level.', tests: 120, badge: 'UPSC', emoji: '\uD83C\uDFDB\uFE0F', gradient: 'from-[#981F1F] to-[#6B1515]' },
+  { exam: 'NDA', title: 'NDA Complete Test Series', desc: 'GS holds 400/900 marks in NDA. Our tests cover the exact NCERT chapters that NDA actually asks.', tests: 80, badge: 'NDA', emoji: '\uD83C\uDF96\uFE0F', gradient: 'from-emerald-600 to-emerald-800' },
+  { exam: 'CUET', title: 'CUET Subject-wise Series', desc: 'Domain-specific tests for History, Geography, Political Science & General Studies sections of CUET.', tests: 150, badge: 'CUET', emoji: '\uD83C\uDF93', gradient: 'from-indigo-600 to-indigo-800' },
 ];
 
 const RESULTS: { type: 'quote' | 'stat'; name?: string; score?: string; year?: string; subject: string; quote: string; avatar?: string; statValue?: string; statLabel?: string }[] = [
@@ -330,34 +330,64 @@ function TestSeriesExplorer() {
           </div>
         </div>
 
+        {/* Tier Labels */}
+        {tab === 'class' && (
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            <div className="flex items-center gap-2 text-sm">
+              <div className="w-3 h-3 rounded-full bg-gradient-to-r from-amber-400 to-teal-500" />
+              <span className="text-[#555] font-medium">Tier 1 — Class 6-8 (Neev)</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <div className="w-3 h-3 rounded-full bg-gradient-to-r from-violet-500 to-[#121212]" />
+              <span className="text-[#555] font-medium">Tier 2 — Class 9-12 (Competition Ready)</span>
+            </div>
+          </div>
+        )}
+
         <AnimatePresence mode="wait">
           {tab === 'class' && (
             <motion.div key="class" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {BY_CLASS_SERIES.map((s, i) => (
-                <div key={i} className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-card-hover hover:-translate-y-2 hover:border-[#981F1F]/30 transition-all duration-300 p-6 relative overflow-hidden">
-                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#981F1F] to-[#FDB813] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 bg-[#FFF1F1] group-hover:bg-[#981F1F] rounded-xl flex items-center justify-center transition-colors duration-300">
-                      <BookOpen size={22} className="text-[#981F1F] group-hover:text-white transition-colors duration-300" />
+                <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+                  className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-[#981F1F]/30 transition-all duration-300 relative overflow-hidden flex flex-col">
+
+                  {/* Visual Header with Gradient + Emoji Avatar */}
+                  <div className={`relative h-32 bg-gradient-to-br ${s.gradient} flex items-center justify-between px-5 pt-4 pb-3`}>
+                    {/* Decorative circles */}
+                    <div className="absolute top-3 right-3 w-20 h-20 rounded-full bg-white/10" />
+                    <div className="absolute bottom-0 right-8 w-12 h-12 rounded-full bg-white/10" />
+
+                    <div className="relative z-10 flex flex-col">
+                      <span className="text-white/70 text-[10px] font-bold uppercase tracking-widest">{s.tier === 'junior' ? 'Tier 1' : 'Tier 2'}</span>
+                      <span className="text-white text-3xl font-extrabold leading-none mt-1">Class {s.class}</span>
+                      <span className="text-white/60 text-[10px] mt-1">{s.age}</span>
                     </div>
-                    <span className="text-xs font-bold bg-[#FDB813]/20 text-[#8a6500] px-2.5 py-1 rounded-full">{s.badge}</span>
+
+                    {/* Age-representative Emoji Avatar */}
+                    <div className="relative z-10 w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/30 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <span className="text-3xl">{s.emoji}</span>
+                    </div>
                   </div>
-                  <h3 className="font-bold text-[#121212] flex items-center gap-2 group-hover:text-[#981F1F] transition-colors text-lg mb-2">
-                    Class {s.class}
-                  </h3>
-                  <div className="flex flex-wrap gap-1 mb-4">
-                    {s.label.split(', ').map(subj => (
-                      <span key={subj} className="text-[10px] bg-gray-50 text-[#555] border border-gray-200 px-2 py-0.5 rounded-md whitespace-nowrap">{subj}</span>
-                    ))}
+
+                  {/* Card Body */}
+                  <div className="p-5 flex flex-col flex-grow">
+                    <p className="text-xs font-bold text-[#981F1F] mb-2 italic">"{s.tagline}"</p>
+
+                    <div className="flex flex-wrap gap-1 mb-4">
+                      {s.label.split(', ').map(subj => (
+                        <span key={subj} className="text-[10px] bg-gray-50 text-[#555] border border-gray-200 px-2 py-0.5 rounded-md whitespace-nowrap">{subj}</span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
+                      <span className="text-sm text-[#666]"><span className="font-bold text-[#981F1F]">{s.tests}+</span> Tests</span>
+                      <button className="text-sm text-white font-semibold flex items-center gap-1 group-hover:gap-2 transition-all bg-[#981F1F] hover:bg-[#7a1818] px-4 py-1.5 rounded-lg shadow-sm">
+                        View <ArrowRight size={14} />
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
-                    <span className="text-sm text-[#666]"><span className="font-bold text-[#981F1F]">{s.tests}+</span> Tests</span>
-                    <button className="text-sm text-[#981F1F] font-semibold flex items-center gap-1 group-hover:gap-2 transition-all bg-[#981F1F]/5 group-hover:bg-[#981F1F]/10 px-3 py-1.5 rounded-lg">
-                      View <ArrowRight size={14} />
-                    </button>
-                  </div>
-                </div>
+                </motion.div>
               ))}
             </motion.div>
           )}
@@ -366,19 +396,27 @@ function TestSeriesExplorer() {
             <motion.div key="exam" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
               className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               {BY_EXAM_SERIES.map((s, i) => (
-                <div key={i} className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 p-8 text-center">
-                  <div className="w-16 h-16 bg-[#121212] rounded-2xl flex items-center justify-center mx-auto mb-5">
-                    <Trophy size={28} className="text-[#FDB813]" />
+                <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12 }}
+                  className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+                  {/* Gradient Header */}
+                  <div className={`relative h-36 bg-gradient-to-br ${s.gradient} flex items-center justify-center`}>
+                    <div className="absolute top-4 right-4 w-16 h-16 rounded-full bg-white/10" />
+                    <div className="absolute bottom-2 left-4 w-10 h-10 rounded-full bg-white/10" />
+                    <div className="relative z-10 text-center">
+                      <span className="text-5xl block mb-2">{s.emoji}</span>
+                      <span className="text-white font-extrabold text-xl tracking-wide">{s.badge}</span>
+                    </div>
                   </div>
-                  <span className="text-xs font-bold bg-[#FDB813]/20 text-[#8a6500] px-3 py-1 rounded-full">{s.badge}</span>
-                  <h3 className="font-bold text-[#121212] text-xl mt-4 mb-2">{s.title}</h3>
-                  <p className="text-sm text-[#555] mb-6">{s.desc}</p>
-                  <div className="text-2xl font-extrabold text-[#981F1F] mb-1">{s.tests}+</div>
-                  <div className="text-xs text-[#666] mb-6">Mock Tests Available</div>
-                  <button className="w-full bg-[#981F1F] text-white font-semibold py-3 rounded-xl hover:bg-[#7a1818] transition-colors">
-                    Explore Series
-                  </button>
-                </div>
+                  <div className="p-6 text-center">
+                    <h3 className="font-bold text-[#121212] text-lg mb-2">{s.title}</h3>
+                    <p className="text-sm text-[#555] mb-5 leading-relaxed">{s.desc}</p>
+                    <div className="text-2xl font-extrabold text-[#981F1F] mb-1">{s.tests}+</div>
+                    <div className="text-xs text-[#666] mb-5">Mock Tests Available</div>
+                    <button className="w-full bg-[#981F1F] text-white font-semibold py-3 rounded-xl hover:bg-[#7a1818] transition-colors shadow-sm group-hover:shadow-md">
+                      Explore Series
+                    </button>
+                  </div>
+                </motion.div>
               ))}
             </motion.div>
           )}
