@@ -34,42 +34,32 @@ function ScrollToTop() {
 const NAV_LINKS = ['Home', 'Test Series', 'Results', 'About', 'Blog'];
 
 const QUICK_LINKS = [
-  { label: 'Class 6–8', icon: '📖' },
-  { label: 'Class 9–10', icon: '📘' },
-  { label: 'Class 11–12', icon: '📗' },
+  { label: 'Class 6', icon: '📖' },
+  { label: 'Class 7', icon: '📘' },
+  { label: 'Class 8', icon: '📗' },
+  { label: 'Class 9', icon: '📙' },
+  { label: 'Class 10', icon: '📕' },
+  { label: 'Class 11', icon: '📓' },
+  { label: 'Class 12', icon: '📚' },
+  { label: 'UPSC', icon: '🏛️' },
   { label: 'NDA', icon: '🎖️' },
-  { label: 'CUET', icon: '🏛️' },
-  { label: 'Agniveer', icon: '⚡' },
-  { label: 'Mathematics', icon: '📐' },
-  { label: 'Physics', icon: '⚗️' },
-  { label: 'Biology', icon: '🧬' },
-  { label: 'English', icon: '📝' },
-  { label: 'GK / GS', icon: '🌍' },
-  { label: 'Reasoning', icon: '🧩' },
+  { label: 'CUET', icon: '🎓' },
 ];
 
 const BY_CLASS_SERIES = [
-  { class: '6–8', label: 'Foundation', subjects: ['Maths', 'Science', 'English', 'Social Studies'], tests: 120, badge: 'FOUNDATION' },
-  { class: '9–10', label: 'Board Prep', subjects: ['Maths', 'Science', 'Social Studies', 'English'], tests: 180, badge: 'BOARD PREP' },
-  { class: '11 PCM', label: 'Science Stream', subjects: ['Physics', 'Chemistry', 'Maths', 'English'], tests: 240, badge: 'PCM' },
-  { class: '11 PCB', label: 'Medical Stream', subjects: ['Physics', 'Chemistry', 'Biology', 'English'], tests: 240, badge: 'PCB' },
-  { class: '12 PCM', label: 'Board + JEE Prep', subjects: ['Physics', 'Chemistry', 'Maths'], tests: 300, badge: 'CLASS 12' },
-  { class: '12 PCB', label: 'Board + NEET Prep', subjects: ['Physics', 'Chemistry', 'Biology'], tests: 300, badge: 'CLASS 12' },
+  { class: '6', label: 'Foundation Builder', tests: 40, badge: 'CLASS 6' },
+  { class: '7', label: 'Concept Mastery', tests: 50, badge: 'CLASS 7' },
+  { class: '8', label: 'Pre-Board Prep', tests: 60, badge: 'CLASS 8' },
+  { class: '9', label: 'Advanced Foundations', tests: 80, badge: 'CLASS 9' },
+  { class: '10', label: 'Board Preparation', tests: 120, badge: 'CLASS 10' },
+  { class: '11', label: 'Stream Introduction', tests: 150, badge: 'CLASS 11' },
+  { class: '12', label: 'Board + Comp. Prep', tests: 200, badge: 'CLASS 12' },
 ];
 
 const BY_EXAM_SERIES = [
+  { exam: 'UPSC', title: 'UPSC Foundation Series', desc: 'NCERT based comprehensive test series for IAS.', tests: 120, badge: 'UPSC' },
   { exam: 'NDA', title: 'NDA Complete Test Series', desc: 'Section-wise + full-length mocks for Maths & GAT.', tests: 80, badge: 'NDA' },
-  { exam: 'CUET', title: 'CUET Subject-wise Series', desc: 'Domain-specific tests for all 27 CUET subjects.', tests: 150, badge: 'CUET' },
-  { exam: 'Agniveer', title: 'Agniveer All Trades', desc: 'Army, Navy & Air Force — complete mock test battery.', tests: 60, badge: 'AGNIVEER' },
-];
-
-const BY_SUBJECT = [
-  { subject: 'Mathematics', icon: '📐', tests: 200, classes: 'Class 6–12 + NDA' },
-  { subject: 'Physics', icon: '⚗️', tests: 150, classes: 'Class 9–12 + CUET' },
-  { subject: 'Chemistry', icon: '🧪', tests: 140, classes: 'Class 9–12 + CUET' },
-  { subject: 'Biology', icon: '🧬', tests: 120, classes: 'Class 9–12 + CUET' },
-  { subject: 'English', icon: '📝', tests: 90, classes: 'Class 6–12 + NDA' },
-  { subject: 'General Knowledge', icon: '🌍', tests: 100, classes: 'NDA + Agniveer' },
+  { exam: 'CUET', title: 'CUET Subject-wise Series', desc: 'Domain-specific tests for all major CUET subjects.', tests: 150, badge: 'CUET' },
 ];
 
 const RESULTS: { type: 'quote' | 'stat'; name?: string; score?: string; year?: string; subject: string; quote: string; avatar?: string; statValue?: string; statLabel?: string }[] = [
@@ -117,9 +107,10 @@ function Navbar() {
 
   const navItems = [
     { name: "Test Series", link: "/#test-series" },
+    { name: "Books", link: "/#books" },
+    { name: "Mission", link: "/#mission" },
     { name: "Results", link: "/#results" },
     { name: "About", link: "/#about" },
-    { name: "Blog", link: "/blog" },
   ];
 
   return (
@@ -215,14 +206,14 @@ function InteractiveHero() {
         {/* Left Column: Text & CTA */}
         <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
           <span className="inline-flex items-center gap-2 bg-[#FFF1F1] text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6 border border-[#981F1F]/20">
-            <Trophy size={14} /> India's Premier Coaching
+            <Trophy size={14} /> Junior IAS Program
           </span>
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#121212] leading-[1.1] mb-6 tracking-tight">
-            Score More. <br />
-            <span className="text-[#981F1F]">Every Subject.</span>
+            Build the Foundation. <br />
+            <span className="text-[#981F1F]">Secure the Future.</span>
           </h1>
           <p className="text-base sm:text-lg text-[#555] mb-8 sm:mb-10 max-w-lg leading-relaxed">
-            A collaborative learning ecosystem extending beyond the classroom. From Foundation to NDA, prepare with India's most rigorous interactive test series.
+            The ultimate "Junior IAS" ecosystem bridging the gap between school exams and competitive success. From Class 6 to UPSC, prepare with Vipin Sir's highly rigorous, strictly NCERT-based program.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 max-w-lg">
@@ -311,11 +302,10 @@ function QuickLinks() {
 }
 
 function TestSeriesExplorer() {
-  const [tab, setTab] = useState<'class' | 'exam' | 'subject'>('class');
-  const tabs: { key: 'class' | 'exam' | 'subject'; label: string }[] = [
+  const [tab, setTab] = useState<'class' | 'exam'>('class');
+  const tabs: { key: 'class' | 'exam'; label: string }[] = [
     { key: 'class', label: 'By Class' },
     { key: 'exam', label: 'By Competitive Exam' },
-    { key: 'subject', label: 'By Subject' },
   ];
   return (
     <section id="test-series" className="py-20 bg-[#FAFAFA]">
@@ -325,7 +315,7 @@ function TestSeriesExplorer() {
             <Target size={12} /> Test Series
           </span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#121212]">Explore Our <span className="text-[#981F1F]">Test Series</span></h2>
-          <p className="text-[#555] mt-2 max-w-xl mx-auto">Find the right test series for your goal — filter by class, exam, or subject.</p>
+          <p className="text-[#555] mt-2 max-w-xl mx-auto">Find the right test series for your goal — filter by class or competitive exam.</p>
         </div>
         {/* Tab bar */}
         <div className="flex justify-center mb-10 mx-auto px-2">
@@ -342,7 +332,7 @@ function TestSeriesExplorer() {
         <AnimatePresence mode="wait">
           {tab === 'class' && (
             <motion.div key="class" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {BY_CLASS_SERIES.map((s, i) => (
                 <div key={i} className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-card-hover hover:-translate-y-2 hover:border-[#981F1F]/30 transition-all duration-300 p-6 relative overflow-hidden">
                   <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#981F1F] to-[#FDB813] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -356,15 +346,10 @@ function TestSeriesExplorer() {
                     Class {s.class}
                   </h3>
                   <p className="text-sm text-[#555] mb-4">{s.label}</p>
-                  <div className="flex flex-wrap gap-1.5 mb-5">
-                    {s.subjects.map(sub => (
-                      <span key={sub} className="text-xs bg-gray-100 text-[#444] px-2.5 py-1 rounded-full">{sub}</span>
-                    ))}
-                  </div>
-                  <div className="flex items-center justify-between mt-auto">
+                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
                     <span className="text-sm text-[#666]"><span className="font-bold text-[#981F1F]">{s.tests}+</span> Tests</span>
                     <button className="text-sm text-[#981F1F] font-semibold flex items-center gap-1 group-hover:gap-2 transition-all bg-[#981F1F]/5 group-hover:bg-[#981F1F]/10 px-3 py-1.5 rounded-lg">
-                      View Details <ArrowRight size={14} />
+                      View <ArrowRight size={14} />
                     </button>
                   </div>
                 </div>
@@ -392,21 +377,127 @@ function TestSeriesExplorer() {
               ))}
             </motion.div>
           )}
-
-          {tab === 'subject' && (
-            <motion.div key="subject" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-              {BY_SUBJECT.map((s, i) => (
-                <div key={i} className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 p-5 text-center cursor-pointer group">
-                  <div className="text-4xl mb-3">{s.icon}</div>
-                  <h3 className="font-bold text-[#121212] text-sm mb-1">{s.subject}</h3>
-                  <p className="text-xs text-[#666] mb-2">{s.classes}</p>
-                  <span className="text-xs font-bold text-[#981F1F]">{s.tests}+ Tests</span>
-                </div>
-              ))}
-            </motion.div>
-          )}
         </AnimatePresence>
+      </div>
+    </section>
+  );
+}
+
+
+const BOOKS = [
+  { class: 'Class 6', title: '6th Foundation', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
+  { class: 'Class 7', title: '7th Mastery', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
+  { class: 'Class 8', title: '8th Pre-Board', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
+  { class: 'Class 9', title: '9th Advanced', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
+  { class: 'Class 10', title: '10th Board Prep', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
+  { class: 'Class 11', title: '11th Core GS', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
+  { class: 'Class 12', title: '12th Mains GS', tags: ['History', 'Geography', 'Constitution', 'Science', 'Static GK'], type: 'Single Book' },
+];
+
+function BooksShowcase() {
+  const [lang, setLang] = useState<'Hindi' | 'English'>('Hindi');
+  return (
+    <section id="books" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-10">
+          <span className="inline-flex items-center gap-2 bg-[#FFF1F1] text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-[#981F1F]/20">
+            <BookOpen size={12} /> Pure NCERT Books
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#121212] tracking-tight mb-4">
+            Early Preparation <span className="text-[#981F1F]">Bright Future.</span>
+          </h2>
+          <p className="text-[#555] max-w-2xl mx-auto mt-2 text-lg">
+            Strictly NCERT-based study materials authored by Vipin Sir. Covering History, Geography, Constitution, Science, and Static GK in a single, perfectly crafted book for Classes 6-12.
+          </p>
+        </div>
+
+        <div className="flex justify-center mb-10">
+          <div className="flex bg-gray-50 border border-gray-200 rounded-xl p-1">
+            <button 
+              onClick={() => setLang('Hindi')}
+              className={`px-8 py-2.5 rounded-lg text-sm font-bold transition-all ${lang === 'Hindi' ? 'bg-[#981F1F] text-white shadow' : 'text-[#555] hover:text-[#121212]'}`}>
+              Hindi Medium
+            </button>
+            <button 
+              onClick={() => setLang('English')}
+              className={`px-8 py-2.5 rounded-lg text-sm font-bold transition-all ${lang === 'English' ? 'bg-[#981F1F] text-white shadow' : 'text-[#555] hover:text-[#121212]'}`}>
+              English Medium
+            </button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {BOOKS.slice(0, 4).map((b, i) => (
+            <div key={i} className="bg-white border text-center border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all">
+              <div className="h-40 bg-[#FAFAFA] rounded-xl mb-6 relative overflow-hidden flex items-center justify-center border border-gray-50">
+                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(152,31,31,0.05),transparent_70%)]" />
+                 <BookOpen size={48} className="text-[#981F1F] opacity-80" />
+                 <div className="absolute bottom-2 right-2 bg-white px-2 py-1 text-[10px] font-bold text-[#121212] rounded shadow-sm uppercase border border-gray-100">{lang}</div>
+              </div>
+              <div className="text-xs font-bold text-[#FDB813] tracking-wider mb-2">{b.class}</div>
+              <h3 className="font-bold text-[#121212] text-xl mb-3">{b.title}</h3>
+              <div className="flex flex-wrap justify-center gap-1.5 mb-5">
+                {b.tags.map(t => (
+                  <span key={t} className="text-[10px] bg-gray-50 text-[#555] border border-gray-200 px-2 py-1 rounded-md whitespace-nowrap">{t}</span>
+                ))}
+              </div>
+              <button className="w-full bg-[#121212] text-white hover:bg-[#333] font-semibold py-2.5 rounded-xl transition-colors">
+                Order Now
+              </button>
+            </div>
+          ))}
+        </div>
+        <div className="mt-8 flex justify-center">
+           <button className="text-[#981F1F] font-semibold hover:underline flex items-center gap-1">View All Classes (6-12) <ArrowRight size={16} /></button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MissionSection() {
+  return (
+    <section id="mission" className="py-24 bg-[#121212] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <span className="inline-flex items-center gap-2 bg-[#981F1F]/20 text-[#FDB813] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6 border border-[#FDB813]/20">
+              <Award size={12} /> Vipin Sir's Legacy
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">
+              The <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FDB813] to-orange-500">Junior IAS</span> Mission.
+            </h2>
+            <p className="text-white/70 text-lg mb-6 leading-relaxed">
+              After producing an unprecedented 350+ UP Police selections and 125+ Super TET successes from a single center, Vipin Sir identified a systemic flaw: <strong>The Education Scam</strong>.
+            </p>
+            <p className="text-white/70 text-lg mb-8 leading-relaxed">
+              Schools focus only on PCM merely to pass board exams, totally neglecting the core Humanities (NCERT) crucial for actual competitive exams like UPSC, NDA, and PCS. To combat this, we launched the Junior IAS program—intervening early to build rock-solid foundations for rural and semi-urban students.
+            </p>
+            
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mt-8">
+               <h3 className="text-white font-bold text-xl flex items-center gap-2 mb-3"><MapPin className="text-[#FDB813]" size={20} /> The 200-Village Vanity Van Tour</h3>
+               <p className="text-white/60 text-sm leading-relaxed">
+                 We are taking this mission directly to the people. Working out of a modified Vanity Van acting as our mobile HQ, Vipin Sir and team will conduct a massive door-to-door, 200-village campaign. Our goal? To sit directly with villagers and prove that elite, UPSC-level foundation education is accessible for just ₹100 a month.
+               </p>
+            </div>
+          </div>
+
+          <div className="relative h-[550px] w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+             <img src="https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=2071&auto=format&fit=crop" alt="Education Mission Vanity Van Tour" className="absolute inset-0 w-full h-full object-cover opacity-50" />
+             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+             <div className="absolute bottom-0 left-0 right-0 p-8">
+                <div className="flex gap-4">
+                  <div className="bg-[#981F1F] h-14 w-14 rounded-xl flex items-center justify-center shrink-0">
+                    <Target size={28} className="text-white" />
+                  </div>
+                  <div className="flex flex-col justify-center">
+                    <h4 className="text-white font-bold text-xl">Grassroots Impact</h4>
+                    <p className="text-white/70 text-sm">Empowering the forgotten talent across India.</p>
+                  </div>
+                </div>
+             </div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -709,19 +800,17 @@ function Footer() {
               <Link key={l} to={`/test-series?filter=${l.replace(' ', '-').toLowerCase()}`} className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">{l}</Link>
             ))}
           </div>
-          {/* Subjects */}
+          {/* Subjects (Now Links) */}
           <div>
-            <h4 className="font-bold mb-4 text-sm uppercase tracking-wider text-white/70">Subjects</h4>
-            {['Mathematics', 'Physics', 'Chemistry', 'Biology', 'English', 'GK / General Studies'].map(l => (
-              <Link key={l} to={`/subject/${l.replace(' / ', '-').toLowerCase()}`} className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">{l}</Link>
-            ))}
+            <h4 className="font-bold mb-4 text-sm uppercase tracking-wider text-white/70">Explore</h4>
+            <Link to="/#books" className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">Our Books</Link>
+            <Link to="/#mission" className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">200-Village Tour</Link>
+            <Link to="/#test-series" className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">Junior IAS Tests</Link>
+            <Link to="/#about" className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">About Vipin Sir</Link>
           </div>
           {/* Quick Links */}
           <div>
             <h4 className="font-bold mb-4 text-sm uppercase tracking-wider text-white/70">Quick Links</h4>
-            <Link to="/about" className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">About Us</Link>
-            <Link to="/results" className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">Our Results</Link>
-            <Link to="/blog" className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">Blog</Link>
             <Link to="/contact" className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">Contact Us</Link>
             <Link to="/privacy-policy" className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">Privacy Policy</Link>
             <Link to="/terms-of-use" className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">Terms of Use</Link>
@@ -744,6 +833,8 @@ function HomePage() {
       <InteractiveHero />
       <QuickLinks />
       <TestSeriesExplorer />
+      <BooksShowcase />
+      <MissionSection />
       <ResultsShowcase />
       <WhyUs />
       <Testimonials />
@@ -773,6 +864,444 @@ function PagePlaceholder({ title }: { title: string }) {
   );
 }
 
+// ─── CONTACT PAGE ─────────────────────────────────────────────────────────────
+
+function ContactPage() {
+  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  return (
+    <div className="bg-[#FAFAFA] pt-32 pb-20 min-h-screen">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+
+        {/* Header */}
+        <div className="text-center mb-14">
+          <span className="inline-flex items-center gap-2 bg-[#FFF1F1] text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-[#981F1F]/20">
+            <Phone size={12} /> Get In Touch
+          </span>
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#121212] mb-4">Contact <span className="text-[#981F1F]">Us</span></h1>
+          <p className="text-[#555] text-lg max-w-xl mx-auto">Have a question about admissions, courses, or anything else? We're here to help.</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
+
+          {/* Contact Info */}
+          <div className="lg:col-span-2 flex flex-col gap-6">
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7">
+              <h2 className="font-bold text-[#121212] text-xl mb-6">Contact Information</h2>
+              <div className="flex flex-col gap-5">
+                <div className="flex items-start gap-4">
+                  <div className="w-11 h-11 bg-[#FFF1F1] rounded-xl flex items-center justify-center shrink-0">
+                    <Phone size={18} className="text-[#981F1F]" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#888] font-semibold uppercase tracking-wide mb-1">Phone / WhatsApp</p>
+                    <a href="tel:+919876543210" className="text-[#121212] font-semibold hover:text-[#981F1F] transition-colors">+91 98765 43210</a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-11 h-11 bg-[#FFF1F1] rounded-xl flex items-center justify-center shrink-0">
+                    <Mail size={18} className="text-[#981F1F]" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#888] font-semibold uppercase tracking-wide mb-1">Email</p>
+                    <a href="mailto:info@perfectclassesnoorpur.com" className="text-[#121212] font-semibold hover:text-[#981F1F] transition-colors">info@perfectclassesnoorpur.com</a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-11 h-11 bg-[#FFF1F1] rounded-xl flex items-center justify-center shrink-0">
+                    <MapPin size={18} className="text-[#981F1F]" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#888] font-semibold uppercase tracking-wide mb-1">Address</p>
+                    <p className="text-[#121212] font-semibold">Perfect Classes, Noorpur</p>
+                    <p className="text-[#555] text-sm">Bijnor District, Uttar Pradesh, India</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-11 h-11 bg-[#FFF1F1] rounded-xl flex items-center justify-center shrink-0">
+                    <Clock size={18} className="text-[#981F1F]" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#888] font-semibold uppercase tracking-wide mb-1">Office Hours</p>
+                    <p className="text-[#121212] font-semibold">Mon – Sat: 8:00 AM – 7:00 PM</p>
+                    <p className="text-[#555] text-sm">Sunday: 10:00 AM – 2:00 PM</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-[#121212] rounded-2xl p-7 text-white">
+              <h3 className="font-bold text-lg mb-2">Quick Enquiry?</h3>
+              <p className="text-white/60 text-sm mb-5">WhatsApp us directly for the fastest response. We usually reply within minutes.</p>
+              <a
+                href="https://wa.me/919876543210?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Perfect%20Classes."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-xl hover:bg-[#1ebe5d] transition-colors"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Chat on WhatsApp
+              </a>
+            </div>
+          </div>
+
+          {/* Contact Form */}
+          <div className="lg:col-span-3">
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+              {submitted ? (
+                <div className="flex flex-col items-center justify-center py-16 text-center">
+                  <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mb-4">
+                    <CheckCircle size={32} className="text-emerald-500" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#121212] mb-2">Message Sent!</h3>
+                  <p className="text-[#555] max-w-sm">Thank you for reaching out. We'll get back to you within 24 hours.</p>
+                  <button onClick={() => setSubmitted(false)} className="mt-6 text-[#981F1F] font-semibold hover:underline text-sm">Send another message</button>
+                </div>
+              ) : (
+                <>
+                  <h2 className="font-bold text-[#121212] text-xl mb-6">Send Us a Message</h2>
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <div>
+                        <label className="block text-sm font-semibold text-[#333] mb-1.5">Full Name *</label>
+                        <input
+                          type="text" required
+                          value={form.name}
+                          onChange={e => setForm({ ...form, name: e.target.value })}
+                          placeholder="Your full name"
+                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#981F1F] focus:ring-2 focus:ring-[#981F1F]/20 text-[#121212] transition-all"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold text-[#333] mb-1.5">Phone Number</label>
+                        <input
+                          type="tel"
+                          value={form.phone}
+                          onChange={e => setForm({ ...form, phone: e.target.value })}
+                          placeholder="+91 XXXXX XXXXX"
+                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#981F1F] focus:ring-2 focus:ring-[#981F1F]/20 text-[#121212] transition-all"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-[#333] mb-1.5">Email Address *</label>
+                      <input
+                        type="email" required
+                        value={form.email}
+                        onChange={e => setForm({ ...form, email: e.target.value })}
+                        placeholder="your@email.com"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#981F1F] focus:ring-2 focus:ring-[#981F1F]/20 text-[#121212] transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-[#333] mb-1.5">Message *</label>
+                      <textarea
+                        required rows={5}
+                        value={form.message}
+                        onChange={e => setForm({ ...form, message: e.target.value })}
+                        placeholder="Tell us about your enquiry — class, subject, exam you're preparing for..."
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#981F1F] focus:ring-2 focus:ring-[#981F1F]/20 text-[#121212] transition-all resize-none"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="bg-[#981F1F] hover:bg-[#7a1818] text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl"
+                    >
+                      Send Message <ArrowRight size={18} />
+                    </button>
+                  </form>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── PRIVACY POLICY PAGE ──────────────────────────────────────────────────────
+
+function PrivacyPolicyPage() {
+  const lastUpdated = 'March 2026';
+  const sections = [
+    {
+      title: '1. Information We Collect',
+      content: `When you register or use our platform, we may collect the following information:
+
+• **Personal Identification:** Name, email address, phone number, and date of birth.
+• **Academic Information:** Class, stream, target exam, and performance data from tests taken on our platform.
+• **Payment Information:** Transaction details processed securely through third-party payment gateways. We do not store card or banking information.
+• **Usage Data:** Pages visited, test attempts, time spent, device type, IP address, and browser type.
+• **Communications:** Messages or enquiries you send to our support team.`,
+    },
+    {
+      title: '2. How We Use Your Information',
+      content: `We use the information collected to:
+
+• Provide and improve our test series and educational services.
+• Personalise your learning experience and generate performance reports.
+• Send important updates, course notifications, and result alerts.
+• Process payments and send transaction confirmations.
+• Respond to your queries and provide customer support.
+• Analyse usage patterns to improve platform performance.
+• Comply with legal obligations.`,
+    },
+    {
+      title: '3. Sharing of Information',
+      content: `We do not sell, trade, or rent your personal information to third parties. We may share your data in the following limited circumstances:
+
+• **Service Providers:** With trusted partners (e.g., payment processors, hosting providers) who assist in operating our platform, subject to confidentiality agreements.
+• **Legal Requirements:** When required by law, court order, or government authority.
+• **Business Transfers:** In the event of a merger, acquisition, or sale of assets, your data may be transferred with appropriate notice.`,
+    },
+    {
+      title: '4. Data Security',
+      content: `We implement industry-standard security measures to protect your personal information:
+
+• SSL/TLS encryption for all data transmission.
+• Secure, access-controlled servers for data storage.
+• Regular security audits and vulnerability assessments.
+• Restricted access to personal data on a need-to-know basis.
+
+While we strive to protect your data, no method of internet transmission is 100% secure. We encourage you to use strong passwords and keep your login credentials confidential.`,
+    },
+    {
+      title: '5. Cookies',
+      content: `We use cookies and similar tracking technologies to enhance your experience on our platform. Cookies help us:
+
+• Keep you logged in during your session.
+• Remember your preferences and settings.
+• Analyse traffic and usage patterns.
+• Deliver relevant content.
+
+You can control or disable cookies through your browser settings. However, disabling cookies may affect the functionality of certain features.`,
+    },
+    {
+      title: '6. Children\'s Privacy',
+      content: `Our platform is designed for students of Class 6 and above. We do not knowingly collect personal information from children under 13 years of age without verifiable parental consent. If you are a parent or guardian and believe your child has provided personal information, please contact us immediately at info@perfectclassesnoorpur.com and we will take appropriate action.`,
+    },
+    {
+      title: '7. Your Rights',
+      content: `You have the following rights regarding your personal data:
+
+• **Access:** Request a copy of the personal data we hold about you.
+• **Correction:** Request correction of inaccurate or incomplete information.
+• **Deletion:** Request deletion of your account and associated data, subject to legal retention requirements.
+• **Opt-Out:** Unsubscribe from marketing communications at any time via the link in our emails.
+
+To exercise any of these rights, contact us at info@perfectclassesnoorpur.com.`,
+    },
+    {
+      title: '8. Third-Party Links',
+      content: `Our website may contain links to third-party websites (e.g., Graphy course platform, social media pages). We are not responsible for the privacy practices or content of those websites. We encourage you to read their privacy policies before providing any personal information.`,
+    },
+    {
+      title: '9. Changes to This Policy',
+      content: `We may update this Privacy Policy from time to time to reflect changes in our practices or for legal, operational, or regulatory reasons. We will notify registered users of significant changes via email or a notice on our platform. The "Last Updated" date at the top of this page will always reflect the most recent version.`,
+    },
+    {
+      title: '10. Contact Us',
+      content: `If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:
+
+• **Email:** info@perfectclassesnoorpur.com
+• **Phone:** +91 98765 43210
+• **Address:** Perfect Classes, Noorpur, Bijnor District, Uttar Pradesh, India`,
+    },
+  ];
+
+  return (
+    <div className="bg-[#FAFAFA] pt-32 pb-20 min-h-screen">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-12">
+          <span className="inline-flex items-center gap-2 bg-[#FFF1F1] text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-[#981F1F]/20">
+            <Shield size={12} /> Legal
+          </span>
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#121212] mb-3">Privacy <span className="text-[#981F1F]">Policy</span></h1>
+          <p className="text-[#555] text-sm">Last updated: {lastUpdated}</p>
+        </div>
+
+        <div className="bg-[#FFF1F1] border border-[#981F1F]/20 rounded-2xl p-6 mb-10">
+          <p className="text-[#555] text-sm leading-relaxed">
+            Perfect Classes ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our website at <strong>perfectclassesnoorpur.com</strong> and our associated test series platform. By using our services, you agree to the terms described in this policy.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-6">
+          {sections.map((s, i) => (
+            <div key={i} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7">
+              <h2 className="text-lg font-bold text-[#121212] mb-4">{s.title}</h2>
+              <div className="text-sm text-[#555] leading-relaxed whitespace-pre-line">
+                {s.content.split('\n').map((line, j) => {
+                  const trimmed = line.trim();
+                  if (trimmed.startsWith('•')) {
+                    return <p key={j} className="mb-1 pl-2">{trimmed}</p>;
+                  }
+                  if (trimmed === '') return <br key={j} />;
+                  return <p key={j} className="mb-2">{trimmed}</p>;
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <Link to="/" className="inline-flex items-center gap-2 bg-[#981F1F] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#7a1818] transition-colors shadow-lg">
+            <ArrowRight className="rotate-180" size={18} /> Back to Homepage
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── TERMS OF USE PAGE ────────────────────────────────────────────────────────
+
+function TermsOfUsePage() {
+  const lastUpdated = 'March 2026';
+  const sections = [
+    {
+      title: '1. Acceptance of Terms',
+      content: `By accessing or using the Perfect Classes website (perfectclassesnoorpur.com) and its associated services, you confirm that you have read, understood, and agree to be bound by these Terms of Use and our Privacy Policy. If you do not agree to these terms, please do not use our platform.
+
+These terms apply to all users including students, parents, and guardians.`,
+    },
+    {
+      title: '2. About Perfect Classes',
+      content: `Perfect Classes is an educational platform based in Noorpur, Uttar Pradesh, India, that provides test series, study materials, and coaching for students of Class 6–12 and competitive exam aspirants (NDA, CUET, Agniveer, and others). Content is delivered through our website and integrated third-party platforms.`,
+    },
+    {
+      title: '3. User Accounts',
+      content: `• You must provide accurate and complete information when creating an account.
+• You are responsible for maintaining the confidentiality of your login credentials.
+• You must not share your account with others or allow multiple users to access a single account.
+• You must notify us immediately at info@perfectclassesnoorpur.com if you suspect unauthorised access to your account.
+• We reserve the right to suspend or terminate accounts that violate these terms.`,
+    },
+    {
+      title: '4. Use of the Platform',
+      content: `You agree to use Perfect Classes only for lawful educational purposes. You must NOT:
+
+• Copy, reproduce, distribute, or resell any test questions, answers, or content from our platform.
+• Attempt to gain unauthorised access to any part of the platform or its systems.
+• Use automated tools, bots, or scripts to access or scrape content.
+• Impersonate any person or entity, including Perfect Classes staff.
+• Post or transmit any content that is offensive, harmful, or violates any applicable law.
+• Use the platform for any commercial purpose without our written consent.`,
+    },
+    {
+      title: '5. Intellectual Property',
+      content: `All content on the Perfect Classes platform — including test questions, study materials, graphics, logos, videos, and text — is the exclusive intellectual property of Perfect Classes or its licensors.
+
+You are granted a limited, non-exclusive, non-transferable licence to access and use the content solely for your personal educational purposes. Any unauthorised use, reproduction, or distribution of our content is strictly prohibited and may result in legal action.`,
+    },
+    {
+      title: '6. Payments and Refunds',
+      content: `• All fees for test series, courses, or subscriptions are displayed clearly before purchase.
+• Payments are processed securely through authorised third-party payment gateways.
+• Once a course or test series is activated and accessed, refunds will not be provided unless the content is found to be materially defective.
+• Refund requests must be raised within 48 hours of purchase by contacting info@perfectclassesnoorpur.com.
+• We reserve the right to modify pricing at any time, with prior notice for existing subscribers.`,
+    },
+    {
+      title: '7. Disclaimer of Warranties',
+      content: `Perfect Classes provides its platform and content on an "as is" and "as available" basis. While we make every effort to ensure accuracy and quality, we do not guarantee:
+
+• That the platform will be uninterrupted or error-free at all times.
+• That test content will guarantee a particular score or exam result.
+• That all information is completely up-to-date at all times.
+
+Use of our platform is at your own risk. We are not liable for any academic outcomes or exam results.`,
+    },
+    {
+      title: '8. Limitation of Liability',
+      content: `To the fullest extent permitted by applicable law, Perfect Classes shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of (or inability to use) our platform, including but not limited to loss of data, loss of revenue, or loss of opportunity.
+
+Our total liability in any matter shall not exceed the amount you paid for the specific service in question.`,
+    },
+    {
+      title: '9. Third-Party Services',
+      content: `Our platform integrates with third-party services (such as Graphy for course delivery and payment gateways for transactions). These services have their own terms of service and privacy policies. Perfect Classes is not responsible for the practices or content of these third-party providers.`,
+    },
+    {
+      title: '10. Termination',
+      content: `We reserve the right to suspend or permanently terminate your access to the platform, without prior notice, if you:
+
+• Violate any of these Terms of Use.
+• Engage in fraudulent, abusive, or harmful behaviour.
+• Attempt to compromise the integrity of our tests or platform.
+
+Upon termination, your right to access the platform ceases immediately. You may contact us at info@perfectclassesnoorpur.com to appeal a termination decision.`,
+    },
+    {
+      title: '11. Governing Law',
+      content: `These Terms of Use shall be governed by and construed in accordance with the laws of India. Any disputes arising out of or in connection with these terms shall be subject to the exclusive jurisdiction of the courts in Bijnor District, Uttar Pradesh, India.`,
+    },
+    {
+      title: '12. Changes to Terms',
+      content: `We may revise these Terms of Use at any time. Updated terms will be posted on this page with a revised "Last Updated" date. Continued use of our platform after changes are posted constitutes your acceptance of the revised terms. We recommend reviewing this page periodically.`,
+    },
+    {
+      title: '13. Contact',
+      content: `For any questions regarding these Terms of Use, please contact us:
+
+• **Email:** info@perfectclassesnoorpur.com
+• **Phone:** +91 98765 43210
+• **Address:** Perfect Classes, Noorpur, Bijnor District, Uttar Pradesh, India`,
+    },
+  ];
+
+  return (
+    <div className="bg-[#FAFAFA] pt-32 pb-20 min-h-screen">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-12">
+          <span className="inline-flex items-center gap-2 bg-[#FFF1F1] text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-[#981F1F]/20">
+            <FileText size={12} /> Legal
+          </span>
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#121212] mb-3">Terms of <span className="text-[#981F1F]">Use</span></h1>
+          <p className="text-[#555] text-sm">Last updated: {lastUpdated}</p>
+        </div>
+
+        <div className="bg-[#FFF1F1] border border-[#981F1F]/20 rounded-2xl p-6 mb-10">
+          <p className="text-[#555] text-sm leading-relaxed">
+            Please read these Terms of Use carefully before using the Perfect Classes platform. These terms constitute a legally binding agreement between you and Perfect Classes regarding your use of our website and services.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-6">
+          {sections.map((s, i) => (
+            <div key={i} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7">
+              <h2 className="text-lg font-bold text-[#121212] mb-4">{s.title}</h2>
+              <div className="text-sm text-[#555] leading-relaxed">
+                {s.content.split('\n').map((line, j) => {
+                  const trimmed = line.trim();
+                  if (trimmed.startsWith('•')) {
+                    return <p key={j} className="mb-1 pl-2">{trimmed}</p>;
+                  }
+                  if (trimmed === '') return <br key={j} />;
+                  return <p key={j} className="mb-2">{trimmed}</p>;
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <Link to="/" className="inline-flex items-center gap-2 bg-[#981F1F] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#7a1818] transition-colors shadow-lg">
+            <ArrowRight className="rotate-180" size={18} /> Back to Homepage
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── APP ─────────────────────────────────────────────────────────────────────
 
 export default function App() {
@@ -788,9 +1317,9 @@ export default function App() {
             <Route path="/results" element={<PagePlaceholder title="Our Hall of Fame" />} />
             <Route path="/about" element={<PagePlaceholder title="About Perfect Classes" />} />
             <Route path="/blog" element={<PagePlaceholder title="Latest Articles & Tips" />} />
-            <Route path="/contact" element={<PagePlaceholder title="Contact Support" />} />
-            <Route path="/privacy-policy" element={<PagePlaceholder title="Privacy Policy" />} />
-            <Route path="/terms-of-use" element={<PagePlaceholder title="Terms of Use" />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms-of-use" element={<TermsOfUsePage />} />
             <Route path="/subject/:subjectId" element={<PagePlaceholder title="Subject Details" />} />
           </Routes>
         </main>

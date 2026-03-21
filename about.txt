@@ -1,0 +1,29 @@
+Perfect Classes & Junior IAS: Master Brand Brain
+
+1. The Visionary: Vipin Sir's Origin Story
+- Academic & Professional Foundation: Vipin Sir holds both a B.Tech and an M.Tech in Aeronautical Engineering. He successfully cleared competitive exams to serve as an Aeronautical Engineer for the BSF, working in that prestigious role for two years.
+- The Pivot to Education: Driven by a genuine passion for teaching, he left his highly secure government position. He transitioned to teaching General Studies (GS) for UPSC aspirants at Drishti IAS, one of India's most elite coaching institutes in Delhi.
+- The Genesis of Perfect Classes: Realizing the desperate need for high-quality education at the grassroots level, he returned to his roots. On April 4, 2016, he founded Perfect Classes in Noorpur, starting with just 5 students in a small rented hall (costing ₹40,000/year).
+- Unprecedented Scale: Through pure word-of-mouth and exceptional teaching quality, the institute scaled massively, eventually accommodating 5,000 students at a time. While he briefly expanded with branches in Kanth, Dhanaura, and Chhajlet, he deliberately consolidated all operations back to Noorpur to maintain absolute, uncompromising control over teaching standards.
+1. The Track Record: The "Wall of Fame"
+The institute's success rate is a statistical anomaly for a town-based coaching center, proving their methodology works on a massive scale.
+- UP Police Constable Dominance: The institute achieved an incredible year-over-year growth curve in selections: from 150, to 200, to a record-breaking 350 selections in a single year. (Context for marketing: State-wide UP Police exams often see upwards of 4.8 million applicants for roughly 60,000 seats. Capturing 350 seats from one localized institute is a monumental achievement).
+- Super TET Success: Secured 125 government teacher selections in a single recruitment drive, effectively elevating 125 rural/semi-urban families into stable government careers.
+- Widespread Placements: Consistent, high-volume selections across SSC (CGL, GD, CPO), UPSI, Army, BSF, ITBP, and Steno exams.
+1. The Core Philosophy: Fixing the "Education Scam"
+After a decade of teaching, Vipin Sir identified a critical, systemic flaw in the Indian education system: the severe disconnect between academic schooling and competitive exam preparation.
+- The Problem: Schools force students to blindly cram PCM (Physics, Chemistry, Math) simply to pass 12th-grade board exams. They completely neglect the conceptual depth of General Studies (Humanities) found in NCERT books.
+- The Trap: After 12th grade, these same students are thrown into the competitive arena (UPSC, UP Police, NDA) where General Studies is actually the ultimate deciding factor.
+- Example: In the NDA exam (900 total marks), GS holds the highest weightage at 400 marks, compared to Math (300) and English (200).
+- The Result: Rural students are severely disadvantaged and forced to migrate to expensive coaching hubs like Delhi or Prayagraj to relearn the basic 6th-12th grade NCERT books they should have been taught properly in school.
+1. The Product & Solution: The "Junior IAS" Mission
+To combat this educational gap, Vipin Sir launched the "Junior IAS" program. It intervenes early to build an unshakable foundation for students while they are still in school (Class 6 to 12).
+- Accessibility Over Profit: The program is priced at a highly affordable ₹100 per month (₹1,200 per year) to ensure no rural or semi-urban family is priced out of quality education.
+- The Print Ecosystem (Custom Books): Vipin Sir has personally authored customized, pure NCERT-based study materials divided into two tiers: Tier 1 (Class 6-8) and Tier 2 (Class 9-12). These books strip away market "junk" and focus strictly on UPSC/State PCS level foundations.
+- The Digital Ecosystem (App/Website Test Series): The physical books are directly paired with a digital testing infrastructure. Students study the books, then log onto the app or website to take rigorous tests. Crucial USP: Every single question in the digital test series is explicitly covered in the customized physical books. ## 5. Grassroots Marketing: The 200-Village Mobile Tour
+Vipin Sir is taking the Junior IAS mission directly to the people via a massive, on-the-ground campaign.
+- The Vanity Van Headquarters: The team is modifying a vanity van to serve as their mobile headquarters and living space. They will sleep in the van to maximize their time and resources on the road.
+- The Target: A door-to-door, village-to-village tour covering exactly 200 villages.
+- The Objective: To sit directly with villagers, listen to the real educational problems parents and students are facing, and personally showcase how the "Junior IAS" program is the exact, affordable solution needed to secure their children's futures.
+1. Website UI/UX & Architecture Strategy
+To organize this massive print and digital ecosystem without confusing the user, the website’s Test Series section utilizes a clean, two-tier gallery-view filtering system.
