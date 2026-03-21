@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import {
   BookOpen, ChevronRight, ChevronLeft, Star, CheckCircle, Trophy,
   Users, Clock, Award, Phone, Mail, MapPin, ArrowRight, Menu, X,
-  FileText, Target, Layers, Zap, BarChart2, Shield
+  FileText, Target, Layers, Zap, BarChart2, Shield, Play
 } from 'lucide-react';
 import { Navbar as ResizableNav, NavBody, NavItems, MobileNav, NavbarLogo, NavbarButton, MobileNavHeader, MobileNavToggle, MobileNavMenu } from "@/components/ui/resizable-navbar";
 import { InteractiveGridPattern } from "@/registry/magicui/interactive-grid-pattern";
@@ -700,84 +700,180 @@ function WhyUs() {
   );
 }
 
+// Video testimonials — replace src with actual video URLs later
+const VIDEO_TESTIMONIALS = [
+  { id: 1, name: 'Rohit Kumar', tag: 'UP Police Selected', thumbnail: '/videos/thumb1.jpg', src: '' },
+  { id: 2, name: 'Priya Sharma', tag: 'Super TET Selected', thumbnail: '/videos/thumb2.jpg', src: '' },
+  { id: 3, name: 'Arun Singh', tag: 'NDA Cleared 2025', thumbnail: '/videos/thumb3.jpg', src: '' },
+  { id: 4, name: 'Kavita Devi', tag: 'Parent — Noorpur', thumbnail: '/videos/thumb4.jpg', src: '' },
+];
+
 function Testimonials() {
-  const firstRow = [...TESTIMONIALS, ...TESTIMONIALS].slice(0, 4);
-  const secondRow = [...TESTIMONIALS, ...TESTIMONIALS].slice(4, 8);
+  const [activeVideo, setActiveVideo] = useState(0);
+  const [activeText, setActiveText] = useState(0);
+
+  // Auto-rotate text testimonials
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveText(prev => (prev + 1) % TESTIMONIALS.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section className="py-24 bg-[#FAFAFA] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
-        
-        {/* Left Side: Header & Context */}
-        <div>
-          <span className="inline-flex items-center gap-2 bg-[#FFF1F1] text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+
+        {/* Top: Header Text */}
+        <div className="text-center mb-14">
+          <span className="inline-flex items-center gap-2 bg-[#FFF1F1] text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-[#981F1F]/20">
             <Star size={12} /> Student Reviews
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-3xl lg:text-5xl font-extrabold text-[#121212] leading-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#121212] leading-tight mb-4">
             Unki Kahani, <span className="text-[#981F1F]">Apni Zubaani.</span>
           </h2>
-          <p className="text-[#555] text-lg leading-relaxed mb-8 max-w-lg">
-            From small towns to government jobs — these are real students and parents from Noorpur and nearby villages who trusted Vipin Sir's system.
+          <p className="text-[#555] text-lg leading-relaxed max-w-2xl mx-auto">
+            From small towns to government jobs — real students and parents from Noorpur and nearby villages who trusted Vipin Sir's system.
           </p>
-          <div className="flex items-center gap-4">
-            <div className="flex -space-x-3">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="w-12 h-12 rounded-full border-4 border-white bg-gray-200" />
-              ))}
-            </div>
-            <div>
-              <div className="flex gap-1 mb-1">
-                {[...Array(5)].map((_, i) => <Star key={i} size={16} className="fill-[#FDB813] text-[#FDB813]" />)}
-              </div>
-              <p className="font-bold text-sm text-[#121212]">Trusted by 5,000+ families</p>
-            </div>
-          </div>
         </div>
 
-        {/* Right Side: Animated Vertical Marquee */}
-        <div className="relative flex h-[400px] sm:h-[500px] lg:h-[600px] w-full flex-row items-center justify-center overflow-hidden [perspective:1000px] [transform-style:preserve-3d]">
-          <div className="absolute inset-y-0 left-0 w-full md:w-1/2 flex flex-col items-center px-2">
-            <Marquee pauseOnHover vertical className="[--duration:30s] [--gap:1.5rem]" style={{"--gap": "1.5rem"} as React.CSSProperties}>
-              {firstRow.map((t, i) => (
-                <div key={`col1-${i}`} className="w-full max-w-sm lg:w-80 cursor-pointer overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex flex-row items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[#FFF1F1] text-[#981F1F] font-bold text-lg shrink-0">{t.avatar}</div>
-                    <div className="flex flex-col">
-                      <figcaption className="text-base font-bold text-[#121212]">{t.name}</figcaption>
-                      <p className="text-xs font-bold text-[#FDB813]">{t.tag}</p>
-                    </div>
+        {/* Bottom: Video Slider (Left) + Text Testimonials (Right) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+
+          {/* Left: Video Slider */}
+          <div>
+            {/* Main Video Player */}
+            <div className="relative aspect-[9/16] sm:aspect-video max-h-[450px] bg-[#121212] rounded-2xl overflow-hidden shadow-xl border border-gray-200">
+              {VIDEO_TESTIMONIALS[activeVideo].src ? (
+                <video
+                  key={activeVideo}
+                  src={VIDEO_TESTIMONIALS[activeVideo].src}
+                  className="w-full h-full object-cover"
+                  controls
+                  autoPlay
+                  muted
+                />
+              ) : (
+                /* Placeholder until videos are provided */
+                <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#121212] to-[#2a2a2a]">
+                  <div className="w-20 h-20 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center mb-4 hover:bg-white/20 transition-colors cursor-pointer">
+                    <Play size={32} className="text-white ml-1" />
                   </div>
-                  <div className="flex gap-1 mb-3">
-                    {[...Array(t.stars)].map((_, idx) => <Star key={idx} size={14} className="fill-[#FDB813] text-[#FDB813]" />)}
-                  </div>
-                  <blockquote className="mt-2 text-sm text-[#555] italic leading-relaxed">{t.text}</blockquote>
+                  <p className="text-white font-bold text-lg">{VIDEO_TESTIMONIALS[activeVideo].name}</p>
+                  <p className="text-[#FDB813] text-sm font-semibold">{VIDEO_TESTIMONIALS[activeVideo].tag}</p>
+                  <p className="text-white/40 text-xs mt-3">Video coming soon</p>
                 </div>
-              ))}
-            </Marquee>
-          </div>
-          
-          <div className="absolute inset-y-0 right-0 hidden md:flex w-1/2 flex-col items-center pt-16 lg:pt-24 px-2">
-            <Marquee reverse pauseOnHover vertical className="[--duration:35s] [--gap:1.5rem]" style={{"--gap": "1.5rem"} as React.CSSProperties}>
-              {secondRow.map((t, i) => (
-                <div key={`col2-${i}`} className="w-full max-w-sm lg:w-80 cursor-pointer overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex flex-row items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[#FFF1F1] text-[#981F1F] font-bold text-lg shrink-0">{t.avatar}</div>
-                    <div className="flex flex-col">
-                      <figcaption className="text-base font-bold text-[#121212]">{t.name}</figcaption>
-                      <p className="text-xs font-bold text-[#FDB813]">{t.tag}</p>
-                    </div>
+              )}
+            </div>
+
+            {/* Video Thumbnail Strip */}
+            <div className="flex gap-3 mt-4 overflow-x-auto pb-2">
+              {VIDEO_TESTIMONIALS.map((v, i) => (
+                <button
+                  key={v.id}
+                  onClick={() => setActiveVideo(i)}
+                  className={`relative flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
+                    activeVideo === i
+                      ? 'border-[#981F1F] shadow-lg scale-105'
+                      : 'border-gray-200 opacity-60 hover:opacity-100'
+                  }`}
+                >
+                  <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex flex-col items-center justify-center">
+                    <Play size={14} className="text-[#981F1F] mb-0.5" />
+                    <span className="text-[8px] font-bold text-[#333] text-center leading-tight px-1">{v.name.split(' ')[0]}</span>
                   </div>
-                  <div className="flex gap-1 mb-3">
-                    {[...Array(t.stars)].map((_, idx) => <Star key={idx} size={14} className="fill-[#FDB813] text-[#FDB813]" />)}
-                  </div>
-                  <blockquote className="mt-2 text-sm text-[#555] italic leading-relaxed">{t.text}</blockquote>
-                </div>
+                  {activeVideo === i && (
+                    <div className="absolute inset-x-0 bottom-0 h-1 bg-[#981F1F]" />
+                  )}
+                </button>
               ))}
-            </Marquee>
+            </div>
           </div>
 
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-[#FAFAFA] to-transparent z-10"></div>
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#FAFAFA] to-transparent z-10"></div>
+          {/* Right: Text Testimonials Slider */}
+          <div className="flex flex-col">
+            {/* Active Testimonial Card */}
+            <div className="relative min-h-[320px] sm:min-h-[350px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeText}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.4 }}
+                  className="bg-white rounded-2xl border border-gray-100 shadow-md p-8 sm:p-10"
+                >
+                  {/* Quote mark */}
+                  <div className="text-[#981F1F]/10 text-8xl font-serif leading-none mb-2 -mt-4">"</div>
+
+                  <blockquote className="text-lg sm:text-xl text-[#333] leading-relaxed mb-8 -mt-6 italic">
+                    {TESTIMONIALS[activeText].text}
+                  </blockquote>
+
+                  <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 rounded-full flex items-center justify-center bg-[#FFF1F1] text-[#981F1F] font-bold text-xl shrink-0">
+                      {TESTIMONIALS[activeText].avatar}
+                    </div>
+                    <div>
+                      <p className="font-bold text-[#121212] text-lg">{TESTIMONIALS[activeText].name}</p>
+                      <p className="text-sm font-semibold text-[#FDB813]">{TESTIMONIALS[activeText].tag}</p>
+                    </div>
+                    <div className="ml-auto flex gap-1">
+                      {[...Array(TESTIMONIALS[activeText].stars)].map((_, idx) => (
+                        <Star key={idx} size={16} className="fill-[#FDB813] text-[#FDB813]" />
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Navigation Dots + Arrows */}
+            <div className="flex items-center justify-between mt-6">
+              <div className="flex gap-2">
+                {TESTIMONIALS.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveText(i)}
+                    className={`transition-all duration-300 rounded-full ${
+                      activeText === i
+                        ? 'w-8 h-3 bg-[#981F1F]'
+                        : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
+                    }`}
+                  />
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setActiveText(prev => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
+                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-[#981F1F] hover:text-white hover:border-[#981F1F] text-[#555] transition-all"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <button
+                  onClick={() => setActiveText(prev => (prev + 1) % TESTIMONIALS.length)}
+                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-[#981F1F] hover:text-white hover:border-[#981F1F] text-[#555] transition-all"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+            </div>
+
+            {/* Trust Badge */}
+            <div className="flex items-center gap-4 mt-8 pt-6 border-t border-gray-100">
+              <div className="flex -space-x-2">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="w-10 h-10 rounded-full border-3 border-white bg-gray-200" />
+                ))}
+              </div>
+              <div>
+                <div className="flex gap-0.5 mb-0.5">
+                  {[...Array(5)].map((_, i) => <Star key={i} size={14} className="fill-[#FDB813] text-[#FDB813]" />)}
+                </div>
+                <p className="font-bold text-sm text-[#121212]">Trusted by 5,000+ families</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
