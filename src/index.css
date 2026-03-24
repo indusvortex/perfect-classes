@@ -76,6 +76,28 @@ html {
   display: none;
 }
 
+/* Orbit animations */
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes orbit-spin-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+.animate-orbit {
+  animation: orbit-spin 25s linear infinite;
+}
+.animate-orbit-reverse {
+  animation: orbit-spin-reverse 25s linear infinite;
+}
+
+/* Journey road animation */
+@keyframes roadMove {
+  0% { left: -8px; }
+  100% { left: calc(100% + 8px); }
+}
+
 /* Card shadow utilities */
 .shadow-card {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
