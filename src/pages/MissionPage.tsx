@@ -1,18 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
-import { MapPin, Phone, ArrowRight } from 'lucide-react';
-
-// Language context - TODO: Extract to @/i18n/context or similar
-type Lang = 'en' | 'hi';
-const LangContext = React.createContext<{ lang: Lang; setLang: (l: Lang) => void }>({ lang: 'en', setLang: () => {} });
-function useLang() { return React.useContext(LangContext); }
-export { LangContext, useLang };
+import { motion, AnimatePresence } from 'motion/react';
+import { MapPin, Phone, ArrowRight, Check, X } from 'lucide-react';
+import { useLang } from '@/i18n/translations';
 
 // Helper component
 /* ── Meet Vipin Sir — WebVeda-style: text left, cycling photo right ── */
 function VipinSirSection({ lang }: { lang: string }) {
   const [photoIdx, setPhotoIdx] = useState(0);
+  const [imageError, setImageError] = useState(false);
   const photos = ['/hero/vipin-sir-1.png', '/hero/vipin-sir-2.png', '/hero/vipin-sir-3.png'];
 
   useEffect(() => {
@@ -21,21 +17,102 @@ function VipinSirSection({ lang }: { lang: string }) {
   }, [photos.length]);
 
   return (
-    <section className="relative py-20 sm:py-28 bg-[#FFF8F0] overflow-hidden">
+    <section id="vipin-sir" className="relative py-12 sm:py-20 md:py-28 bg-[#FFF8F0] overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+        {/* Mobile: Photo on top, text below */}
+        <div className="lg:hidden flex flex-col items-center text-center">
+          {/* Mobile Photo - Large portrait */}
+          <motion.div initial={{ opacity: 0, y: -20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="w-full max-w-sm mb-6">
+            {/* Mobile blob photo */}
+            <div className="relative flex justify-center items-end mx-auto" style={{ width: 280, height: 340 }}>
+              <motion.div className="absolute" style={{ width: 240, height: 240, top: 20, left: 20 }}
+                animate={{ rotate: [0, 6, 0, -6, 0] }} transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1 }}>
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                  <path fill="#FDB813" opacity="0.25" d="M42.7,-65.3C54.6,-56.1,62.8,-42.4,67.3,-27.7C71.8,-13,72.5,2.7,68.4,16.8C64.3,30.9,55.4,43.4,43.5,52.5C31.6,61.6,16.8,67.3,0.8,66.2C-15.2,65.1,-30.4,57.2,-43.1,47C-55.8,36.7,-66.1,24,-70,9.3C-73.9,-5.4,-71.4,-22.1,-63.2,-35.3C-55,-48.5,-41.1,-58.2,-27,-63.5C-12.9,-68.8,1.4,-69.7,15.6,-67.1C29.8,-64.5,30.8,-74.5,42.7,-65.3Z" transform="translate(100 100)" />
+                </svg>
+              </motion.div>
+              <motion.div className="absolute" style={{ width: 260, height: 260, top: 10, left: 5 }}
+                animate={{ rotate: [0, -8, 0, 8, 0] }} transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}>
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                  <path fill="#981F1F" opacity="0.18" d="M47.4,-71.4C59.7,-62.3,67,-46.1,71.9,-29.5C76.8,-12.9,79.2,4.1,74.7,18.9C70.2,33.7,58.9,46.3,45.5,55.7C32.1,65.1,16,71.2,-0.9,72.5C-17.8,73.8,-35.6,70.4,-49.1,61.1C-62.5,51.8,-71.7,36.7,-75.2,20.3C-78.7,3.9,-76.6,-13.8,-69.7,-29.1C-62.8,-44.4,-51.2,-57.3,-37.5,-66.2C-23.8,-75.1,-7.9,-80.1,7.2,-79.2C22.3,-78.3,35.1,-80.5,47.4,-71.4Z" transform="translate(100 100)" />
+                </svg>
+              </motion.div>
+              <div className="relative z-10 w-full flex justify-center items-end" style={{ height: 340 }}>
+                <AnimatePresence mode="wait">
+                  <motion.img key={photoIdx} src={photos[photoIdx]} alt="Vipin Sir"
+                    className="object-contain object-bottom drop-shadow-2xl"
+                    style={{ maxHeight: 340, maxWidth: 240 }}
+                    initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.55 }} onError={() => setImageError(true)} />
+                </AnimatePresence>
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 pb-1">
+                {photos.map((_, i) => (
+                  <button key={i} onClick={() => setPhotoIdx(i)}
+                    className={`h-2 rounded-full transition-all duration-300 ${i === photoIdx ? 'bg-[#981F1F] w-6' : 'bg-[#D4C5A9] w-2'}`} />
+                ))}
+              </div>
+            </div>
+          </motion.div>
 
-          {/* Left — About text */}
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="lg:w-[55%]">
-            <span className="inline-block bg-[#981F1F]/10 text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-5 border border-[#981F1F]/20">
+          {/* Mobile Text */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <span className="inline-block bg-[#981F1F]/10 text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-[#981F1F]/20">
               {lang === 'hi' ? 'संस्थापक से मिलें' : 'Meet Our Founder'}
             </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#2A1810] leading-tight mb-6">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#2A1810] leading-tight mb-4">
               {lang === 'hi' ? 'मिलिए ' : 'Meet '}<span className="text-[#981F1F]">{lang === 'hi' ? 'विपिन सर' : 'Vipin Sir'}</span>
             </h2>
 
-            <div className="space-y-4 text-[#5A4A3A] text-base sm:text-lg leading-relaxed">
+            <div className="space-y-3 text-[#5A4A3A] text-sm leading-relaxed text-left max-w-lg mx-auto">
+              <p>
+                {lang === 'hi'
+                  ? 'एक इंजीनियर जिसने सरकारी नौकरी और दिल्ली का करियर छोड़कर अपने गाँव नूरपुर लौटने का फ़ैसला किया — सिर्फ़ इसलिए कि गाँव के बच्चों को वही शिक्षा मिले जो शहर के बच्चों को मिलती है।'
+                  : 'An engineer who walked away from a government career and the bright lights of Delhi to return to his village Noorpur — because he believed every child in rural India deserves the same quality of education that city kids get.'}
+              </p>
+              <p>
+                {lang === 'hi'
+                  ? '2016 में 5 छात्रों और एक छोटे हॉल से शुरुआत किया। आज 5,000+ छात्र, 350+ सरकारी चयन, और 4 ज़िलों में शाखाएँ — सब कुछ बिना किसी विज्ञापन के, सिर्फ़ ज़ुबानी प्रचार से।'
+                  : 'Started in 2016 with 5 students and a rented hall. Today — 5,000+ students, 350+ government selections, branches across 4 districts. All through word-of-mouth alone. Zero advertising.'}
+              </p>
+              <p className="font-semibold text-[#2A1810]">
+                {lang === 'hi'
+                  ? 'अब मिशन है 200 गाँवों तक पहुँचना। ₹100/महीना। कोई बहाना नहीं, कोई बच्चा पीछे नहीं।'
+                  : 'Now on a mission to reach 200 villages. ₹100/month. No excuses, no child left behind.'}
+              </p>
+            </div>
+
+            {/* Social links */}
+            <div className="mt-6 flex flex-wrap justify-center items-center gap-3">
+              {[
+                { label: 'YouTube', href: 'https://youtube.com/channel/UC5axZEqn8or1vnIBBQAN6XA', icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg> },
+                { label: 'Instagram', href: 'https://www.instagram.com/vipinkumarposwal', icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.97.24 2.44.41.61.24 1.05.52 1.51.98.46.46.74.9.98 1.51.17.47.36 1.27.41 2.44.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.44a4.07 4.07 0 0 1-.98 1.51c-.46.46-.9.74-1.51.98-.47.17-1.27.36-2.44.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.97-.24-2.44-.41a4.07 4.07 0 0 1-1.51-.98 4.07 4.07 0 0 1-.98-1.51c-.17-.47-.36-1.27-.41-2.44C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.24-1.97.41-2.44.24-.61.52-1.05.98-1.51.46-.46.9-.74 1.51-.98.47-.17 1.27-.36 2.44-.41C8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.77 5.77 0 0 0-2.09 1.36A5.77 5.77 0 0 0 .69 4.08C.39 4.84.19 5.72.13 6.99.07 8.27.06 8.68.06 11.94s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.72 1.47 1.36 2.09.62.64 1.29 1.05 2.09 1.36.76.3 1.64.5 2.91.56 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.77 5.77 0 0 0 2.09-1.36 5.77 5.77 0 0 0 1.36-2.09c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.77 5.77 0 0 0-1.36-2.09A5.77 5.77 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.85-10.4a1.44 1.44 0 1 0-2.88 0 1.44 1.44 0 0 0 2.88 0z"/></svg> },
+                { label: 'Facebook', href: 'https://facebook.com/Vipinkumarsheelaram', icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07c0 6.02 4.39 11.02 10.13 11.93v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.33l-.53 3.49h-2.8v8.44C19.61 23.09 24 18.09 24 12.07z"/></svg> },
+              ].map((s, i) => (
+                <a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-white border border-gray-200 text-[#2A1810] text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#981F1F] hover:text-white hover:border-[#981F1F] transition-all shadow-sm">
+                  {s.icon} {s.label}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Desktop: Side by side */}
+        <div className="hidden lg:flex flex-row items-center gap-20">
+
+          {/* Left — About text */}
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+            className="w-[55%]">
+            <span className="inline-block bg-[#981F1F]/10 text-[#981F1F] text-[9px] sm:text-xs font-bold px-2 py-0.5 sm:px-4 sm:py-1.5 rounded-full uppercase tracking-wider mb-2 sm:mb-3 md:mb-5 border border-[#981F1F]/20">
+              {lang === 'hi' ? 'संस्थापक से मिलें' : 'Meet Our Founder'}
+            </span>
+            <h2 className="text-base sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#2A1810] leading-tight mb-2 sm:mb-4 md:mb-6">
+              {lang === 'hi' ? 'मिलिए ' : 'Meet '}<span className="text-[#981F1F]">{lang === 'hi' ? 'विपिन सर' : 'Vipin Sir'}</span>
+            </h2>
+
+            <div className="space-y-1.5 sm:space-y-3 md:space-y-4 text-[#5A4A3A] text-[10px] sm:text-sm md:text-base lg:text-lg leading-relaxed">
               <p>
                 {lang === 'hi'
                   ? 'एक इंजीनियर जिसने सरकारी नौकरी और दिल्ली का करियर छोड़कर अपने गाँव नूरपुर लौटने का फ़ैसला किया — सिर्फ़ इसलिए कि गाँव के बच्चों को वही शिक्षा मिले जो शहर के बच्चों को मिलती है।'
@@ -54,47 +131,54 @@ function VipinSirSection({ lang }: { lang: string }) {
             </div>
 
             {/* Social links */}
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-2 sm:mt-6 md:mt-8 flex flex-wrap items-center gap-1.5 sm:gap-2 md:gap-3">
               {[
-                { label: 'YouTube', href: 'https://youtube.com/@perfectclassesnoorpur', icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg> },
-                { label: 'Instagram', href: 'https://instagram.com/perfectclassesnoorpur', icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.97.24 2.44.41.61.24 1.05.52 1.51.98.46.46.74.9.98 1.51.17.47.36 1.27.41 2.44.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.44a4.07 4.07 0 0 1-.98 1.51c-.46.46-.9.74-1.51.98-.47.17-1.27.36-2.44.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.97-.24-2.44-.41a4.07 4.07 0 0 1-1.51-.98 4.07 4.07 0 0 1-.98-1.51c-.17-.47-.36-1.27-.41-2.44C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.24-1.97.41-2.44.24-.61.52-1.05.98-1.51.46-.46.9-.74 1.51-.98.47-.17 1.27-.36 2.44-.41C8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.77 5.77 0 0 0-2.09 1.36A5.77 5.77 0 0 0 .69 4.08C.39 4.84.19 5.72.13 6.99.07 8.27.06 8.68.06 11.94s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.72 1.47 1.36 2.09.62.64 1.29 1.05 2.09 1.36.76.3 1.64.5 2.91.56 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.77 5.77 0 0 0 2.09-1.36 5.77 5.77 0 0 0 1.36-2.09c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.77 5.77 0 0 0-1.36-2.09A5.77 5.77 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.85-10.4a1.44 1.44 0 1 0-2.88 0 1.44 1.44 0 0 0 2.88 0z"/></svg> },
-                { label: 'Facebook', href: 'https://facebook.com/perfectclassesnoorpur', icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07c0 6.02 4.39 11.02 10.13 11.93v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.33l-.53 3.49h-2.8v8.44C19.61 23.09 24 18.09 24 12.07z"/></svg> },
+                { label: 'YouTube', href: 'https://youtube.com/channel/UC5axZEqn8or1vnIBBQAN6XA', icon: <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg> },
+                { label: 'Instagram', href: 'https://www.instagram.com/vipinkumarposwal', icon: <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.97.24 2.44.41.61.24 1.05.52 1.51.98.46.46.74.9.98 1.51.17.47.36 1.27.41 2.44.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.44a4.07 4.07 0 0 1-.98 1.51c-.46.46-.9.74-1.51.98-.47.17-1.27.36-2.44.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.97-.24-2.44-.41a4.07 4.07 0 0 1-1.51-.98 4.07 4.07 0 0 1-.98-1.51c-.17-.47-.36-1.27-.41-2.44C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.24-1.97.41-2.44.24-.61.52-1.05.98-1.51.46-.46.9-.74 1.51-.98.47-.17 1.27-.36 2.44-.41C8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.77 5.77 0 0 0-2.09 1.36A5.77 5.77 0 0 0 .69 4.08C.39 4.84.19 5.72.13 6.99.07 8.27.06 8.68.06 11.94s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.72 1.47 1.36 2.09.62.64 1.29 1.05 2.09 1.36.76.3 1.64.5 2.91.56 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.77 5.77 0 0 0 2.09-1.36 5.77 5.77 0 0 0 1.36-2.09c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.77 5.77 0 0 0-1.36-2.09A5.77 5.77 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.85-10.4a1.44 1.44 0 1 0-2.88 0 1.44 1.44 0 0 0 2.88 0z"/></svg> },
+                { label: 'Facebook', href: 'https://facebook.com/Vipinkumarsheelaram', icon: <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07c0 6.02 4.39 11.02 10.13 11.93v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.33l-.53 3.49h-2.8v8.44C19.61 23.09 24 18.09 24 12.07z"/></svg> },
               ].map((s, i) => (
                 <a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-white border border-gray-200 text-[#2A1810] text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#981F1F] hover:text-white hover:border-[#981F1F] transition-all shadow-sm">
-                  {s.icon} {s.label}
+                  className="inline-flex items-center gap-1 sm:gap-1.5 md:gap-2 bg-white border border-gray-200 text-[#2A1810] text-[8px] sm:text-[10px] md:text-sm font-semibold px-1.5 py-1 sm:px-2 sm:py-1.5 md:px-4 md:py-2.5 rounded-md sm:rounded-lg md:rounded-xl hover:bg-[#981F1F] hover:text-white hover:border-[#981F1F] transition-all shadow-sm">
+                  {s.icon}
+                  <span className="hidden sm:inline">{s.label}</span>
                 </a>
               ))}
             </div>
           </motion.div>
 
-          {/* Right — Cycling photo */}
+          {/* Right — Photo on organic blob */}
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="lg:w-[45%] flex justify-center">
-            <div className="relative">
-              {/* Decorative blob behind photo */}
-              <div className="absolute -inset-6 bg-gradient-to-br from-[#981F1F]/10 to-[#FDB813]/10 rounded-[3rem] -rotate-3" />
-
-              <div className="relative w-72 sm:w-80 md:w-96 aspect-[3/4] rounded-2xl overflow-hidden bg-gradient-to-b from-[#F5ECD7] to-[#E8DCC4] shadow-2xl">
+            className="w-[42%] sm:w-[40%] lg:w-[45%] flex justify-center">
+            <div className="relative flex justify-center items-end" style={{ width: 340, height: 420 }}>
+              {/* Gold blob */}
+              <motion.div className="absolute" style={{ width: 300, height: 300, top: 30, left: 30 }}
+                animate={{ rotate: [0, 6, 0, -6, 0] }} transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1 }}>
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                  <path fill="#FDB813" opacity="0.25" d="M42.7,-65.3C54.6,-56.1,62.8,-42.4,67.3,-27.7C71.8,-13,72.5,2.7,68.4,16.8C64.3,30.9,55.4,43.4,43.5,52.5C31.6,61.6,16.8,67.3,0.8,66.2C-15.2,65.1,-30.4,57.2,-43.1,47C-55.8,36.7,-66.1,24,-70,9.3C-73.9,-5.4,-71.4,-22.1,-63.2,-35.3C-55,-48.5,-41.1,-58.2,-27,-63.5C-12.9,-68.8,1.4,-69.7,15.6,-67.1C29.8,-64.5,30.8,-74.5,42.7,-65.3Z" transform="translate(100 100)" />
+                </svg>
+              </motion.div>
+              {/* Red blob */}
+              <motion.div className="absolute" style={{ width: 320, height: 320, top: 20, left: 10 }}
+                animate={{ rotate: [0, -8, 0, 8, 0] }} transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}>
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                  <path fill="#981F1F" opacity="0.18" d="M47.4,-71.4C59.7,-62.3,67,-46.1,71.9,-29.5C76.8,-12.9,79.2,4.1,74.7,18.9C70.2,33.7,58.9,46.3,45.5,55.7C32.1,65.1,16,71.2,-0.9,72.5C-17.8,73.8,-35.6,70.4,-49.1,61.1C-62.5,51.8,-71.7,36.7,-75.2,20.3C-78.7,3.9,-76.6,-13.8,-69.7,-29.1C-62.8,-44.4,-51.2,-57.3,-37.5,-66.2C-23.8,-75.1,-7.9,-80.1,7.2,-79.2C22.3,-78.3,35.1,-80.5,47.4,-71.4Z" transform="translate(100 100)" />
+                </svg>
+              </motion.div>
+              {/* Photo — no box, floats over blobs */}
+              <div className="relative z-10 w-full flex justify-center items-end" style={{ height: 420 }}>
                 <AnimatePresence mode="wait">
-                  <motion.img
-                    key={photoIdx}
-                    src={photos[photoIdx]}
-                    alt="Vipin Sir"
-                    className="absolute inset-0 w-full h-full object-contain object-bottom"
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.6 }}
-                  />
+                  <motion.img key={photoIdx} src={photos[photoIdx]} alt="Vipin Sir"
+                    className="object-contain object-bottom drop-shadow-2xl"
+                    style={{ maxHeight: 420, maxWidth: 300 }}
+                    initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.55 }} onError={() => setImageError(true)} />
                 </AnimatePresence>
               </div>
-
-              {/* Photo dots */}
-              <div className="flex justify-center gap-2 mt-4">
+              {/* Dots */}
+              <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 pb-1">
                 {photos.map((_, i) => (
                   <button key={i} onClick={() => setPhotoIdx(i)}
-                    className={`h-2 rounded-full transition-all duration-300 ${i === photoIdx ? 'bg-[#981F1F] w-6' : 'bg-[#D4C5A9] w-2'}`} />
+                    className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 ${i === photoIdx ? 'bg-[#981F1F] w-4 sm:w-6' : 'bg-[#D4C5A9] w-1.5 sm:w-2'}`} />
                 ))}
               </div>
             </div>
@@ -129,7 +213,7 @@ function MissionPage() {
     <div className="bg-[#FFF8F0] overflow-hidden">
 
       {/* ── Hero — Dark with map ── */}
-      <section className="relative bg-[#0A0A0A] pt-28 pb-32 sm:pt-32 sm:pb-40 overflow-hidden min-h-[85vh] flex items-center">
+      <section className="relative bg-[#0A0A0A] pt-20 pb-16 sm:pt-32 sm:pb-40 overflow-hidden min-h-[70vh] sm:min-h-[85vh] flex items-center">
         {/* Topography texture background */}
         <div className="absolute inset-0" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23981F1F' stroke-width='1'%3E%3Cpath d='M0 0h80v80H0z'/%3E%3Cpath d='M14 16H9v-2h5V9.87a4 4 0 1 1 2 0V14h5v2h-5v15.95A10 10 0 0 0 23.66 27l-3.46-2 8.2-2.2-2.9 5a12 12 0 0 1-21 0l-2.89-5 8.2 2.2-3.47 2A10 10 0 0 0 14 31.95V16zm40 40h-5v-2h5v-4.13a4 4 0 1 1 2 0V54h5v2h-5v15.95A10 10 0 0 0 63.66 67l-3.47-2 8.2-2.2-2.88 5a12 12 0 0 1-21.02 0l-2.88-5 8.2 2.2-3.47 2A10 10 0 0 0 54 71.95V56zm-39 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm40-40a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM15 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm40 40a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'/%3E%3C/g%3E%3C/svg%3E")`,
@@ -154,38 +238,24 @@ function MissionPage() {
               </span>
             </motion.div>
             <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-extrabold text-white leading-[1.05] mb-6">
+              className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-extrabold text-white leading-[1.05] mb-4 sm:mb-6">
               {lang === 'hi' ? 'हर गाँव को' : 'Every Village'}<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FDB813] via-orange-400 to-[#981F1F]">
                 {lang === 'hi' ? 'मौक़ा मिलेगा।' : 'Deserves a Chance.'}
               </span>
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-white/50 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-10">
+              className="text-white/50 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-6 sm:mb-10">
               {lang === 'hi'
                 ? 'एक शिक्षक जो ख़ुद 200 गाँवों में जा रहा है — ताकि किसी बच्चे को पढ़ाई के लिए शहर न जाना पड़े। सब कुछ सिर्फ़ ₹100/महीना में।'
                 : 'One teacher. 200 villages. A promise that no child should have to leave home to get a world-class education. All for just ₹100/month.'}
             </motion.p>
 
-            {/* Stats bar */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.45 }}
-              className="flex flex-wrap justify-center gap-6 sm:gap-12 mb-10">
-              {[
-                { val: '200', label: lang === 'hi' ? 'गाँव' : 'Villages' },
-                { val: '₹100', label: lang === 'hi' ? '/महीना' : '/Month' },
-                { val: '7', label: lang === 'hi' ? 'क्लास' : 'Classes' },
-                { val: '5000+', label: lang === 'hi' ? 'छात्र' : 'Students' },
-              ].map((s, i) => (
-                <div key={i} className="text-center">
-                  <div className="text-[#FDB813] font-extrabold text-2xl sm:text-3xl">{s.val}</div>
-                  <div className="text-white/30 text-xs font-semibold uppercase tracking-wider mt-0.5">{s.label}</div>
-                </div>
-              ))}
-            </motion.div>
+            {/* Stats bar - REMOVED */}
 
             {/* CTAs */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.55 }}
-              className="flex flex-wrap justify-center gap-4">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.45 }}
+              className="flex flex-wrap justify-center gap-3 sm:gap-4">
               <Link to="/#test-series" className="inline-flex bg-gradient-to-r from-[#981F1F] to-[#7A1818] text-white font-bold px-8 py-4 rounded-xl items-center gap-2 transition-all shadow-lg hover:shadow-2xl hover:-translate-y-0.5 text-sm sm:text-base">
                 {lang === 'hi' ? 'अभी जुड़ें' : 'Join the Mission'} <ArrowRight size={18} />
               </Link>
@@ -202,10 +272,7 @@ function MissionPage() {
       <VipinSirSection lang={lang} />
 
       {/* ── Problem vs Solution — Torn paper pinboard style ── */}
-      <section className="relative py-16 sm:py-24 overflow-hidden">
-        <MapBg />
-        {/* Warm background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FFF8F0] via-[#FBF3E4] to-[#FFF8F0]" />
+      <section className="relative py-10 sm:py-16 md:py-24 overflow-hidden bg-gradient-to-b from-[#FFF8F0] via-[#FBF3E4] to-[#FFF8F0]">
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-12">
@@ -220,11 +287,6 @@ function MissionPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 relative">
-            {/* Red thread connecting the two sides */}
-            <svg className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none hidden md:block" viewBox="0 0 800 500">
-              <path d="M380,80 Q400,250 380,420" stroke="#C41E1E" strokeWidth="1.5" fill="none" opacity="0.25" strokeDasharray="6 4" />
-              <circle cx="400" cy="250" r="4" fill="#C41E1E" opacity="0.3" />
-            </svg>
 
             {/* Left — What Schools Do (torn paper note) */}
             <motion.div initial={{ opacity: 0, x: -30, rotate: -1 }} whileInView={{ opacity: 1, x: 0, rotate: -1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
@@ -260,7 +322,6 @@ function MissionPage() {
             {/* Right — What Junior IAS Does (torn paper note) */}
             <motion.div initial={{ opacity: 0, x: 30, rotate: 1.5 }} whileInView={{ opacity: 1, x: 0, rotate: 1.5 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
               className="relative bg-[#F5ECD7] rounded-sm p-7 sm:p-9 shadow-xl" style={{ clipPath: 'polygon(0.5% 0.5%, 99.5% 0%, 100% 99.5%, 0% 100%)' }}>
-              <div className="absolute top-0.5 right-[37px] w-1 h-4 bg-red-800/50" />
 
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
@@ -291,9 +352,7 @@ function MissionPage() {
       </section>
 
       {/* ── Three Pillars — Pinboard cards with red pins ── */}
-      <section className="py-20 sm:py-28 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FBF3E4] to-[#FFF8F0]" />
-        <MapBg />
+      <section className="py-20 sm:py-28 relative overflow-hidden bg-[#FFF8F0]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-16">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
@@ -352,40 +411,27 @@ function MissionPage() {
         </div>
       </section>
 
-      {/* ── The Journey — Pinboard with red thread timeline ── */}
-      <section className="py-20 sm:py-28 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FFF8F0] via-[#F8EDD8] to-[#FFF8F0]" />
-        <MapBg />
+      {/* ── The Journey — Clean timeline without pins ── */}
+      <section className="py-20 sm:py-28 relative overflow-hidden bg-[#FFF8F0]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-16">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <span className="inline-block bg-[#981F1F]/10 text-[#981F1F] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-[#981F1F]/20">
-                {lang === 'hi' ? 'एक सफ़र' : 'The Journey'}
+                {lang === 'hi' ? 'विपिन सर की यात्रा' : 'Vipin Sir\'s Journey'}
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#2A1810] leading-tight">
-                {lang === 'hi' ? 'सड़क जो' : 'The Road That'} <span className="text-[#981F1F]">{lang === 'hi' ? 'यहाँ तक लाई' : 'Led Here'}</span>
+                {lang === 'hi' ? 'इंजीनियर से' : 'From Engineer to'} <span className="text-[#981F1F]">{lang === 'hi' ? 'शिक्षक तक' : 'Educator'}</span>
               </h2>
               <p className="text-[#5A4A3A] mt-3 text-base max-w-lg mx-auto">
-                {lang === 'hi' ? 'BSF इंजीनियर से 200 गाँवों के मिशन तक — हर मोड़ पर एक कहानी।' : 'From BSF engineer to a 200-village mission — a story at every turn.'}
+                {lang === 'hi' ? 'BSF से शुरू करके 200 गाँवों तक — हर कदम एक कहानी।' : 'From BSF to 200 villages — every step tells a story.'}
               </p>
             </motion.div>
           </div>
 
-          {/* Timeline with red thread and pinned notes */}
+          {/* Clean Modern Timeline */}
           <div className="relative">
-            {/* Red thread center line — desktop */}
-            <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 hidden sm:block">
-              <svg className="w-4 h-full" viewBox="0 0 10 1000" preserveAspectRatio="none">
-                <path d="M5,0 Q8,100 3,200 Q-1,300 7,400 Q10,500 4,600 Q0,700 6,800 Q9,900 5,1000" stroke="#C41E1E" strokeWidth="1.5" fill="none" opacity="0.35" />
-              </svg>
-            </div>
-
-            {/* Mobile: simple red thread left */}
-            <div className="absolute left-6 top-0 bottom-0 sm:hidden">
-              <svg className="w-2 h-full" viewBox="0 0 4 1000" preserveAspectRatio="none">
-                <path d="M2,0 Q4,100 1,200 Q-1,300 3,400 Q5,500 2,600 Q0,700 3,800 Q4,900 2,1000" stroke="#C41E1E" strokeWidth="1.5" fill="none" opacity="0.3" />
-              </svg>
-            </div>
+            {/* Vertical line */}
+            <div className="absolute left-8 sm:left-1/2 sm:-translate-x-1/2 top-0 bottom-20 w-0.5 bg-gradient-to-b from-[#981F1F] via-[#FDB813] to-green-500" />
 
             {milestones.map((m, i) => (
               <motion.div
@@ -393,56 +439,39 @@ function MissionPage() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="relative mb-14 last:mb-0"
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="relative mb-12 last:mb-0"
               >
-                {/* Desktop: alternating torn-paper notes */}
+                {/* Desktop: alternating cards */}
                 <div className={`hidden sm:flex w-full items-center ${m.side === 'left' ? 'flex-row' : 'flex-row-reverse'}`}>
-                  <div className={`w-[44%] ${m.side === 'left' ? 'pr-8' : 'pl-8'}`}>
-                    <div
-                      className="relative bg-[#F5ECD7] rounded-sm p-5 sm:p-6 shadow-lg hover:shadow-xl transition-shadow border border-[#D4C5A9]/30 group"
-                      style={{ rotate: m.rotate, clipPath: i % 2 === 0 ? 'polygon(0% 0%, 100% 0.8%, 99.2% 100%, 0.5% 99%)' : 'polygon(0.5% 0.5%, 99.5% 0%, 100% 99.5%, 0% 99.8%)' }}
-                    >
-                      {/* Red push pin icon - custom SVG for better visibility */}
-                      <svg
-                        className={`absolute -top-3 ${m.side === 'left' ? 'right-2' : 'left-2'} z-10 drop-shadow-md`}
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        style={{ transform: m.side === 'left' ? 'rotate(15deg)' : 'rotate(-15deg)' }}
-                      >
-                        <circle cx="12" cy="8" r="5" fill="#C41E1E" stroke="#8B1515" strokeWidth="1.5"/>
-                        <path d="M12 13L12 21" stroke="#8B1515" strokeWidth="2" strokeLinecap="round"/>
-                        <circle cx="12" cy="8" r="2.5" fill="#E63939"/>
-                      </svg>
-
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-2xl">{m.icon}</span>
-                        <span className="text-[#981F1F] font-extrabold text-xl">{m.year}</span>
+                  <div className={`w-[46%] ${m.side === 'left' ? 'pr-12' : 'pl-12'}`}>
+                    <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all border border-gray-100">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#981F1F] to-[#7A1818] flex items-center justify-center text-2xl shadow-md">
+                          {m.icon}
+                        </div>
+                        <span className="text-[#981F1F] font-extrabold text-2xl">{m.year}</span>
                       </div>
-                      <h3 className="text-lg sm:text-xl font-extrabold text-[#2A1810] mb-2">{m.title}</h3>
+                      <h3 className="text-xl font-extrabold text-[#2A1810] mb-2">{m.title}</h3>
                       <p className="text-[#5A4A3A] text-sm leading-relaxed">{m.desc}</p>
-                      {/* Ruled line */}
-                      <div className="absolute bottom-3 left-5 right-5 h-px bg-[#D4C5A9]/30" />
                     </div>
                   </div>
 
-                  {/* Center red pin on the thread */}
-                  <div className="flex-shrink-0 w-[12%] flex justify-center relative z-10">
-                    <div className="w-5 h-5 rounded-full bg-red-600 border-2 border-red-700 shadow-lg" />
+                  {/* Center dot */}
+                  <div className="flex-shrink-0 w-[8%] flex justify-center relative z-10">
+                    <div className="w-6 h-6 rounded-full bg-white border-4 border-[#981F1F] shadow-lg" />
                   </div>
 
-                  <div className="w-[44%]" />
+                  <div className="w-[46%]" />
                 </div>
 
-                {/* Mobile: always left-aligned */}
+                {/* Mobile: left-aligned */}
                 <div className="flex sm:hidden items-start gap-4">
-                  <div className="flex-shrink-0 relative z-10 mt-2">
-                    <div className="w-4 h-4 rounded-full bg-red-600 border-2 border-red-700 shadow-md" />
+                  <div className="flex-shrink-0 relative z-10 mt-1">
+                    <div className="w-5 h-5 rounded-full bg-white border-3 border-[#981F1F] shadow-md" />
                   </div>
-                  <div className="flex-1 bg-[#F5ECD7] rounded-sm shadow-md p-5 border border-[#D4C5A9]/30" style={{ rotate: m.rotate }}>
-                    <div className="flex items-center gap-2 mb-1">
+                  <div className="flex-1 bg-white rounded-xl shadow-md p-5 border border-gray-100">
+                    <div className="flex items-center gap-2 mb-2">
                       <span className="text-xl">{m.icon}</span>
                       <span className="text-[#981F1F] font-extrabold text-lg">{m.year}</span>
                     </div>
@@ -453,104 +482,139 @@ function MissionPage() {
               </motion.div>
             ))}
 
-            {/* Finish — destination pin */}
+            {/* Final destination - clean version */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
+              initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="flex justify-center mt-10"
+              className="relative flex justify-center sm:justify-center mt-8"
             >
-              <div className="relative">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#F5ECD7] rounded-sm shadow-xl flex items-center justify-center text-3xl sm:text-4xl border border-[#D4C5A9]/30" style={{ rotate: '3deg' }}>
-                  🏁
-                </div>
-                {/* Red push pin icon - custom SVG for better visibility */}
-                <svg
-                  className="absolute -top-4 left-1/2 -translate-x-1/2 z-10 drop-shadow-md"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  style={{ transform: 'translateX(-50%) rotate(-10deg)' }}
-                >
-                  <circle cx="12" cy="8" r="5" fill="#C41E1E" stroke="#8B1515" strokeWidth="1.5"/>
-                  <path d="M12 13L12 21" stroke="#8B1515" strokeWidth="2" strokeLinecap="round"/>
-                  <circle cx="12" cy="8" r="2.5" fill="#E63939"/>
-                </svg>
+              <div className="bg-gradient-to-br from-[#981F1F] to-[#7A1818] text-white rounded-2xl px-8 py-6 shadow-xl text-center">
+                <div className="text-4xl mb-2">🎯</div>
+                <p className="font-extrabold text-lg">
+                  {lang === 'hi' ? '200 गाँव — मिशन जारी है' : '200 Villages — Mission Continues'}
+                </p>
               </div>
             </motion.div>
-            <p className="text-center text-[#981F1F] font-extrabold text-lg mt-4">
-              {lang === 'hi' ? '200 गाँव — मिशन जारी है...' : '200 Villages — Mission Continues...'}
-            </p>
           </div>
+        </div>
+      </section>
 
-          {/* Quote — torn paper style */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="mt-16 relative bg-[#F5ECD7] rounded-sm p-6 sm:p-8 shadow-xl border border-[#D4C5A9]/30" style={{ rotate: '-0.5deg', clipPath: 'polygon(0% 0.5%, 100% 0%, 99.5% 100%, 0.5% 99.5%)' }}>
-            {/* Two red push pin icons - custom SVG for better visibility */}
-            <svg
-              className="absolute -top-4 left-8 z-10 drop-shadow-md"
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              style={{ transform: 'rotate(-15deg)' }}
-            >
-              <circle cx="12" cy="8" r="5" fill="#C41E1E" stroke="#8B1515" strokeWidth="1.5"/>
-              <path d="M12 13L12 21" stroke="#8B1515" strokeWidth="2" strokeLinecap="round"/>
-              <circle cx="12" cy="8" r="2.5" fill="#E63939"/>
-            </svg>
-            <svg
-              className="absolute -top-4 right-8 z-10 drop-shadow-md"
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              style={{ transform: 'rotate(15deg)' }}
-            >
-              <circle cx="12" cy="8" r="5" fill="#C41E1E" stroke="#8B1515" strokeWidth="1.5"/>
-              <path d="M12 13L12 21" stroke="#8B1515" strokeWidth="2" strokeLinecap="round"/>
-              <circle cx="12" cy="8" r="2.5" fill="#E63939"/>
-            </svg>
-            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-              <div className="text-5xl sm:text-6xl">💬</div>
-              <blockquote className="text-[#2A1810] text-lg sm:text-xl italic leading-relaxed text-center sm:text-left" style={{ fontFamily: 'Georgia, serif' }}>
-                {lang === 'hi'
-                  ? '"वो टैलेंट जो दिल्ली नहीं जा सकता — हम उसके पास जा रहे हैं।"'
-                  : '"The talent that can\'t go to Delhi — we\'re going to them."'}
-                <span className="block text-[#981F1F] text-sm not-italic font-bold mt-2">— Vipin Sir</span>
-              </blockquote>
+      {/* ── Vision Statement — Full Width Strip ── */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#981F1F] to-[#7A1818] py-16 sm:py-20">
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/5 rounded-full translate-x-1/2 translate-y-1/2" />
+        <div className="absolute top-1/2 left-1/4 w-48 h-48 bg-[#FDB813]/5 rounded-full -translate-y-1/2" />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <div className="inline-block text-6xl mb-6">🌟</div>
+            <h3 className="text-3xl sm:text-4xl font-extrabold text-white mb-6 leading-tight">
+              {lang === 'hi'
+                ? 'हमारा विज़न'
+                : 'Our Vision'}
+            </h3>
+            <p className="text-white/90 text-xl sm:text-2xl font-medium leading-relaxed max-w-3xl mx-auto mb-4">
+              {lang === 'hi'
+                ? '"जो बच्चे दिल्ली नहीं जा सकते — हम उनके गाँव में जाएंगे।"'
+                : '"For Students Who Can\'t Go To Delhi — We Bring Education To Their Village."'}
+            </p>
+            <p className="text-[#FDB813] font-bold text-lg">— Vipin Sir</p>
+
+            <div className="mt-10 pt-10 border-t border-white/20">
+              <div className="flex flex-nowrap items-center justify-center gap-2 sm:gap-4 md:gap-8 text-white/90 text-xs sm:text-base md:text-lg font-medium">
+                <div className="flex items-baseline gap-1">
+                  <span className="text-[#FDB813] text-lg sm:text-2xl md:text-3xl font-extrabold">200</span>
+                  <span className="text-xs sm:text-base">{lang === 'hi' ? 'गाँव' : 'Villages'}</span>
+                </div>
+                <span className="text-white/30">•</span>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-[#FDB813] text-lg sm:text-2xl md:text-3xl font-extrabold">₹100</span>
+                  <span className="text-xs sm:text-base">{lang === 'hi' ? '/महीना' : '/Month'}</span>
+                </div>
+                <span className="text-white/30">•</span>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-[#FDB813] text-lg sm:text-2xl md:text-3xl font-extrabold">∞</span>
+                  <span className="text-xs sm:text-base">{lang === 'hi' ? 'संभावनाएँ' : 'Possibilities'}</span>
+                </div>
+              </div>
             </div>
-            {/* Ruled lines */}
-            <div className="absolute bottom-10 left-6 right-6 h-px bg-[#D4C5A9]/25" />
-            <div className="absolute bottom-6 left-6 right-6 h-px bg-[#D4C5A9]/15" />
           </motion.div>
         </div>
       </section>
 
-      {/* ── CTA — gradient with map overlay ── */}
-      <section className="relative py-20 sm:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#981F1F] via-[#7A1818] to-[#121212]" />
-        <MapBg dark />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            {/* Removed India flag */}
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
-              {lang === 'hi' ? 'मिशन में जुड़ें' : 'Join the Mission'}
-            </h2>
-            <p className="text-white/70 text-lg sm:text-xl mb-10 max-w-xl mx-auto leading-relaxed">
-              {lang === 'hi'
-                ? 'आज ही अपने बच्चे की UPSC नींव शुरू करें — क्लास 6 से। सिर्फ़ ₹100/महीना।'
-                : 'Start Your Child\'s UPSC Foundation Today — from Class 6 Itself. Just ₹100/month.'}
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/#test-series" className="inline-flex bg-white text-[#981F1F] font-bold px-8 py-4 sm:px-10 sm:py-5 rounded-xl items-center gap-3 transition-all shadow-lg hover:shadow-2xl hover:-translate-y-1 text-base sm:text-lg">
-                {lang === 'hi' ? 'टेस्ट सीरीज़ देखें' : 'Explore Test Series'} <ArrowRight size={20} />
-              </Link>
-              <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer"
-                className="inline-flex bg-white/10 border border-white/20 text-white font-semibold px-8 py-4 sm:px-10 sm:py-5 rounded-xl items-center gap-3 transition-all hover:bg-white/20 text-base sm:text-lg">
-                <Phone size={18} /> WhatsApp
-              </a>
+      {/* ── CTA — Clean, matches website vibe ── */}
+      <section className="relative py-10 sm:py-12 md:py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-[#FFF8F0] to-[#FBF3E4] rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 text-center relative overflow-hidden border-2 border-[#981F1F]/10"
+          >
+            {/* Decorative circles */}
+            <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#981F1F]/5 rounded-full" />
+            <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-[#FDB813]/5 rounded-full" />
+
+            <div className="relative z-10">
+              <div className="inline-block text-3xl sm:text-4xl md:text-5xl mb-3 sm:mb-4">🚀</div>
+
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#2A1810] mb-2 sm:mb-3 leading-tight">
+                {lang === 'hi' ? 'तैयार हो?' : 'Ready to Begin?'}
+              </h2>
+
+              <p className="text-[#5A4A3A] text-sm sm:text-base md:text-lg mb-4 sm:mb-6 max-w-2xl mx-auto leading-relaxed">
+                {lang === 'hi'
+                  ? 'आज से ही अपने बच्चे की UPSC नींव रखें। क्लास 6 से शुरू करें — सिर्फ़ ₹100/महीना।'
+                  : 'Start building your child\'s UPSC foundation today. Begin from Class 6 — just ₹100/month.'}
+              </p>
+
+              {/* Stats bar */}
+              <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 mb-4 sm:mb-6 py-3 sm:py-4">
+                {[
+                  { icon: '📖', label: lang === 'hi' ? 'किताब' : 'Book', value: '200+', sub: lang === 'hi' ? 'पेज' : 'Pages' },
+                  { icon: '🎥', label: lang === 'hi' ? 'लाइव क्लास' : 'Live Classes', value: '365', sub: lang === 'hi' ? 'दिन' : 'Days' },
+                  { icon: '📝', label: lang === 'hi' ? 'टेस्ट' : 'Tests', value: '400+', sub: lang === 'hi' ? 'सालाना' : 'Yearly' },
+                ].map((stat, i) => (
+                  <div key={i} className="text-center">
+                    <div className="text-2xl sm:text-3xl mb-1">{stat.icon}</div>
+                    <div className="text-[#981F1F] font-extrabold text-xl sm:text-2xl">{stat.value}</div>
+                    <div className="text-[#5A4A3A] text-xs sm:text-sm font-medium">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+                <Link
+                  to="/#test-series"
+                  className="inline-flex bg-[#981F1F] text-white font-bold px-6 py-3 sm:px-8 sm:py-3.5 rounded-xl items-center gap-2 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base"
+                >
+                  {lang === 'hi' ? 'टेस्ट सीरीज़ देखें' : 'Explore Test Series'} <ArrowRight size={18} />
+                </Link>
+                <a
+                  href="https://wa.me/919876543210"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex bg-white border-2 border-[#981F1F]/20 text-[#981F1F] font-semibold px-6 py-3 sm:px-8 sm:py-3.5 rounded-xl items-center gap-2 transition-all hover:bg-[#981F1F]/5 text-sm sm:text-base"
+                >
+                  <Phone size={16} /> WhatsApp
+                </a>
+              </div>
+
+              {/* Price highlight */}
+              <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-[#981F1F]/10">
+                <p className="text-[#5A4A3A] text-xs sm:text-sm mb-1">{lang === 'hi' ? 'सभी कुछ शामिल' : 'Everything included'}</p>
+                <div className="flex items-baseline justify-center gap-2">
+                  <span className="text-[#981F1F] text-3xl sm:text-4xl font-extrabold">₹100</span>
+                  <span className="text-[#5A4A3A] text-base sm:text-lg">{lang === 'hi' ? '/महीना' : '/month'}</span>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

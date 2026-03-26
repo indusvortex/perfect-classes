@@ -4,12 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { BookOpen, ChevronRight, ArrowRight, Phone } from 'lucide-react';
 import PagePlaceholder from './PagePlaceholder';
 import FloatingIcon from '@/components/shared/FloatingIcon';
-
-// Language context  - TODO: Extract to @/i18n/context or similar
-type Lang = 'en' | 'hi';
-const LangContext = React.createContext<{ lang: Lang; setLang: (l: Lang) => void }>({ lang: 'en', setLang: () => {} });
-function useLang() { return React.useContext(LangContext); }
-export { LangContext, useLang };
+import { useLang } from '@/i18n/translations';
 
 // Class data - TODO: Move to @/data/classes.ts
 const BY_CLASS_SERIES = [

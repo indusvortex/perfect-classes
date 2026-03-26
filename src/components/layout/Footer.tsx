@@ -19,9 +19,9 @@ export function Footer() {
             </div>
             <p className="text-white/50 text-sm leading-relaxed mb-5">{T[lang].footerDesc}</p>
             <div className="flex flex-col gap-2 text-sm text-white/50">
+              <span className="flex items-start gap-2 leading-relaxed"><MapPin size={13} className="mt-0.5 flex-shrink-0" /> Perfect Classes, Near Children Academy School, MBD Road, Noorpur, Bijnor, Uttar Pradesh, 246734</span>
               <a href="tel:+919876543210" className="flex items-center gap-2 hover:text-white transition-colors"><Phone size={13} /> +91 98765 43210</a>
               <a href="mailto:support@perfectclassesnoorpur.com" className="flex items-center gap-2 hover:text-white transition-colors"><Mail size={13} /> support@perfectclassesnoorpur.com</a>
-              <span className="flex items-start gap-2 leading-relaxed"><MapPin size={13} className="mt-0.5 flex-shrink-0" /> Perfect Classes, Near Children Academy School, MBD Road, Noorpur, Bijnor, Uttar Pradesh, 246734</span>
             </div>
           </div>
           {/* Test Series */}
@@ -37,7 +37,7 @@ export function Footer() {
             <Link to="/#books" className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">{T[lang].footerOurBooks}</Link>
             <Link to="/mission" className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">{T[lang].footer200Village}</Link>
             <Link to="/#test-series" className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">{T[lang].footerJuniorIasTests}</Link>
-            <Link to="/#results" className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">{T[lang].footerAboutVipin}</Link>
+            <Link to="/mission#vipin-sir" className="block text-sm text-white/50 hover:text-white mb-2 transition-colors">{T[lang].footerAboutVipin}</Link>
           </div>
           {/* Quick Links */}
           <div>

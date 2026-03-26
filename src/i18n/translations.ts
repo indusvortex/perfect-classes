@@ -31,6 +31,15 @@ export const T: Record<Lang, Record<string, string>> = {
     trust100: 'Just ₹100/month',
     trustClass: 'Class 6 to 12 Coverage',
 
+    // Achievement Strip
+    achNcert: 'Pure NCERT — No Junk',
+    ach100: 'Just ₹100/Month',
+    ach5000: '5,000+ Students',
+    achClass: 'Class 6 to 12 Coverage',
+    achVipin: "Vipin Sir's 15+ Yrs",
+    ach200: '200-Village Mission',
+    achRural: 'Made for Rural India',
+
     // Test Series
     testBadge: 'Junior IAS Test Series',
     testHeading: 'NCERT-Based',
@@ -144,6 +153,15 @@ export const T: Record<Lang, Record<string, string>> = {
     trust5000: '5,000+ छात्र जुड़े हुए',
     trust100: 'सिर्फ़ ₹100/महीना',
     trustClass: 'क्लास 6 से 12 तक',
+
+    // Achievement Strip
+    achNcert: 'शुद्ध NCERT — कोई जंक नहीं',
+    ach100: 'सिर्फ़ ₹100/महीना',
+    ach5000: '5,000+ छात्र',
+    achClass: 'क्लास 6 से 12 तक',
+    achVipin: 'विपिन सर के 15+ साल',
+    ach200: '200 गाँव मिशन',
+    achRural: 'ग्रामीण भारत के लिए',
 
     // Test Series
     testBadge: 'जूनियर IAS टेस्ट सीरीज़',

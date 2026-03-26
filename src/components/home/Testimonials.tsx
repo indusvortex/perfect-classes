@@ -107,15 +107,15 @@ export function Testimonials() {
             <div>
               <AnimatePresence mode="wait">
                 <motion.div key={activeText} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.4 }}
-                  className="bg-white rounded-xl border border-[#981F1F]/10 shadow-md relative overflow-hidden p-3">
+                  className="bg-white rounded-xl border border-[#981F1F]/10 shadow-md relative overflow-hidden p-2">
                   <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#981F1F] via-[#FDB813] to-[#981F1F]" />
-                  <div className="text-[#981F1F]/10 text-xl font-serif leading-none">"</div>
-                  <blockquote className="text-[10px] text-[#333] leading-snug italic line-clamp-3">{TESTIMONIALS[activeText].text}</blockquote>
+                  <div className="text-[#981F1F]/10 text-sm font-serif leading-none">"</div>
+                  <blockquote className="text-[8px] text-[#333] leading-tight italic line-clamp-3">{TESTIMONIALS[activeText].text}</blockquote>
                   <div className="flex items-center gap-1.5 pt-1.5 mt-1.5 border-t border-gray-100">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center bg-[#FFF1F1] text-[#981F1F] font-bold text-[8px] shrink-0">{TESTIMONIALS[activeText].avatar}</div>
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center bg-[#FFF1F1] text-[#981F1F] font-bold text-[7px] shrink-0">{TESTIMONIALS[activeText].avatar}</div>
                     <div className="min-w-0 flex-1">
-                      <p className="font-bold text-[#121212] text-[9px] truncate">{TESTIMONIALS[activeText].name}</p>
-                      <p className="text-[8px] font-semibold text-[#FDB813] truncate">{TESTIMONIALS[activeText].tag}</p>
+                      <p className="font-bold text-[#121212] text-[8px] truncate">{TESTIMONIALS[activeText].name}</p>
+                      <p className="text-[7px] font-semibold text-[#FDB813] truncate">{TESTIMONIALS[activeText].tag}</p>
                     </div>
                   </div>
                   <div className="flex justify-center gap-1 mt-1.5">
@@ -136,9 +136,9 @@ export function Testimonials() {
         </div>
 
         {/* DESKTOP LAYOUT (md+): Reel video + text testimonial + gallery */}
-        <div className="hidden md:flex gap-6 lg:gap-8 items-start">
+        <div className="hidden md:flex gap-6 lg:gap-8 items-stretch">
           {/* Left: Video Reel (9:16, constrained width) */}
-          <div className="w-[280px] lg:w-[320px] flex-shrink-0">
+          <div className="w-full md:w-[280px] lg:w-[320px] xl:w-[360px] flex-shrink-0">
             <div className="relative w-full aspect-[9/16] bg-[#121212] rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl border border-gray-200">
               <button onClick={() => setActiveVideo(prev => (prev - 1 + VIDEO_TESTIMONIALS.length) % VIDEO_TESTIMONIALS.length)}
                 className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full flex items-center justify-center transition-all">
@@ -171,14 +171,16 @@ export function Testimonials() {
           </div>
 
           {/* Right: Vipin Sir Photos (top) + Testimonial Slider (bottom) */}
-          <div className="flex-1 flex flex-col gap-4" style={{ height: 'calc(320px * 16 / 9)' }}>
+          <div className="flex-1 flex flex-col gap-4 min-w-0">
             {/* Vipin Sir Gallery — top half */}
-            <div className="flex-1 min-h-0">
+            <div className="flex-1 min-h-[250px] md:min-h-[300px] lg:min-h-[350px]">
               <GalleryCard />
             </div>
 
             {/* Testimonial Slider — bottom half, draggable horizontal scroll */}
-            <TestimonialSlider />
+            <div className="flex-shrink-0">
+              <TestimonialSlider />
+            </div>
           </div>
         </div>
 
@@ -242,15 +244,18 @@ export function TestimonialSlider() {
         <ChevronRight size={16} className="text-[#981F1F]" />
       </button>
 
-      {/* Scrollable container with equal padding */}
+      {/* Scrollable container - first card starts from left, last card has right padding */}
       <div
         ref={scrollRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
-        className="flex gap-4 overflow-x-auto scrollbar-hide items-stretch px-10 cursor-grab active:cursor-grabbing py-2"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        className="flex gap-4 overflow-x-auto scrollbar-hide items-stretch cursor-grab active:cursor-grabbing py-2 pl-10 pr-10"
+        style={{
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        }}
       >
         {TESTIMONIALS.map((t, i) => (
           <div key={i} className="flex-shrink-0 w-[280px] lg:w-[320px] bg-white rounded-xl border border-[#981F1F]/10 shadow-sm p-5 flex flex-col justify-between select-none">

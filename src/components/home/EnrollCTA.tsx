@@ -6,20 +6,15 @@ import { useLang, T } from '@/i18n/translations';
 export function EnrollCTA() {
   const { lang } = useLang();
   return (
-    <section className="py-20 bg-[#981F1F] relative overflow-hidden">
-      {/* Topography pattern background */}
-      <div className="absolute inset-0" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23701616' stroke-width='1'%3E%3Cpath d='M0 0h80v80H0z'/%3E%3Cpath d='M14 16H9v-2h5V9.87a4 4 0 1 1 2 0V14h5v2h-5v15.95A10 10 0 0 0 23.66 27l-3.46-2 8.2-2.2-2.9 5a12 12 0 0 1-21 0l-2.89-5 8.2 2.2-3.47 2A10 10 0 0 0 14 31.95V16zm40 40h-5v-2h5v-4.13a4 4 0 1 1 2 0V54h5v2h-5v15.95A10 10 0 0 0 63.66 67l-3.47-2 8.2-2.2-2.88 5a12 12 0 0 1-21.02 0l-2.88-5 8.2 2.2-3.47 2A10 10 0 0 0 54 71.95V56zm-39 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm40-40a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM15 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm40 40a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'/%3E%3C/g%3E%3C/svg%3E")`,
-        opacity: 0.15
-      }} />
-      {/* Decorative bubbles/circles */}
-      <div className="absolute top-10 left-[10%] w-32 h-32 rounded-full bg-white/5 blur-2xl" />
-      <div className="absolute top-1/4 right-[15%] w-40 h-40 rounded-full bg-white/[0.03] blur-3xl" />
-      <div className="absolute bottom-10 left-[20%] w-24 h-24 rounded-full bg-[#FDB813]/10 blur-2xl" />
-      <div className="absolute bottom-1/4 right-[25%] w-36 h-36 rounded-full bg-white/[0.04] blur-3xl" />
-      <div className="absolute top-1/2 left-[5%] w-20 h-20 rounded-full bg-white/[0.06]" />
-      <div className="absolute top-[20%] right-[8%] w-16 h-16 rounded-full bg-[#FDB813]/[0.08]" />
-      <div className="absolute bottom-[15%] right-[12%] w-28 h-28 rounded-full bg-white/[0.04]" />
+    <section className="py-20 bg-gradient-to-br from-[#981F1F] to-[#7A1818] relative overflow-hidden">
+      {/* Decorative bubbles/circles only */}
+      <div className="absolute top-0 left-0 w-96 h-96 rounded-full bg-white/5 blur-3xl -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-white/5 blur-3xl translate-x-1/2 translate-y-1/2" />
+      <div className="absolute top-1/2 left-1/4 w-48 h-48 rounded-full bg-[#FDB813]/5 blur-3xl -translate-y-1/2" />
+      <div className="absolute top-10 right-[10%] w-32 h-32 rounded-full bg-white/[0.03] blur-2xl" />
+      <div className="absolute bottom-10 left-[15%] w-40 h-40 rounded-full bg-white/[0.04] blur-2xl" />
+      <div className="absolute top-1/3 right-[20%] w-24 h-24 rounded-full bg-[#FDB813]/[0.06]" />
+      <div className="absolute bottom-1/3 left-[30%] w-36 h-36 rounded-full bg-white/[0.02]" />
 
       <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
         <motion.span animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} className="inline-block bg-[#FDB813] text-[#121212] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6">

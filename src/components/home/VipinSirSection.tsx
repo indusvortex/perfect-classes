@@ -62,30 +62,58 @@ export function VipinSirSection({ lang }: VipinSirSectionProps) {
             </div>
           </motion.div>
 
-          {/* Right — Cycling photo */}
+          {/* Right — Photo on organic blob */}
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
             className="lg:w-[45%] flex justify-center">
-            <div className="relative">
-              {/* Decorative blob behind photo */}
-              <div className="absolute -inset-6 bg-gradient-to-br from-[#981F1F]/10 to-[#FDB813]/10 rounded-[3rem] -rotate-3" />
+            <div className="relative flex justify-center items-end" style={{ width: 340, height: 420 }}>
 
-              <div className="relative w-72 sm:w-80 md:w-96 aspect-[3/4] rounded-2xl overflow-hidden bg-gradient-to-b from-[#F5ECD7] to-[#E8DCC4] shadow-2xl">
+              {/* Blob layer 2 — offset gold accent */}
+              <motion.div
+                className="absolute"
+                style={{ width: 300, height: 300, top: 30, left: 30 }}
+                animate={{ rotate: [0, 6, 0, -6, 0] }}
+                transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+              >
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                  <path fill="#FDB813" opacity="0.25"
+                    d="M42.7,-65.3C54.6,-56.1,62.8,-42.4,67.3,-27.7C71.8,-13,72.5,2.7,68.4,16.8C64.3,30.9,55.4,43.4,43.5,52.5C31.6,61.6,16.8,67.3,0.8,66.2C-15.2,65.1,-30.4,57.2,-43.1,47C-55.8,36.7,-66.1,24,-70,9.3C-73.9,-5.4,-71.4,-22.1,-63.2,-35.3C-55,-48.5,-41.1,-58.2,-27,-63.5C-12.9,-68.8,1.4,-69.7,15.6,-67.1C29.8,-64.5,30.8,-74.5,42.7,-65.3Z"
+                    transform="translate(100 100)" />
+                </svg>
+              </motion.div>
+
+              {/* Blob layer 1 — main red blob */}
+              <motion.div
+                className="absolute"
+                style={{ width: 320, height: 320, top: 20, left: 10 }}
+                animate={{ rotate: [0, -8, 0, 8, 0] }}
+                transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                  <path fill="#981F1F" opacity="0.18"
+                    d="M47.4,-71.4C59.7,-62.3,67,-46.1,71.9,-29.5C76.8,-12.9,79.2,4.1,74.7,18.9C70.2,33.7,58.9,46.3,45.5,55.7C32.1,65.1,16,71.2,-0.9,72.5C-17.8,73.8,-35.6,70.4,-49.1,61.1C-62.5,51.8,-71.7,36.7,-75.2,20.3C-78.7,3.9,-76.6,-13.8,-69.7,-29.1C-62.8,-44.4,-51.2,-57.3,-37.5,-66.2C-23.8,-75.1,-7.9,-80.1,7.2,-79.2C22.3,-78.3,35.1,-80.5,47.4,-71.4Z"
+                    transform="translate(100 100)" />
+                </svg>
+              </motion.div>
+
+              {/* Photo — sits above blobs, no background box */}
+              <div className="relative z-10 w-full flex justify-center items-end" style={{ height: 420 }}>
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={photoIdx}
                     src={photos[photoIdx]}
                     alt="Vipin Sir"
-                    className="absolute inset-0 w-full h-full object-contain object-bottom"
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.6 }}
+                    className="object-contain object-bottom drop-shadow-2xl"
+                    style={{ maxHeight: 420, maxWidth: 300 }}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.55 }}
                   />
                 </AnimatePresence>
               </div>
 
-              {/* Photo dots */}
-              <div className="flex justify-center gap-2 mt-4">
+              {/* Dot indicators */}
+              <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 pb-1">
                 {photos.map((_, i) => (
                   <button key={i} onClick={() => setPhotoIdx(i)}
                     className={`h-2 rounded-full transition-all duration-300 ${i === photoIdx ? 'bg-[#981F1F] w-6' : 'bg-[#D4C5A9] w-2'}`} />
